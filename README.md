@@ -145,7 +145,7 @@
 ## 导航器react-navigation（5.x）
   1. 安装核心包：
     ```
-      npm install @react-navigation/native
+      yarn add @react-navigation/native
     ```
 
   2. 安装相应的依赖包：
