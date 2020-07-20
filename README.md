@@ -171,3 +171,207 @@
     ```
       yarn add @react-navigation/stack
     ```
+
+  2. 创建堆栈式导航器   
+      * createStackNavigator标签包含两个子组件Screen和Navigator
+      ```
+        import React, { Component } from 'react'
+        import { NavigationContainer } from '@react-navigation/native'
+        import { createStackNavigator } from '@react-navigation/stack'
+        import Home from '@/pages/Home'
+        import Detail from '@/pages/Home/Detail'
+
+        type RootStackList = { // 定义类型别名
+          Home: undefined,
+          Detail: undefined
+        }
+
+        let Stack = createStackNavigator<RootStackList>()
+
+        export default class Navigator extends Component {
+          render() {
+            return (
+              <NavigationContainer>
+                <Stack.Navigator>
+                  <Stack.Screen
+                    options={{
+                      headerTitleAlign: 'center',
+                      headerTitle: '首页'
+                    }}
+                    name="Home"
+                    component={Home}
+                  />
+                  <Stack.Screen 
+                    name="Detail" 
+                    component={Detail}
+                    options={{
+                      headerTitleAlign: 'center',
+                      headerTitle: '详情页首页'
+                    }}
+                  />
+                </Stack.Navigator>
+              </NavigationContainer>
+            )
+          }
+        }
+      ```
+
+      * Stack.Navigator可以接收screenOptions属性，用于配置所有的导航器的样式
+
+  3. 页面传参：
+       * home页面跳转到detail页面
+         ```
+           # home页面传递：
+             this.props.navigation.navigate('Detail', {id: '123'})
+
+           # detail页面接收
+             <Text> {this.props.route.params.id} </Text>
+         ``` 
+
+       * 详细代码请看
+           * router/index.tsx里： 
+              ```
+                import React, { Component } from 'react'
+                import { NavigationContainer } from '@react-navigation/native'
+                import { createStackNavigator, StackNavigationProp, HeaderStyleInterpolators, CardStyleInterpolators } from '@react-navigation/stack'
+                import Home from '@/pages/Home'
+                import Detail from '@/pages/Home/Detail'
+
+                export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
+                  Home: undefined,
+                  Detail: {
+                    id: string
+                  }
+                }
+
+                // 该类型申明约束每一个页面组件的props
+                export type RootStackNavigation = StackNavigationProp<RootStackList>
+
+                let Stack = createStackNavigator<RootStackList>()
+
+                export default class Navigator extends Component {
+                  render() {
+                    return (
+                      <NavigationContainer>
+                        <Stack.Navigator
+                          headerMode='screen'
+                          screenOptions={{
+                            headerTitleAlign: 'center', // 标题内容居中
+                            // 下面两句是统一ios和安卓的页面切换效果
+                            headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
+                            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                            // 开启安卓的切换手势
+                            gestureEnabled: true,
+                            gestureDirection: 'horizontal'
+                          }}
+                        >
+                          <Stack.Screen
+                            options={{
+                              headerTitle: '首页'
+                            }}
+                            name="Home"
+                            component={Home}
+                          />
+                          <Stack.Screen 
+                            name="Detail" 
+                            component={Detail}
+                            options={{
+                              headerTitle: '详情页'
+                            }}
+                          />
+                        </Stack.Navigator>
+                      </NavigationContainer>
+                    )
+                  }
+                }
+              ```
+
+            * Home.tsx里：
+              ```
+                import React, { Component } from 'react'
+                import { Text, View, Button } from 'react-native'
+                import { RootStackNavigation } from '@/router/index'
+
+                interface homeProps {
+                  navigation: RootStackNavigation
+                }
+
+                export default class Home extends Component<homeProps> {
+                  render() {
+                    return (
+                      <View>
+                        <Text> textInComponent </Text>
+                        <Button title='跳转到详情页面' onPress={()=>{
+                          this.props.navigation.navigate('Detail', {id: '123'})
+                        }} />
+                      </View>
+                    )
+                  }
+                }
+              ```
+
+            * Detail.tsx里：
+              ```
+                import React, { Component } from 'react'
+                import { Text, View } from 'react-native'
+                import { RootStackList } from '@/router/index'
+                import { RouteProp } from '@react-navigation/native'
+
+                interface Iprops{
+                  route: RouteProp<RootStackList, 'Detail'>
+                }
+
+                export default class Detail extends Component<Iprops> {
+                  render() {
+                    console.log(this.props)
+                    return (
+                      <View>
+                        <Text> {this.props.route.params.id} </Text>
+                      </View>
+                    )
+                  }
+                }
+
+              ```
+
+  4. 注意：   
+       * 设置标题位置为居中还是居左：Stack.Navigator组件的screenOptions属性
+         ```
+           <Stack.Navigator
+             screenOptions={{
+               headerTitleAlign: 'center', // 标题内容居中
+             }}
+           ></Stack.Navigator>
+         ```
+
+       * 设置页面切换的动画效果（统一ios）：Stack.Navigator组件的headerStyleInterpolator和cardStyleInterpolator属性
+         ```
+           <Stack.Navigator
+             screenOptions={{
+               // 设置页面切换的风格
+               headerStyleInterpolator: HeaderStyleInterpolators.forUIKit, // 头部统一
+               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS // 页面主体内容统一
+             }}
+           >
+         ```
+
+       * 隐藏导航栏：Stack.Navigator组件的headerMode属性
+         ```
+           <Stack.Navigator
+             headerMode='node'
+           >
+         ```
+
+       * 开启安卓的切换手势(默认是关闭的)：Stack.Navigator组件的screenOptions属性
+          ```
+            <Stack.Navigator
+              screenOptions={{
+                // 开启安卓的切换手势
+                gestureEnabled: true,
+                gestureDirection: 'horizontal'
+              }}
+            >
+          ```
+
+  5. 详细文档请看: https://reactnavigation.org/docs/stack-navigator
+
