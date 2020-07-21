@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, StackNavigationProp, HeaderStyleInterpolators, CardStyleInterpolators } from '@react-navigation/stack'
-import Home from '@/pages/Home'
 import Detail from '@/pages/Home/Detail'
+import BottomTabs from '@/router/BottomTabs'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
-  Home: undefined,
+  Tab: {
+    screen?: string
+  },
   Detail: {
     id: string
   }
@@ -33,17 +35,14 @@ export default class Navigator extends Component {
           }}
         >
           <Stack.Screen
-            options={{
-              headerTitle: '首页'
-            }}
-            name="Home"
-            component={Home}
+            name="Tab"
+            component={BottomTabs}
           />
           <Stack.Screen 
             name="Detail" 
             component={Detail}
             options={{
-              headerTitle: '详情页'
+              headerTitle: '详情'
             }}
           />
         </Stack.Navigator>
