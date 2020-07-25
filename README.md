@@ -538,3 +538,176 @@
       ```
 
     * 在根路径的index.js中，引入Navigator即可
+
+## 状态管理dva
+  * 核心包安装：
+    ```
+      yarn add dva-core-ts react-redux @types/react-redux dva-loading-ts
+
+    ```
+
+  * 使用步骤
+    1. 创建实例
+    2. 加载model对象
+    3. 启动dva
+    4. 导出dva对象 
+    5. 在src/index.tsx中用provider包裹所有的组件
+    6. 详细代码请看：
+      * 在config/dva.ts中：
+        ```
+          import { create } from 'dva-core-ts'
+          import models from '@/models/index'
+          // 1. 创建实例
+          const app = create()
+          // 2. 加载model对象
+          models.forEach(model => {
+              app.model(model)
+          })
+          // 3. 启动dva
+          app.start()
+          // 4. 导出dva的数据
+          export default app._store
+        ```
+
+      * 在models/index.ts中： 
+        ```
+          import home, { HomeState } from '@/models/home'
+          import { DvaLoadingState } from 'dva-loading-ts'
+
+          const models = [home];
+          export type RootState = {
+            home: HomeState,
+            loading: DvaLoadingState
+          }
+          export default models;
+        ```
+
+      * 在models/home.ts中：
+        ```
+          import { Model, Effect } from 'dva-core-ts'
+          import { Reducer } from 'react'
+
+          export interface HomeState {
+            num: number
+          }
+
+          interface HomeModel extends Model {
+            namespace: 'home';
+            state: HomeState;
+            reducers: {
+              add: Reducer<HomeState, any>;
+              asyncAddResult: Reducer<HomeState, any>;
+            }
+            effects: {
+              asyncAdd: Effect
+            }
+          }
+
+          const initialState = {
+            num: 0
+          }
+
+          type codeType = { // 定义页面传过来的对象类型
+            num: number,
+            initNumber: number
+          }
+
+          function delay(code: codeType) {
+            return code.num + code.initNumber
+          }
+
+          const homeHodel: HomeModel = {
+            namespace: 'home',
+            state: initialState,
+            effects: { // 异步操作
+              *asyncAdd({ payload }, { call, put }) {
+                const res = yield call(delay, payload)
+                yield put({
+                  type: 'asyncAddResult',
+                  payload: res,
+                })
+              }
+            },
+            reducers: { // 同步操作
+              add(state = initialState, { payload }) {
+                console.log('payload', payload)
+                return {
+                  ...state,
+                  num: state.num + payload.num
+                }
+              },
+              asyncAddResult(state = initialState, { payload }) {
+                console.log('payload', payload)
+                return {
+                  ...state,
+                  num: payload
+                }
+              }
+            }
+          }
+
+          export default homeHodel
+        ```
+
+      * 在src/pages/Home/index.tsx里，使用
+        ```
+          import React, { Component } from 'react'
+          import { Text, View, Button } from 'react-native'
+          import { RootStackNavigation } from '@/router/index'
+          import { connect, ConnectedProps } from 'react-redux'
+          import { RootState } from '@/models/index'
+
+          function mapStateToProps(state: RootState) {
+            return {
+              num: state.home.num
+            }
+          }
+
+          const connector = connect(mapStateToProps)
+
+          type ModelState = ConnectedProps<typeof connector> // 定义connect的类型
+
+          // 去继承ModalState否则在render里取store里的this.props.num会报错
+          interface homeProps extends ModelState {
+            navigation: RootStackNavigation
+          }
+
+          class Home extends Component<homeProps> {
+            handleAdd = () => {
+              const { dispatch } = this.props
+              dispatch({
+                type: 'home/add',
+                payload: {
+                  num: 1
+                }
+              })
+            }
+
+            handleAsyncAdd = () => {
+              const { dispatch, num } = this.props
+              dispatch({
+                type: 'home/asyncAdd',
+                payload: {
+                  num: 2,
+                  initNumber: num
+                }
+              })
+            }
+
+            render() {
+              return (
+                <View>
+                  <Text> {this.props.num} </Text>
+                  <Button title='加' onPress={() => this.handleAdd()} />
+                  <Button title='异步加' onPress={() => this.handleAsyncAdd()} />
+                  <Button title='跳转到详情页面' onPress={() => {
+                    this.props.navigation.navigate('Detail', { id: '123' })
+                  }} />
+                </View>
+              )
+            }
+          }
+
+          export default connector(Home)
+
+        ```

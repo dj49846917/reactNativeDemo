@@ -11,7 +11,8 @@ module.exports = {
           '@/components': './src/components',
           '@/models': './src/models',
           '@/assets': './src/assets',
-          '@/router': './src/router'
+          '@/router': './src/router',
+          '@/config': './src/config'
         }
       }
     ]
