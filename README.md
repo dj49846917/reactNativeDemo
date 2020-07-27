@@ -709,5 +709,37 @@
           }
 
           export default connector(Home)
-
         ```
+
+  * 在dva中使用自带的loading
+    * 使用步骤：
+      1. 安装依赖包：yarn add dva-loading-ts
+
+      2. 在config/dva.ts中，引入createLoading
+        ```
+          import { create } from 'dva-core-ts'
+          import createLoading from 'dva-loading-ts'
+          import models from '@/models/index'
+          // 1. 创建实例
+          const app = create()
+          // 2. 加载model对象
+          models.forEach(model => {
+              app.model(model)
+          })
+          app.use(createLoading())
+          // 3. 启动dva
+          app.start()
+          // 4. 导出dva的数据
+          export default app._store
+        ```
+
+      3. 在Home/index.tsx中的mapStateToProps函数中使用（effects里面要选择loading的函数）
+        ```
+          function mapStateToProps(state: RootState) {
+            return {
+              num: state.home.num,
+              loading: state.loading.effects['home/asyncAdd']
+            }
+          }
+        ```
+    

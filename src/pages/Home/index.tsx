@@ -6,7 +6,8 @@ import { RootState } from '@/models/index'
 
 function mapStateToProps(state: RootState) {
   return {
-    num: state.home.num
+    num: state.home.num,
+    loading: state.loading.effects['home/asyncAdd']
   }
 }
 
@@ -46,7 +47,9 @@ class Home extends Component<homeProps> {
       <View>
         <Text> {this.props.num} </Text>
         <Button title='加' onPress={() => this.handleAdd()} />
+        <Text>{this.props.loading}</Text>
         <Button title='异步加' onPress={() => this.handleAsyncAdd()} />
+        <Text>{this.props.loading ? '加载中...' : ''}</Text>
         <Button title='跳转到详情页面' onPress={() => {
           this.props.navigation.navigate('Detail', { id: '123' })
         }} />
