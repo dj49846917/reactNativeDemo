@@ -3,14 +3,14 @@ import { Text, View } from 'react-native'
 import { RootStackNavigation } from '@/router/index'
 
 interface homeProps {
-  navigation: RootStackNavigation,
+  navigation: RootStackNavigation
 }
 
-export default class Found extends Component<homeProps> {
+export default class Recommend extends Component<homeProps> {
   render() {
     return (
       <View>
-        <Text> Found </Text>
+        <Text> Listen </Text>
       </View>
     )
   }

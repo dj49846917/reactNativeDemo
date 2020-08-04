@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, StackNavigationProp, HeaderStyleInterpolators, CardStyleInterpolators } from '@react-navigation/stack'
 import Detail from '@/pages/Home/Detail'
 import BottomTabs from '@/router/BottomTabs'
+import { View, Text } from 'react-native'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
   Tab: {
@@ -37,6 +38,15 @@ export default class Navigator extends Component {
           <Stack.Screen
             name="Tab"
             component={BottomTabs}
+            options={{
+              header: ({scene, previous, navigation}) => {
+                return (
+                  <View>
+                    <Text>首页</Text>
+                  </View>
+                )
+              },
+            }}
           />
           <Stack.Screen 
             name="Detail" 

@@ -12,7 +12,8 @@ module.exports = {
           '@/models': './src/models',
           '@/assets': './src/assets',
           '@/router': './src/router',
-          '@/config': './src/config'
+          '@/config': './src/config',
+          '@/constant': './src/constant'
         }
       }
     ]

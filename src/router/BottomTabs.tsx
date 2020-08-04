@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Home from '@/pages/Home'
-import Account from '@/pages/Account'
-import Found from '@/pages/Found'
-import Listen from '@/pages/Listen'
+import { Image } from 'react-native'
 import { RootStackNavigation, RootStackList } from '@/router/index'
 import { RouteProp, TabNavigationState } from '@react-navigation/native'
+import Home from '@/pages/Home'
+import Account from '@/pages/Account'
+import Collection from '@/pages/Collection'
+import Recommend from '@/pages/Recommend'
+import { ENV_ICON } from '@/constant/image/icon'
 
 export type BottomTabParamList = {
   Home: undefined,
-  Found: undefined,
-  Listen: undefined,
+  Collection: undefined,
+  Recommend: undefined,
   Account: undefined
 }
 
@@ -31,12 +33,12 @@ function getHeaderTitle(route: Route) {
   switch (routeName) {
     case 'Home':
       return '首页';
-    case 'Listen':
-      return '我听';
-    case 'Found':
-      return '发现';
+    case 'Recommend':
+      return '推荐';
+    case 'Collection':
+      return '收藏';
     default:
-      return '账户';
+      return '我的';
   }
 }
 
@@ -59,13 +61,54 @@ export default class BottomTabs extends Component<IProps> {
 
   render() {
     return (
-      <Tab.Navigator tabBarOptions={{
-        activeTintColor: '#c71622'
-      }}>
-        <Tab.Screen name='Home' component={Home} options={{ tabBarLabel: '首页' }}></Tab.Screen>
-        <Tab.Screen name='Listen' component={Listen} options={{ tabBarLabel: '我听' }}></Tab.Screen>
-        <Tab.Screen name='Found' component={Found} options={{ tabBarLabel: '发现' }}></Tab.Screen>
-        <Tab.Screen name='Account' component={Account} options={{ tabBarLabel: '用户' }}></Tab.Screen>
+      <Tab.Navigator
+        lazy
+        tabBarOptions={{
+          activeTintColor: '#c71622',
+          inactiveTintColor: '#666',
+          labelStyle: { fontSize: 14, position: 'relative', top: -4 }
+        }}
+      >
+        <Tab.Screen
+          name='Home'
+          component={Home}
+          options={{
+            tabBarLabel: '首页',
+            tabBarIcon: ({ focused, color, size }) => (
+              <Image source={focused ? ENV_ICON.icon_footer_home_red : ENV_ICON.icon_footer_home} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name='Recommend'
+          component={Recommend}
+          options={{
+            tabBarLabel: '推荐',
+            tabBarIcon: ({ focused, color, size }) => (
+              <Image source={focused ? ENV_ICON.icon_footer_recommend_red : ENV_ICON.icon_footer_recommend} />
+            )
+          }}
+        />
+        <Tab.Screen
+          name='Collection'
+          component={Collection}
+          options={{
+            tabBarLabel: '收藏',
+            tabBarIcon: ({ focused, color, size }) => (
+              <Image source={focused ? ENV_ICON.icon_footer_collect_red : ENV_ICON.icon_footer_collect} />
+            )
+          }}
+        />
+        <Tab.Screen
+          name='Account'
+          component={Account}
+          options={{
+            tabBarLabel: '我的',
+            tabBarIcon: ({ focused, color, size }) => (
+              <Image source={focused ? ENV_ICON.icon_footer_user_red : ENV_ICON.icon_footer_user} />
+            )
+          }}
+        />
       </Tab.Navigator>
     )
   }
