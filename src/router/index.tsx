@@ -39,17 +39,18 @@ export default class Navigator extends Component {
             name="Tab"
             component={BottomTabs}
             options={{
-              header: ({scene, previous, navigation}) => {
+              header: ({ scene, previous, navigation }) => {
+                console.log(scene, previous, navigation)
                 return (
                   <View>
-                    <Text>首页</Text>
+                    <Text>{scene.descriptor.options.headerTitle}</Text>
                   </View>
                 )
               },
             }}
           />
-          <Stack.Screen 
-            name="Detail" 
+          <Stack.Screen
+            name="Detail"
             component={Detail}
             options={{
               headerTitle: '详情'
