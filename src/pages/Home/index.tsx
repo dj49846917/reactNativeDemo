@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
-import { Text, View, StatusBar, SafeAreaView, StyleSheet } from 'react-native'
+import { Text, View, StatusBar, SafeAreaView, StyleSheet, Button } from 'react-native'
 
-export default class Home extends Component {
+import { RootStackNavigation } from '@/router/index'
+
+interface homeProps {
+  navigation: RootStackNavigation,
+}
+
+export default class Home extends Component<homeProps> {
   render() {
     return (
       <>
@@ -9,6 +15,10 @@ export default class Home extends Component {
           <View>
             <Text>222</Text>
           </View>
+          <Button title='更新' onPress={()=>{
+            console.log(this.props.navigation, '2222')
+            this.props.navigation.navigate('Detail', {id: '123'})
+          }}></Button>
         </SafeAreaView>
       </>
     )
@@ -18,7 +28,7 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   box: {
     flex: 1,
-    backgroundColor: 'red'
+    backgroundColor: '#fff'
   }
 })
 
