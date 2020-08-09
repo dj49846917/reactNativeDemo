@@ -46,7 +46,6 @@ function getHeaderTitle(route: Route) {
 export default class BottomTabs extends Component<IProps> {
   componentDidMount() {
     const { navigation, route } = this.props;
-    console.log('route', route)
     navigation.setOptions({
       headerTitle: getHeaderTitle(route)
     })

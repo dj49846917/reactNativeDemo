@@ -42,7 +42,6 @@ export default class DefaultNavigationHeader extends Component<IProps> {
   }
 
   render() {
-    console.log(this.props, 'this.props')
     return (
       <View style={[styles.header, this.props.showBorder ? commonStyle.commonBorder : null]}>
         {this.props.showLeftIcon ? (

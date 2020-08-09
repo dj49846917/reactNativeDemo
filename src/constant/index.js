@@ -5,5 +5,6 @@ export const Constant = {
   borderBottomColor: '#f1f1f1',
   borderBottomWidth: UnitConvert.dpi(2),
   iconWidth: UnitConvert.dpi(60),
-  headerTitleSize: UnitConvert.dpi(32)
+  headerTitleSize: UnitConvert.dpi(32),
+  inputHeight: UnitConvert.dpi(90)
 }

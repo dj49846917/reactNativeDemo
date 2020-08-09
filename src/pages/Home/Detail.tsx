@@ -23,7 +23,6 @@ export default class Detail extends Component<Iprops> {
   }
 
   render() {
-    console.log(this.props)
     return (
       <View>
         <Text> {this.props.route.params.id} </Text>

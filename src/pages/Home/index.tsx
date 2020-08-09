@@ -16,7 +16,6 @@ export default class Home extends Component<homeProps> {
             <Text>222</Text>
           </View>
           <Button title='更新' onPress={()=>{
-            console.log(this.props.navigation, '2222')
             this.props.navigation.navigate('Detail', {id: '123'})
           }}></Button>
         </SafeAreaView>

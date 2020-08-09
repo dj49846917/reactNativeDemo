@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, StackNavigationProp, HeaderStyleInterpolators, CardStyleInterpolators } from '@react-navigation/stack'
 import Detail from '@/pages/Home/Detail'
 import BottomTabs from '@/router/BottomTabs'
+import Test from '@/pages/Test/test'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
   Tab: {
@@ -11,6 +12,9 @@ export type RootStackList = { // 定义类型别名，用于约束navigator组�
   },
   Detail: {
     id: string
+  },
+  Test: {
+    screen?: string
   }
 }
 
@@ -34,6 +38,7 @@ export default class Navigator extends Component {
             gestureEnabled: true,
             gestureDirection: 'horizontal',
           }}
+          initialRouteName='Test'
         >
           <Stack.Screen
             name="Tab"
@@ -42,6 +47,10 @@ export default class Navigator extends Component {
           <Stack.Screen
             name="Detail"
             component={Detail}
+          />
+          <Stack.Screen
+            name="Test"
+            component={Test}
           />
         </Stack.Navigator>
       </NavigationContainer>
