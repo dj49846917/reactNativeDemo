@@ -743,6 +743,40 @@
           }
         ```
     
+## 提示框react-native-root-toast
+使用步骤：    
+  1. 下载核心包:
+    ```
+      yarn add react-native-root-toast 或者 npm install --save react-native-root-toast
+    ```
+
+  2. 当react-native的版本>0.62时，需要在根路径src/index.tsx或者App.tsx中，加入以下代码：
+    ```
+      import { RootSiblingParent } from 'react-native-root-siblings';
+
+      return (
+        <RootSiblingParent>  // <- use RootSiblingParent to wrap your root component
+          <App />
+        </RootSiblingParent>
+      );
+    ```
+
+  3. 使用:
+    ```
+      import Toast from 'react-native-root-toast';
+
+      Toast.show('This is a message', {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.BOTTOM,
+        shadow: true,
+        animation: true,
+        hideOnPress: true,
+        delay: 0,
+      });
+    ```
+
+  4. 详细说明文档请看：https://github.com/magicismight/react-native-root-toast
+    
 
 # 项目实战开发
 ## 底部导航栏添加图标
@@ -928,3 +962,57 @@
         statusBarHeight: getStatusBarHeight(),
       }
     ```
+
+# 使用ts开发react-native的一些总结
+## 子组件要使用state，则必须定义interface或者type
+  ```
+    interface Props { }
+    interface State { }
+
+    class Index extends React.PureComponent<Props, State> {
+      constructor(props: Props) {
+        super(props);
+        this.state = {
+        }
+      }
+
+      render() {
+        return (
+          <div className="container">
+              
+          </div>
+        )
+      }
+    }
+  ```
+
+## react-native中父组件获取子组件的ref，并调用方法
+  * 需求：父组件点击任意空白处，清除掉子组件textInput里的值
+    1. 父组件test.tsx里，使用ref函数
+      ```
+        export default class Test extends Component {
+          child: any = {} // 获取dom
+
+          render() {
+            return (
+              <TouchableOpacity style={styles.box} onPress={()=>{
+                console.log(this.child.refs.input, 'this.child')
+                this.child.refs.input.clear() // 调用
+              }}>
+                <View style={styles.item}>
+                  <MyTextInput 
+                    ref={(ref)=>{ // 获取dom
+                      this.child = ref
+                    }}
+                    width={UnitConvert.w - UnitConvert.dpi(60)}
+                    placeholder='请输入XXX'
+                    flelds='姓名'
+                  />
+                </View>
+              </TouchableOpacity>
+            )
+          }
+        }
+      ```
+
+    2. 子组件MyTextInput.tsx中正常使用ref

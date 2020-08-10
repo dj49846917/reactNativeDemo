@@ -10,4 +10,5 @@ export const ENV_ICON = {
   icon_top_left: require('@/assets/images/icon/icon_top_left.png'),
   icon_top_screen: require("@/assets/images/icon/icon_top_screen.png"),
   icon_top_search: require('@/assets/images/icon/icon_top_search.png'),
+  icon_off: require('@/assets/images/icon/icon_off.png'),
 }
