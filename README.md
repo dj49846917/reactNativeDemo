@@ -777,6 +777,34 @@
 
   4. 详细说明文档请看：https://github.com/magicismight/react-native-root-toast
     
+## 弹窗组件react-native-modalbox
+使用步骤：    
+  1. 下载核心包：
+    ```
+      npm install react-native-modalbox@latest --save
+      npm install --save-dev @types/react-native-modalbox
+    ```
+
+  2. 使用：
+    ```
+      import Modal from 'react-native-modalbox'
+
+      <Modal
+        isOpen={this.state.visible}
+        style={{height: UnitConvert.dpi(300)}}
+        position='top'
+        startOpen
+        onClosed={()=>{
+          this.setState({
+            visible: false
+          })
+        }}
+      >
+        <Text>2222</Text>
+      </Modal>
+    ```
+
+  3. 详细文档: 
 
 # 项目实战开发
 ## 底部导航栏添加图标

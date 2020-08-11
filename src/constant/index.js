@@ -6,5 +6,12 @@ export const Constant = {
   borderBottomWidth: UnitConvert.dpi(2),
   iconWidth: UnitConvert.dpi(60),
   headerTitleSize: UnitConvert.dpi(32),
-  inputHeight: UnitConvert.dpi(90)
+  inputHeight: UnitConvert.dpi(90),
+  commonColor: { // 颜色
+    danger: '#c71622', 
+    primary: '#639be7',
+    success: '#288d65',
+    warning: '#f7912b',
+    default: '#8a8a8a'
+  }
 }
