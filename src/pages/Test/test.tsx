@@ -4,7 +4,8 @@ import MyTextInput from '@/components/MyTextInput'
 import { UnitConvert } from '@/utils/unitConvert'
 import { ErrorNotice } from '@/utils/errorNotice'
 import { VerifyUtil } from '@/utils/verifyUtil'
-import ModalBox from '@/components/ModalBox'
+import ModalComfirm from '@/components/ModalComfirm'
+import ModalTip from '@/components/ModalTip'
 
 interface Iprops { }
 interface IState {
@@ -19,7 +20,8 @@ export default class Test extends Component<Iprops, IState> {
     }
   }
   child: any = {}
-  modalRef: any = {}
+  modalRef: any = {} // 对话框的ref
+  modalTip: any = {} // 提示框的ref
 
   render() {
     return (
@@ -54,19 +56,25 @@ export default class Test extends Component<Iprops, IState> {
           <TouchableOpacity
             style={styles.modal_box}
             onPress={() => {
-              console.log(this.modalRef, 'this.modalref')
               this.modalRef.modal.open()
             }}
           >
-            <Text style={styles.modal_box_text}>点击</Text>
+            <Text style={styles.modal_box_text}>点击对话框ModalComfirm</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modal_box}
+            onPress={() => {
+              this.modalTip.modal.open()
+            }}
+          >
+            <Text style={styles.modal_box_text}>点击提示框ModalTip</Text>
           </TouchableOpacity>
         </TouchableOpacity>
-        <ModalBox
-          ref={(ref) => {
-            this.modalRef = ref
-          }}
-          closeModal={() => { }}
-          backdropPressToClose
+        <ModalComfirm
+          ref={(ref) => { this.modalRef = ref }}
+        />
+        <ModalTip
+          ref={(ref) => { this.modalTip = ref }}
         />
       </>
     )
