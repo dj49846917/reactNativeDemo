@@ -22,6 +22,30 @@
 ***
 
 # 项目开发经验
+## UI框架react-native-mobile
+使用步骤：
+  1. 核心包下载：
+    ```
+      npm install @ant-design/react-native --save
+    ```
+
+  2. 使用：
+    ```
+      import React, { Component } from 'react';
+      import { AppRegistry } from 'react-native';
+      import Button from '@ant-design/react-native/lib/button';
+
+      class HelloWorldApp extends Component {
+        render() {
+          return <Button>Start</Button>;
+        }
+      }
+
+      AppRegistry.registerComponent('HelloWorldApp', () => HelloWorldApp);
+    ```
+
+  3. 详细文档请看：https://rn.mobile.ant.design/index-cn
+
 ## 多环境配置
   * 详细文档请看: https://github.com/luggit/react-native-config
 
@@ -804,7 +828,50 @@
       </Modal>
     ```
 
-  3. 详细文档: 
+  3. 详细文档: https://github.com/maxs15/react-native-modalbox#readme
+
+## 可滑动的选择组件react-native-picker
+使用步骤：     
+  1. 下载核心包:
+    ```
+      npm install --save react-native-picker
+    ```
+
+  2. 使用：
+    ```
+      import Picker from 'react-native-picker'
+
+      _showDatePicker = () => {
+        Picker.init({
+          pickerTitleText: '时间选择',
+          pickerCancelBtnText: '取消',
+          pickerConfirmBtnText: '确定',
+          selectedValue: [3],                     // 选中的数据
+          pickerBg: [255, 255, 255, 1],           // 内容的背景区域
+          pickerData: [1, 2, 3, 4],               // 数据源
+          pickerFontColor: [33, 33, 33, 1],       // 内容的文字大小
+          onPickerCancel: (data) => {             // 点击取消的回调
+            console.log('date', data);
+          },
+          onPickerSelect: (data) => {             // 点击确定时的回调
+            console.log('date', data);
+          }
+        });
+        Picker.show();
+      }
+
+      <TouchableOpacity
+        style={styles.modal_box}
+        onPress={() => {
+          this._showDatePicker()
+        }}
+      >
+        <Text style={styles.modal_box_text}>点击demo</Text>
+      </TouchableOpacity>
+    ```
+
+  3. 详细文档请看：https://github.com/beefe/react-native-picker
+  4. 它也有局限性，就是一些样式不能自定义
 
 # 项目实战开发
 ## 底部导航栏添加图标

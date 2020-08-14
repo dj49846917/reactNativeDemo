@@ -6,6 +6,7 @@ import { ErrorNotice } from '@/utils/errorNotice'
 import { VerifyUtil } from '@/utils/verifyUtil'
 import ModalComfirm from '@/components/ModalComfirm'
 import ModalTip from '@/components/ModalTip'
+import ModalSelect from '@/components/ModalSelect'
 
 interface Iprops { }
 interface IState {
@@ -16,12 +17,13 @@ export default class Test extends Component<Iprops, IState> {
   constructor(props: Iprops) {
     super(props)
     this.state = {
-      name: '',
+      name: ''
     }
   }
   child: any = {}
   modalRef: any = {} // 对话框的ref
   modalTip: any = {} // 提示框的ref
+  modalSelect: any = {} // 选择框的ref
 
   render() {
     return (
@@ -69,12 +71,33 @@ export default class Test extends Component<Iprops, IState> {
           >
             <Text style={styles.modal_box_text}>点击提示框ModalTip</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modal_box}
+            onPress={() => {
+              this.modalSelect.modal.open()
+              this.modalSelect._showDatePicker()
+            }}
+          >
+            <Text style={styles.modal_box_text}>点击demo</Text>
+          </TouchableOpacity>
         </TouchableOpacity>
         <ModalComfirm
           ref={(ref) => { this.modalRef = ref }}
         />
         <ModalTip
           ref={(ref) => { this.modalTip = ref }}
+        />
+        <ModalSelect
+          ref={(ref) => { this.modalSelect = ref }}
+          cancelCallback={(code: any) => {
+            this.modalSelect.modal.close()
+            console.log('code', code)
+          }}
+          pickerData={[1, 2]}
+          okCallback={(code: any) => {
+            this.modalSelect.modal.close()
+            console.log('code', code)
+          }}
         />
       </>
     )
