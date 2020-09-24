@@ -13,7 +13,6 @@ module.exports = {
           '@/assets': './src/assets',
           '@/router': './src/router',
           '@/config': './src/config',
-          '@/assets': './src/assets'
         }
       }
     ]

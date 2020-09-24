@@ -22,6 +22,30 @@
 ***
 
 # 项目开发经验
+## UI框架react-native-mobile
+使用步骤：
+  1. 核心包下载：
+    ```
+      npm install @ant-design/react-native --save
+    ```
+
+  2. 使用：
+    ```
+      import React, { Component } from 'react';
+      import { AppRegistry } from 'react-native';
+      import Button from '@ant-design/react-native/lib/button';
+
+      class HelloWorldApp extends Component {
+        render() {
+          return <Button>Start</Button>;
+        }
+      }
+
+      AppRegistry.registerComponent('HelloWorldApp', () => HelloWorldApp);
+    ```
+
+  3. 详细文档请看：https://rn.mobile.ant.design/index-cn
+
 ## 多环境配置
   * 详细文档请看: https://github.com/luggit/react-native-config
 
@@ -539,20 +563,6 @@
 
     * 在根路径的index.js中，引入Navigator即可
 
-  4. 给底部导航栏添加图片
-    ```
-      <Tab.Screen name='Home' component={Home}
-        options={{
-          tabBarLabel: '首页',
-          tabBarIcon: ({ focused, color, size }) => {
-            return (
-              <Image source={focused ? ENV_ICON.icon_footer_home_red : ENV_ICON.icon_footer_home} />
-            )
-          }
-        }}
-      />
-    ```
-
 ## 状态管理dva
   * 核心包安装：
     ```
@@ -757,3 +767,347 @@
           }
         ```
     
+## 提示框react-native-root-toast
+使用步骤：    
+  1. 下载核心包:
+    ```
+      yarn add react-native-root-toast 或者 npm install --save react-native-root-toast
+    ```
+
+  2. 当react-native的版本>0.62时，需要在根路径src/index.tsx或者App.tsx中，加入以下代码：
+    ```
+      import { RootSiblingParent } from 'react-native-root-siblings';
+
+      return (
+        <RootSiblingParent>  // <- use RootSiblingParent to wrap your root component
+          <App />
+        </RootSiblingParent>
+      );
+    ```
+
+  3. 使用:
+    ```
+      import Toast from 'react-native-root-toast';
+
+      Toast.show('This is a message', {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.BOTTOM,
+        shadow: true,
+        animation: true,
+        hideOnPress: true,
+        delay: 0,
+      });
+    ```
+
+  4. 详细说明文档请看：https://github.com/magicismight/react-native-root-toast
+    
+## 弹窗组件react-native-modalbox
+使用步骤：    
+  1. 下载核心包：
+    ```
+      npm install react-native-modalbox@latest --save
+      npm install --save-dev @types/react-native-modalbox
+    ```
+
+  2. 使用：
+    ```
+      import Modal from 'react-native-modalbox'
+
+      <Modal
+        isOpen={this.state.visible}
+        style={{height: UnitConvert.dpi(300)}}
+        position='top'
+        startOpen
+        onClosed={()=>{
+          this.setState({
+            visible: false
+          })
+        }}
+      >
+        <Text>2222</Text>
+      </Modal>
+    ```
+
+  3. 详细文档: https://github.com/maxs15/react-native-modalbox#readme
+
+## 可滑动的选择组件react-native-picker
+使用步骤：     
+  1. 下载核心包:
+    ```
+      npm install --save react-native-picker
+    ```
+
+  2. 使用：
+    ```
+      import Picker from 'react-native-picker'
+
+      _showDatePicker = () => {
+        Picker.init({
+          pickerTitleText: '时间选择',
+          pickerCancelBtnText: '取消',
+          pickerConfirmBtnText: '确定',
+          selectedValue: [3],                     // 选中的数据
+          pickerBg: [255, 255, 255, 1],           // 内容的背景区域
+          pickerData: [1, 2, 3, 4],               // 数据源
+          pickerFontColor: [33, 33, 33, 1],       // 内容的文字大小
+          onPickerCancel: (data) => {             // 点击取消的回调
+            console.log('date', data);
+          },
+          onPickerSelect: (data) => {             // 点击确定时的回调
+            console.log('date', data);
+          }
+        });
+        Picker.show();
+      }
+
+      <TouchableOpacity
+        style={styles.modal_box}
+        onPress={() => {
+          this._showDatePicker()
+        }}
+      >
+        <Text style={styles.modal_box_text}>点击demo</Text>
+      </TouchableOpacity>
+    ```
+
+  3. 详细文档请看：https://github.com/beefe/react-native-picker
+  4. 它也有局限性，就是一些样式不能自定义
+
+# 项目实战开发
+## 底部导航栏添加图标
+  * 将项目中用到的图片放到assets/images文件夹下
+
+  * 新建constant/image/icon.js,将图片引入
+    ``` 
+      export const ENV_ICON = {
+        icon_footer_home: require('@/assets/images/icon/icon_footer_home.png'),
+        icon_footer_home_red: require('@/assets/images/icon/icon_footer_home_red.png'),
+        icon_footer_recommend: require('@/assets/images/icon/icon_footer_recommend.png'),
+        icon_footer_recommend_red: require('@/assets/images/icon/icon_footer_recommend_red.png'),
+        icon_footer_collect: require('@/assets/images/icon/icon_footer_collect.png'),
+        icon_footer_collect_red: require('@/assets/images/icon/icon_footer_collect_red.png'),
+        icon_footer_user: require('@/assets/images/icon/icon_footer_user.png'),
+        icon_footer_user_red: require('@/assets/images/icon/icon_footer_user_red.png'),
+      }
+    ```
+
+  * 在router/BottomTabs.tsx中,设置图片
+    ```
+      import React, { Component } from 'react'
+      import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+      import { Image } from 'react-native'
+      import { RootStackNavigation, RootStackList } from '@/router/index'
+      import { RouteProp, TabNavigationState } from '@react-navigation/native'
+      import Home from '@/pages/Home'
+      import Account from '@/pages/Account'
+      import Collection from '@/pages/Collection'
+      import Recommend from '@/pages/Recommend'
+      import { ENV_ICON } from '@/constant/image/icon'
+
+      export type BottomTabParamList = {
+        Home: undefined,
+        Collection: undefined,
+        Recommend: undefined,
+        Account: undefined
+      }
+
+      const Tab = createBottomTabNavigator<BottomTabParamList>()
+
+      type Route = RouteProp<RootStackList, 'Tab'> & {
+        state?: TabNavigationState
+      }
+
+      interface IProps {
+        navigation: RootStackNavigation,
+        route: Route
+      }
+
+      // 动态获取底部导航栏的标题
+      function getHeaderTitle(route: Route) {
+        const routeName = route.state ? route.state.routes[route.state.index].name : route.params?.screen || 'Home';
+        switch (routeName) {
+          case 'Home':
+            return '首页';
+          case 'Recommend':
+            return '推荐';
+          case 'Collection':
+            return '收藏';
+          default:
+            return '我的';
+        }
+      }
+
+
+      export default class BottomTabs extends Component<IProps> {
+        componentDidMount() {
+          const { navigation, route } = this.props;
+          console.log('route', route)
+          navigation.setOptions({
+            headerTitle: getHeaderTitle(route)
+          })
+        }
+
+        componentDidUpdate() {
+          const { navigation, route } = this.props;
+          navigation.setOptions({
+            headerTitle: getHeaderTitle(route)
+          })
+        }
+
+        render() {
+          return (
+            <Tab.Navigator
+              lazy
+              tabBarOptions={{
+                activeTintColor: '#c71622',
+                inactiveTintColor: '#979797',
+                labelStyle: { fontSize: 14, position: 'relative', top: -4 }
+              }}
+            >
+              <Tab.Screen
+                name='Home'
+                component={Home}
+                options={{
+                  tabBarLabel: '首页',
+                  tabBarIcon: ({ focused, color, size }) => (
+                    <Image source={focused ? ENV_ICON.icon_footer_home_red : ENV_ICON.icon_footer_home} />
+                  )
+                }}
+              />
+              <Tab.Screen
+                name='Recommend'
+                component={Recommend}
+                options={{
+                  tabBarLabel: '推荐',
+                  tabBarIcon: ({ focused, color, size }) => (
+                    <Image source={focused ? ENV_ICON.icon_footer_recommend_red : ENV_ICON.icon_footer_recommend} />
+                  )
+                }}
+              />
+              <Tab.Screen
+                name='Collection'
+                component={Collection}
+                options={{
+                  tabBarLabel: '收藏',
+                  tabBarIcon: ({ focused, color, size }) => (
+                    <Image source={focused ? ENV_ICON.icon_footer_collect_red : ENV_ICON.icon_footer_collect} />
+                  )
+                }}
+              />
+              <Tab.Screen
+                name='Account'
+                component={Account}
+                options={{
+                  tabBarLabel: '我的',
+                  tabBarIcon: ({ focused, color, size }) => (
+                    <Image source={focused ? ENV_ICON.icon_footer_user_red : ENV_ICON.icon_footer_user} />
+                  )
+                }}
+              />
+            </Tab.Navigator>
+          )
+        }
+      }
+    ```
+
+## react-native适配
+  * 使用Dimensions类获取宽高
+  * 用实际宽度 / 设计稿的宽度 * 屏幕宽度就行适配
+  * 详细代码：
+    ```
+      'use strict';
+      import {
+        Dimensions,
+        PixelRatio,
+        Platform,
+        StatusBar,
+        NativeModules
+      } from 'react-native';
+      import { getStatusBarHeight } from '@/utils/utils'
+
+      // 手机屏幕的宽高
+      const { height, width } = Dimensions.get('window');
+
+      //UI设计图的宽度
+      const designWidth = 750
+      //UI设计图的高度
+      const designHeight = 1334
+
+      // 定义UnitConvert的类型
+      type UnitConvertType = { 
+        px1: number,
+        dpi: Function,
+        w: number,
+        h: number,
+        ToDeviceWidth: Function,
+        ToDeviceHeight: Function,
+        statusBarHeight: number | undefined
+      }
+
+      //屏幕单位转换
+      export const UnitConvert:UnitConvertType = {
+        px1: 1 / PixelRatio.get(),
+        dpi: (w: number) => {
+          return w / designWidth * width;
+        },
+        w: width,
+        h: height,
+        ToDeviceWidth: (w: number) => { return w * designWidth / width; },
+        ToDeviceHeight: (h: number) => { return h * designHeight / height; },
+        statusBarHeight: getStatusBarHeight(),
+      }
+    ```
+
+# 使用ts开发react-native的一些总结
+## 子组件要使用state，则必须定义interface或者type
+  ```
+    interface Props { }
+    interface State { }
+
+    class Index extends React.PureComponent<Props, State> {
+      constructor(props: Props) {
+        super(props);
+        this.state = {
+        }
+      }
+
+      render() {
+        return (
+          <div className="container">
+              
+          </div>
+        )
+      }
+    }
+  ```
+
+## react-native中父组件获取子组件的ref，并调用方法
+  * 需求：父组件点击任意空白处，清除掉子组件textInput里的值
+    1. 父组件test.tsx里，使用ref函数
+      ```
+        export default class Test extends Component {
+          child: any = {} // 获取dom
+
+          render() {
+            return (
+              <TouchableOpacity style={styles.box} onPress={()=>{
+                console.log(this.child.refs.input, 'this.child')
+                this.child.refs.input.clear() // 调用
+              }}>
+                <View style={styles.item}>
+                  <MyTextInput 
+                    ref={(ref)=>{ // 获取dom
+                      this.child = ref
+                    }}
+                    width={UnitConvert.w - UnitConvert.dpi(60)}
+                    placeholder='请输入XXX'
+                    flelds='姓名'
+                  />
+                </View>
+              </TouchableOpacity>
+            )
+          }
+        }
+      ```
+
+    2. 子组件MyTextInput.tsx中正常使用ref

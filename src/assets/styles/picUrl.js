@@ -7,4 +7,5 @@ export const ENV_ICON = {
   icon_footer_collect_red: require('@/assets/images/icon/icon_footer_collect_red.png'), 
   icon_footer_user: require('@/assets/images/icon/icon_footer_user.png'), // 我的
   icon_footer_user_red: require('@/assets/images/icon/icon_footer_user_red.png'),
+  icon_down: require('@/assets/images/icon/icon_down.png'),
 }
