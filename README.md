@@ -539,6 +539,20 @@
 
     * 在根路径的index.js中，引入Navigator即可
 
+  4. 给底部导航栏添加图片
+    ```
+      <Tab.Screen name='Home' component={Home}
+        options={{
+          tabBarLabel: '首页',
+          tabBarIcon: ({ focused, color, size }) => {
+            return (
+              <Image source={focused ? ENV_ICON.icon_footer_home_red : ENV_ICON.icon_footer_home} />
+            )
+          }
+        }}
+      />
+    ```
+
 ## 状态管理dva
   * 核心包安装：
     ```

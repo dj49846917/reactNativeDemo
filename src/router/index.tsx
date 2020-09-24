@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, StackNavigationProp, HeaderStyleInterpolators, CardStyleInterpolators } from '@react-navigation/stack'
-import Detail from '@/pages/Home/Detail'
 import BottomTabs from '@/router/BottomTabs'
+import Demo from '@/pages/demo'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
   Tab: {
     screen?: string
   },
-  Detail: {
-    id: string
-  }
+  Demo: {
+    screen?: string
+  },
 }
 
 // 该类型申明约束每一个页面组件的props
@@ -31,19 +31,19 @@ export default class Navigator extends Component {
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             // 开启安卓的切换手势
             gestureEnabled: true,
-            gestureDirection: 'horizontal'
+            gestureDirection: 'horizontal',
           }}
         >
           <Stack.Screen
             name="Tab"
             component={BottomTabs}
-          />
-          <Stack.Screen 
-            name="Detail" 
-            component={Detail}
             options={{
-              headerTitle: '详情'
+              header: () => null
             }}
+          />
+          <Stack.Screen
+            name="Demo"
+            component={Demo}
           />
         </Stack.Navigator>
       </NavigationContainer>
