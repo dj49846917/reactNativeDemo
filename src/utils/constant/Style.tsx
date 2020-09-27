@@ -1,7 +1,36 @@
 import { StyleSheet } from "react-native";
 import { UnitConvert } from "@/utils/unitConvert";
+import { Constant } from "./Constant";
 
 const CommonStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  commonBorder: {
+    borderBottomColor: Constant.commonBorderColor,
+    borderBottomWidth: UnitConvert.dpi(2)
+  },
+  commonHeaderBox: {
+    height: UnitConvert.dpi(90),
+    width: UnitConvert.w,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  commonHeaderBox_title: {
+    color: '#000',
+    fontSize: UnitConvert.dpi(34),
+    fontWeight: '700'
+  },
+  search_icon: {
+    position: 'absolute',
+    top: UnitConvert.dpi(4),
+    left: UnitConvert.dpi(10),
+    zIndex: 2,
+    width: UnitConvert.dpi(60),
+    height: UnitConvert.dpi(60)
+  },
   img: {
     width: UnitConvert.dpi(60),
     height: UnitConvert.dpi(60)

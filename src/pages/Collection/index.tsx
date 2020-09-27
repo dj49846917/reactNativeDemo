@@ -1,17 +1,40 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
-import { RootStackNavigation } from '@/router/index'
+import React, { useState } from 'react';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import CommonStyle from '@/utils/constant/Style';
+import MyTab, { listType } from '@/components/MyTab';
+import { Constant } from '@/utils/constant/Constant';
+import NavBar from '@/pages/Collection/NavBar';
+import TabPane from './TabPane';
 
-interface homeProps {
-  navigation: RootStackNavigation,
-}
+interface CollectionProps { }
 
-export default class Found extends Component<homeProps> {
-  render() {
-    return (
-      <View>
-        <Text> Found </Text>
-      </View>
-    )
-  }
-}
+const Collection = (props: CollectionProps) => {
+  const [tab, setTab] = useState({
+    current: 0,
+    row: Constant.collection_tab_arr[0]
+  })
+  return (
+    <SafeAreaView style={CommonStyle.container}>
+      <NavBar />
+      {/* 选项卡 */}
+      <MyTab
+        current={tab.current}
+        list={Constant.collection_tab_arr}
+        onChange={(item: listType, index: number)=>{
+          setTab({
+            current: index,
+            row: item
+          })
+        }}
+      />
+      {/* 主体内容 */}
+      <TabPane row={tab.row} />
+    </SafeAreaView>
+  );
+};
+
+export default Collection;
+
+const styles = StyleSheet.create({
+  
+});

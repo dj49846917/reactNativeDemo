@@ -11,6 +11,7 @@ import { AssetAutionData, AssetDic, JudicialAuctionData } from '@/assets/data/As
 import { SecondHouseData } from '@/assets/data/SecondHouse'
 import { ScrollView } from 'react-native-gesture-handler';
 import CommonSecondHouseList from '@/components/CommonSecondHoseList';
+import CommonStyle from '@/utils/constant/Style';
 
 interface HomeProps {
 
@@ -18,11 +19,11 @@ interface HomeProps {
 
 const Home = (props: HomeProps) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={CommonStyle.container}>
       {/* 顶部搜索 */}
       <Search />
       {/* banner图 */}
-      <ScrollView style={styles.container}>
+      <ScrollView style={CommonStyle.container}>
         <Swiper />
         {/* 分类 */}
         <Category list={Constant.home_category_arr} />
@@ -41,8 +42,4 @@ const Home = (props: HomeProps) => {
 export default Home;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  }
 });

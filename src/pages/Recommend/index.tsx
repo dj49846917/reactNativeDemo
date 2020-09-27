@@ -1,17 +1,21 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
-import { RootStackNavigation } from '@/router/index'
+import * as React from 'react';
+import { Text, View, StyleSheet, SafeAreaView } from 'react-native';
+import CommonStyle from '@/utils/constant/Style';
+import DefaultNavigationHeader from '@/components/DefaultNavigationHeader';
 
-interface homeProps {
-  navigation: RootStackNavigation
-}
+interface RecommendProps {}
 
-export default class Listen extends Component<homeProps> {
-  render() {
-    return (
-      <View>
-        <Text> Listen </Text>
-      </View>
-    )
-  }
-}
+const Recommend = (props: RecommendProps) => {
+  return (
+    <SafeAreaView style={CommonStyle.container}>
+      <DefaultNavigationHeader 
+        title='推荐'
+      />
+    </SafeAreaView>
+  );
+};
+
+export default Recommend;
+
+const styles = StyleSheet.create({
+});
