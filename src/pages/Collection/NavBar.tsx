@@ -45,9 +45,9 @@ const NavBar = (props: CollectionProps) => {
           </View>
         ) : (
             <DefaultNavigationHeader
+              showLeftIcon={false}
               title="收藏"
               showRightSecondIcon
-              showLeftIcon
               rightSecondCallBack={() => {
                 setVisible(true)
               }}

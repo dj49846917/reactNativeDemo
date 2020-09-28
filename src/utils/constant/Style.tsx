@@ -3,6 +3,14 @@ import { UnitConvert } from "@/utils/unitConvert";
 import { Constant } from "./Constant";
 
 const CommonStyle = StyleSheet.create({
+  sizedBox: {
+    width: UnitConvert.w,
+    height: UnitConvert.dpi(20),
+    backgroundColor: Constant.defaultBgColor
+  },
+  content: {
+    flex: 1
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff'

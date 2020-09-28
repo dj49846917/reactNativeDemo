@@ -35,5 +35,9 @@ export const Constant = {
     { id: '0', val: '资产拍卖' },
     { id: '1', val: '司法拍卖' },
     { id: '2', val: '二手房' },
+  ],
+  recommend_tab_arr: [
+    { id: '0', val: '客源' },
+    { id: '1', val: '房源' },
   ]
 }
