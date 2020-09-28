@@ -1111,3 +1111,117 @@
       ```
 
     2. 子组件MyTextInput.tsx中正常使用ref
+
+## react-native 使用textInput遮挡键盘的问题：
+  1. 使用组件KeyboardAvoidingView
+  2. scrollview包裹在组件KeyboardAvoidingView的外面
+  3. 详细代码请看：
+    ```
+      import * as React from 'react';
+      import { Text, View, StyleSheet, KeyboardAvoidingView, TextInput } from 'react-native';
+      import CommonStyle from '@/utils/constant/Style';
+      import { ScrollView } from 'react-native-gesture-handler';
+      import { UnitConvert } from '@/utils/unitConvert';
+
+      interface HouseProps { }
+
+      const House = (props: HouseProps) => {
+        return (
+          <View style={CommonStyle.content}>
+            <View style={CommonStyle.sizedBox}></View>
+            <Text>111</Text>
+            <ScrollView style={{flex: 1}}>
+              <KeyboardAvoidingView style={{ flex: 1 }} behavior='position' keyboardVerticalOffset={200}>
+                <TextInput
+                  style={{ height: UnitConvert.dpi(100) }}
+                  placeholder="请输入新密码"
+                  placeholderTextColor="#cccccc"
+                  maxLength={16}
+                  secureTextEntry={true}
+                  onChangeText={() => { }}
+                />
+                <TextInput
+                  style={{ height: UnitConvert.dpi(100) }}
+                  placeholder="请输入新密码"
+                  placeholderTextColor="#cccccc"
+                  maxLength={16}
+                  secureTextEntry={true}
+                  onChangeText={() => { }}
+                />
+                <TextInput
+                  style={{ height: UnitConvert.dpi(100) }}
+                  placeholder="请输入新密码"
+                  placeholderTextColor="#cccccc"
+                  maxLength={16}
+                  secureTextEntry={true}
+                  onChangeText={() => { }}
+                />
+                <TextInput
+                  style={{ height: UnitConvert.dpi(100) }}
+                  placeholder="请输入新密码"
+                  placeholderTextColor="#cccccc"
+                  maxLength={16}
+                  secureTextEntry={true}
+                  onChangeText={() => { }}
+                />
+                <TextInput
+                  style={{ height: UnitConvert.dpi(100) }}
+                  placeholder="请输入新密码"
+                  placeholderTextColor="#cccccc"
+                  maxLength={16}
+                  secureTextEntry={true}
+                  onChangeText={() => { }}
+                />
+                <TextInput
+                  style={{ height: UnitConvert.dpi(100) }}
+                  placeholder="请输入新密码"
+                  placeholderTextColor="#cccccc"
+                  maxLength={16}
+                  secureTextEntry={true}
+                  onChangeText={() => { }}
+                />
+                <TextInput
+                  style={{ height: UnitConvert.dpi(100) }}
+                  placeholder="请输入新密码"
+                  placeholderTextColor="#cccccc"
+                  maxLength={16}
+                  secureTextEntry={true}
+                  onChangeText={() => { }}
+                />
+                <TextInput
+                  style={{ height: UnitConvert.dpi(100) }}
+                  placeholder="请输入新密码"
+                  placeholderTextColor="#cccccc"
+                  maxLength={16}
+                  secureTextEntry={true}
+                  onChangeText={() => { }}
+                />
+                <TextInput
+                  style={{ height: UnitConvert.dpi(100) }}
+                  placeholder="请输入新密码"
+                  placeholderTextColor="#cccccc"
+                  maxLength={16}
+                  secureTextEntry={true}
+                  onChangeText={() => { }}
+                />
+              </KeyboardAvoidingView>
+            </ScrollView>
+
+          </View>
+        );
+      };
+
+      export default House;
+
+      const styles = StyleSheet.create({
+        sizedBox: {
+          width: UnitConvert.w,
+          height: UnitConvert.dpi(20),
+          backgroundColor: Constant.defaultBgColor
+        },
+        content: {
+          flex: 1
+        },
+      });
+
+    ```
