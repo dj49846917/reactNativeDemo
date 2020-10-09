@@ -6,7 +6,7 @@ export interface HomeState {
 }
 
 interface HomeModel extends Model {
-  namespace: 'home';
+  namespace: string;
   state: HomeState;
   reducers: {
     add: Reducer<HomeState, any>;
@@ -17,7 +17,7 @@ interface HomeModel extends Model {
   }
 }
 
-const initialState = {
+const initialState: HomeState = {
   num: 0
 }
 
@@ -30,7 +30,7 @@ function delay(code: codeType) {
   return code.num + code.initNumber
 }
 
-const homeHodel: HomeModel = {
+const Home: HomeModel = {
   namespace: 'home',
   state: initialState,
   effects: {
@@ -60,4 +60,4 @@ const homeHodel: HomeModel = {
   }
 }
 
-export default homeHodel
+export default Home

@@ -7,9 +7,24 @@ import { Constant } from '@/utils/constant/Constant';
 import { UnitConvert } from '@/utils/unitConvert';
 import Customer from './Customer';
 import House from './House';
+import { connect, ConnectedProps } from 'react-redux'
+import { RootState } from '@/models/index'
+import MyModalSelect from '@/components/MyModalSelect';
 
-interface RecommendProps {}
+function mapStateToProps(state: RootState) {
+  return {
+    visible: state.recommend.visible
+    // num: state.home.num,
+    // loading: state.loading.effects['home/asyncAdd']
+  }
+}
 
+const connector = connect(mapStateToProps)
+type ModalState = ConnectedProps<typeof connector> // 定义connect的类型
+
+interface RecommendProps extends ModalState {
+
+}
 const Recommend = (props: RecommendProps) => {
   const [tab, setTab] = useState({
     current: 0,
@@ -18,7 +33,7 @@ const Recommend = (props: RecommendProps) => {
   return (
     <SafeAreaView style={CommonStyle.container}>
       {/* 导航栏 */}
-      <DefaultNavigationHeader 
+      <DefaultNavigationHeader
         title='推荐'
       />
       {/* 选项卡 */}
@@ -28,7 +43,7 @@ const Recommend = (props: RecommendProps) => {
           fontSize: UnitConvert.dpi(32)
         }}
         list={Constant.recommend_tab_arr}
-        onChange={(item: listType, index: number)=>{
+        onChange={(item: listType, index: number) => {
           setTab({
             current: index,
             row: item
@@ -37,11 +52,22 @@ const Recommend = (props: RecommendProps) => {
       />
       {/* 主体内容 */}
       {tab.row.val === '客源' ? <Customer /> : <House />}
+      <MyModalSelect
+        visible={props.visible}
+        callBack={() => {
+          props.dispatch({
+            type: 'recommend/closeModal',
+            payload: {
+              val: false
+            }
+          })
+        }}
+      />
     </SafeAreaView>
   );
 };
 
-export default Recommend;
+export default connector(Recommend);
 
 const styles = StyleSheet.create({
 });

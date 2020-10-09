@@ -79,6 +79,10 @@ const CommonStyle = StyleSheet.create({
   list_right_startbox_text: {
     fontSize: UnitConvert.dpi(36)
   },
+  modal: {
+    flex: 1,
+    backgroundColor: '#f1f1f1'
+  }
 })
 
 export default CommonStyle

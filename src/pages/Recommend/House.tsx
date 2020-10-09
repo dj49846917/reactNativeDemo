@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, KeyboardAvoidingView, TextInput } from 'react-native';
+import { Text, View, StyleSheet, KeyboardAvoidingView, TextInput, ScrollView } from 'react-native';
 import CommonStyle from '@/utils/constant/Style';
-import { ScrollView } from 'react-native-gesture-handler';
 import { UnitConvert } from '@/utils/unitConvert';
 
 interface HouseProps { }

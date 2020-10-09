@@ -10,14 +10,9 @@ import { Constant } from '@/utils/constant/Constant';
 interface AccountProps { }
 
 const Account = (props: AccountProps) => {
-  return (
-    <SafeAreaView style={CommonStyle.container}>
-      {/* 导航栏 */}
-      <DefaultNavigationHeader
-        title='个人中心'
-        showBorder={false}
-      />
-      {/* 登录图标 */}
+  // 登录图标 
+  const LogonComponent = () => {
+    return (
       <View style={styles.account_user}>
         <Image source={ENV_ICON.pic_user} style={styles.account_user_icon} />
         <View style={styles.account_user_right}>
@@ -28,13 +23,12 @@ const Account = (props: AccountProps) => {
           <Image source={ENV_ICON.icon_right} style={CommonStyle.img} />
         </View>
       </View>
-      {/* 广告 */}
-      <TouchableOpacity
-        onPress={() => { }}
-        style={styles.account_addbox}
-      >
-        <Image source={ENV_ICON.vip} style={styles.accout_add} />
-      </TouchableOpacity>
+    )
+  }
+  
+  //主体内容
+  const List = () => {
+    return (
       <View style={styles.account_list}>
         <View style={styles.sizedBox}></View>
         {
@@ -53,7 +47,7 @@ const Account = (props: AccountProps) => {
         }
         <TouchableOpacity
           style={[styles.account_list_item, { marginTop: UnitConvert.dpi(20) }]}
-          onPress={() => {}}
+          onPress={() => { }}
         >
           <Image style={styles.account_list_item_left} source={ENV_ICON.icon_sz} />
           <View style={styles.account_list_item_right}>
@@ -62,6 +56,27 @@ const Account = (props: AccountProps) => {
           </View>
         </TouchableOpacity>
       </View>
+    )
+  }
+
+  return (
+    <SafeAreaView style={CommonStyle.container}>
+      {/* 导航栏 */}
+      <DefaultNavigationHeader
+        title='个人中心'
+        showBorder={false}
+      />
+      {/* 登录图标 */}
+      <LogonComponent />
+      {/* 广告 */}
+      <TouchableOpacity
+        onPress={() => { }}
+        style={styles.account_addbox}
+      >
+        <Image source={ENV_ICON.vip} style={styles.accout_add} />
+      </TouchableOpacity>
+      {/* 主体内容 */}
+      <List />
     </SafeAreaView>
   );
 };
