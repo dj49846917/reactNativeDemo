@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, SafeAreaView } from 'react-native';
 import CommonStyle from '@/utils/constant/Style';
 import DefaultNavigationHeader from '@/components/DefaultNavigationHeader';
@@ -9,11 +9,17 @@ import Customer from './Customer';
 import House from './House';
 import { connect, ConnectedProps } from 'react-redux'
 import { RootState } from '@/models/index'
-import MyModalSelect from '@/components/MyModalSelect';
+import MyModalSelect, { MyModalSelectState } from '@/components/MyModalSelect';
+import { RecommendDicArr } from '@/assets/data/Recommend';
 
 function mapStateToProps(state: RootState) {
+  console.log('state.recommend.key', state.recommend.key)
   return {
-    visible: state.recommend.visible
+    visible: state.recommend.visible,
+    title: state.recommend.title,
+    list: state.recommend.list,
+    defaultValue: state.recommend.defaultValue,
+    selectedKey: state.recommend.key
     // num: state.home.num,
     // loading: state.loading.effects['home/asyncAdd']
   }
@@ -25,7 +31,16 @@ type ModalState = ConnectedProps<typeof connector> // 定义connect的类型
 interface RecommendProps extends ModalState {
 
 }
+
+
+
 const Recommend = (props: RecommendProps) => {
+  const [dicArr, setDicArr] = useState<any>([])
+  useEffect(() => {
+    const result = RecommendDicArr
+    setDicArr(result)
+  })
+
   const [tab, setTab] = useState({
     current: 0,
     row: Constant.recommend_tab_arr[0]
@@ -51,10 +66,9 @@ const Recommend = (props: RecommendProps) => {
         }}
       />
       {/* 主体内容 */}
-      {tab.row.val === '客源' ? <Customer /> : <House />}
+      {tab.row.val === '客源' ? <Customer dicArr={dicArr} /> : <House />}
       <MyModalSelect
-        visible={props.visible}
-        callBack={() => {
+        onCancel={() => {
           props.dispatch({
             type: 'recommend/closeModal',
             payload: {
@@ -62,6 +76,26 @@ const Recommend = (props: RecommendProps) => {
             }
           })
         }}
+        onOk={(selectInfo: MyModalSelectState) => {
+          console.log('selectInfo.val', selectInfo.val)
+          props.dispatch({
+            type: 'recommend/closeModal',
+            payload: {
+              val: false
+            }
+          })
+          props.dispatch({
+            type: 'recommend/setSelectFields',
+            payload: {
+              key: props.selectedKey,
+              val: selectInfo.val,
+            }
+          })
+        }}
+        visible={props.visible}
+        title={props.title}
+        list={props.list}
+        defaultValue={props.defaultValue}
       />
     </SafeAreaView>
   );

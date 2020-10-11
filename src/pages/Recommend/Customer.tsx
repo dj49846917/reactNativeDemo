@@ -7,11 +7,14 @@ import { Constant } from '@/utils/constant/Constant';
 import MyDropdownList from '@/components/MyDropdownList';
 import { connect, ConnectedProps } from 'react-redux'
 import { RootState } from '@/models/index'
+import { getSubTypeList, findDicName } from '@/utils/utils';
 
 const mapStateToProps = (state: RootState) => {
-  console.log('state', state)
   return {
-    UserName: state.recommend.UserName
+    UserName: state.recommend.UserName,
+    MobilePhone: state.recommend.MobilePhone,
+    IDCard: state.recommend.IDCard,
+    RegionId: state.recommend.RegionId
     // num: state.home.num,
     // loading: state.loading.effects['home/asyncAdd']
   }
@@ -21,21 +24,15 @@ const connector = connect(mapStateToProps)
 type ModalState = ConnectedProps<typeof connector> // 定义connect的类型
 
 interface CustomerProps extends ModalState {
-  
+  dicArr: Array<any>
 }
 
 const Customer = (props: CustomerProps) => {
   const [fileds, setFileds] = React.useState({
-    // UserName: '',         // 客户名称
-    MobilePhone: '',      // 客户电话
-    IDCard: '',           // 身份证号
-    RegionId: 0,          // 意向区域
     ViewingDate: '',      // 看房日期
     needs: '',            // 购房需求        
     Remark: '',           // 备注
-    showRegionId: false,  // 意向区域弹窗
   })
-  console.log('props', props.UserName)
   return (
     <View style={[CommonStyle.content, { backgroundColor: Constant.defaultBgColor }]}>
       <View style={CommonStyle.sizedBox}></View>
@@ -44,7 +41,7 @@ const Customer = (props: CustomerProps) => {
           <MyTextInput
             flelds='客户姓名'
             required
-            showClearIcon
+            // showClearIcon
             placeholder='请输入推荐人姓名'
             defaultValue={props.UserName}
             lableStyle={{
@@ -63,10 +60,10 @@ const Customer = (props: CustomerProps) => {
           <MyTextInput
             flelds='客户电话'
             required
-            showClearIcon
+            // showClearIcon
             placeholder='请输入被推荐人电话'
             keyboardType='phone-pad'
-            defaultValue={fileds.MobilePhone}
+            defaultValue={props.MobilePhone}
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
@@ -83,8 +80,8 @@ const Customer = (props: CustomerProps) => {
           <MyTextInput
             flelds='身份证号'
             placeholder='请输入被推荐人身份证号'
-            showClearIcon
-            defaultValue={fileds.IDCard}
+            // showClearIcon
+            defaultValue={props.IDCard}
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
@@ -104,15 +101,21 @@ const Customer = (props: CustomerProps) => {
             required
             flelds='意向区域'
             placeHolder='请选择意向区域'
-            defaultValue={fileds.RegionId}
+            defaultValue={findDicName(getSubTypeList(props.dicArr, 1110), props.RegionId)}
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
             callBack={()=>{
+              // 过滤数据字典
+              const dic = getSubTypeList(props.dicArr, 1110)
               props.dispatch({
                 type: 'recommend/openModal',
                 payload: {
-                  val: true
+                  val: true,
+                  title: '意向区域',
+                  list: dic,
+                  defaultValue: props.RegionId,
+                  key: 'RegionId'
                 }
               })
             }}

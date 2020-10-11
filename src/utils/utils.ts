@@ -80,3 +80,22 @@ export function parseMoney(data: String | Number, secondData?: String | Number |
     return ` ¥ ${Number(secondData) / 10000}万`
   }
 }
+
+// 根据数据字典大类筛选数据字典
+export function getSubTypeList(list: any[], subTypeCode: number) {
+  try {
+    return list.filter((x: { SubTypeCode: number; }) => x.SubTypeCode == subTypeCode)
+  } catch (e) {
+    return []
+  }
+}
+
+//根据字典code获取字典名称
+export function findDicName(list: any[], code: number | undefined, defaultVal = "") {
+  try {
+      return list.find(x=>x.DicCode == code).DicName;
+  } catch(e) {
+      return  defaultVal
+  ;
+}
+}

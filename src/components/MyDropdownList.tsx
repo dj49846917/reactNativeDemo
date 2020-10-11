@@ -5,22 +5,22 @@ import { ENV_ICON } from '@/assets/styles/picUrl';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface MyDropdownListProps {
-  width: number,                             // 选择框的宽度
-  height?: number,                            // 选择框的高度
-  showBorder?: boolean,                       // 是否展示底部边框
-  showLabel: boolean,                        // 是否展示左侧的标题栏
-  lableStyle?: StyleProp<ViewStyle>,          // 左侧文字提示的样式
-  placeHolder: string,                       // 提示文字
-  selectStyle?: StyleProp<ViewStyle>,          // 选中区域的样式
-  textStyle?: StyleProp<TextProps>,           // 选中文字的样式
-  placeHolderStyle?: StyleProp<TextProps>,    // placeholder的样式
-  required?: boolean,                         // 是否必输
-  labelWidth: number                         // 标题栏的宽度
-  flelds: string,                            // 字段名
-  defaultValue: string | Function | number,  // 初始值
-  bgColor?: string,                            // 背景颜色
-  readonly?: boolean                          // 是否只读
-  callBack: Function                          // 点击的回调
+  width: number,                                            // 选择框的宽度
+  height?: number,                                          // 选择框的高度
+  showBorder?: boolean,                                     // 是否展示底部边框
+  showLabel: boolean,                                       // 是否展示左侧的标题栏
+  lableStyle?: StyleProp<ViewStyle>,                        // 左侧文字提示的样式
+  placeHolder: string,                                      // 提示文字
+  selectStyle?: StyleProp<ViewStyle>,                       // 选中区域的样式
+  textStyle?: StyleProp<TextProps>,                         // 选中文字的样式
+  placeHolderStyle?: StyleProp<TextProps>,                  // placeholder的样式
+  required?: boolean,                                       // 是否必输
+  labelWidth: number                                        // 标题栏的宽度
+  flelds: string,                                           // 字段名
+  defaultValue: string | Function | number | undefined,     // 初始值
+  bgColor?: string,                                         // 背景颜色
+  readonly?: boolean                                        // 是否只读
+  callBack: Function                                        // 点击的回调
 }
 
 const MyDropdownList = (props: MyDropdownListProps) => {
