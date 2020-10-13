@@ -10,7 +10,8 @@ export interface RecommendState {
   ViewingDate: string,                          // 看房日期
   needs: string,                                // 购房需求        
   Remark: string,                               // 备注
-  visible: boolean                              // 打开弹窗
+  visible: boolean                              // 打开下拉框弹窗
+  dateVisible: boolean                          // 看房日期弹窗状态
   title: string                                 // 标题
   list: any[]                                   // 数据字典
   defaultValue: string | number | undefined     // 初始值
@@ -27,6 +28,7 @@ interface RecommendModel extends Model {
   reducers: {
     setFields: Reducer<RecommendState, any>,       // 表单赋值
     setSelectFields: Reducer<RecommendState, any>, // 下拉框赋值
+    setDateFields: Reducer<RecommendState, any>,    // 日期选择框赋值
     closeModal: Reducer<RecommendState, any>,
     openModal: Reducer<RecommendState, any>,
   }
@@ -42,6 +44,7 @@ const initailState: RecommendState = {
   needs: '',                 
   Remark: '',           
   visible: false,
+  dateVisible: false,
   title: '',
   list: [],
   defaultValue: undefined,
@@ -67,6 +70,15 @@ const Recommend: RecommendModel = {
         ...state,
         [payload.key]: payload.val,
         defaultValue: payload.val
+      }
+    },
+
+    // 看房日期赋值
+    setDateFields(state = initailState, {payload}) {
+      return {
+        ...state,
+        ViewingDate: payload.ViewingDate,
+        dateVisible: payload.dateVisible
       }
     },
 

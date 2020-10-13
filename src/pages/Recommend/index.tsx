@@ -11,6 +11,8 @@ import { connect, ConnectedProps } from 'react-redux'
 import { RootState } from '@/models/index'
 import MyModalSelect, { MyModalSelectState } from '@/components/MyModalSelect';
 import { RecommendDicArr } from '@/assets/data/Recommend';
+import MyDatePicker from '@/components/MyDatePicker';
+import moment from 'moment';
 
 function mapStateToProps(state: RootState) {
   console.log('state.recommend.key', state.recommend.key)
@@ -19,7 +21,9 @@ function mapStateToProps(state: RootState) {
     title: state.recommend.title,
     list: state.recommend.list,
     defaultValue: state.recommend.defaultValue,
-    selectedKey: state.recommend.key
+    selectedKey: state.recommend.key,
+    dateVisible: state.recommend.dateVisible,
+    ViewingDate: state.recommend.ViewingDate
     // num: state.home.num,
     // loading: state.loading.effects['home/asyncAdd']
   }
@@ -45,6 +49,7 @@ const Recommend = (props: RecommendProps) => {
     current: 0,
     row: Constant.recommend_tab_arr[0]
   })
+  
   return (
     <SafeAreaView style={CommonStyle.container}>
       {/* 导航栏 */}
@@ -96,6 +101,29 @@ const Recommend = (props: RecommendProps) => {
         title={props.title}
         list={props.list}
         defaultValue={props.defaultValue}
+      />
+      <MyDatePicker 
+        onOk={(val: any)=>{
+          props.dispatch({
+            type: 'recommend/setDateFields',
+            payload: {
+              dateVisible: false,
+              ViewingDate: moment(val).format('YYYY-MM-DD')
+            }
+          })
+        }}
+        onCancel={()=>{
+          props.dispatch({
+            type: 'recommend/setFields',
+            payload: {
+              key: 'dateVisible',
+              val: false
+            }
+          })
+        }}
+        title='看房日期'
+        visible={props.dateVisible}
+        defaultDate={props.ViewingDate}
       />
     </SafeAreaView>
   );

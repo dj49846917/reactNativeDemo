@@ -14,7 +14,8 @@ const mapStateToProps = (state: RootState) => {
     UserName: state.recommend.UserName,
     MobilePhone: state.recommend.MobilePhone,
     IDCard: state.recommend.IDCard,
-    RegionId: state.recommend.RegionId
+    RegionId: state.recommend.RegionId,
+    ViewingDate: state.recommend.ViewingDate
     // num: state.home.num,
     // loading: state.loading.effects['home/asyncAdd']
   }
@@ -29,7 +30,6 @@ interface CustomerProps extends ModalState {
 
 const Customer = (props: CustomerProps) => {
   const [fileds, setFileds] = React.useState({
-    ViewingDate: '',      // 看房日期
     needs: '',            // 购房需求        
     Remark: '',           // 备注
   })
@@ -124,11 +124,19 @@ const Customer = (props: CustomerProps) => {
             showLabel
             flelds='看房日期'
             placeHolder='请选择看房日期'
-            defaultValue={fileds.ViewingDate}
+            defaultValue={props.ViewingDate}
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
-            callBack={()=>{}}
+            callBack={()=>{
+              props.dispatch({
+                type: 'recommend/setFields',
+                payload: {
+                  key: 'dateVisible',
+                  val: true
+                }
+              })
+            }}
           />
           <MyDropdownList
             showLabel
