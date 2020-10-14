@@ -10,9 +10,9 @@ import House from './House';
 import { connect, ConnectedProps } from 'react-redux'
 import { RootState } from '@/models/index'
 import MyModalSelect, { MyModalSelectState } from '@/components/MyModalSelect';
-import { RecommendDicArr } from '@/assets/data/Recommend';
 import MyDatePicker from '@/components/MyDatePicker';
 import moment from 'moment';
+import MoreCust from './MoreCust';
 
 function mapStateToProps(state: RootState) {
   console.log('state.recommend.key', state.recommend.key)
@@ -23,7 +23,8 @@ function mapStateToProps(state: RootState) {
     defaultValue: state.recommend.defaultValue,
     selectedKey: state.recommend.key,
     dateVisible: state.recommend.dateVisible,
-    ViewingDate: state.recommend.ViewingDate
+    ViewingDate: state.recommend.ViewingDate,
+    moreCustVisible: state.recommend.moreCustVisible
     // num: state.home.num,
     // loading: state.loading.effects['home/asyncAdd']
   }
@@ -36,20 +37,21 @@ interface RecommendProps extends ModalState {
 
 }
 
-
-
 const Recommend = (props: RecommendProps) => {
-  const [dicArr, setDicArr] = useState<any>([])
   useEffect(() => {
-    const result = RecommendDicArr
-    setDicArr(result)
-  })
+    props.dispatch({
+      type: 'recommend/getSysDic',
+      payload: {
+        params: [2034, 2013, 2002, 1110, 2004, 1000, 5600]
+      }
+    })
+  },[])
 
   const [tab, setTab] = useState({
     current: 0,
     row: Constant.recommend_tab_arr[0]
   })
-  
+
   return (
     <SafeAreaView style={CommonStyle.container}>
       {/* 导航栏 */}
@@ -71,7 +73,7 @@ const Recommend = (props: RecommendProps) => {
         }}
       />
       {/* 主体内容 */}
-      {tab.row.val === '客源' ? <Customer dicArr={dicArr} /> : <House />}
+      {tab.row.val === '客源' ? <Customer /> : <House />}
       <MyModalSelect
         onCancel={() => {
           props.dispatch({
@@ -82,7 +84,6 @@ const Recommend = (props: RecommendProps) => {
           })
         }}
         onOk={(selectInfo: MyModalSelectState) => {
-          console.log('selectInfo.val', selectInfo.val)
           props.dispatch({
             type: 'recommend/closeModal',
             payload: {
@@ -102,8 +103,8 @@ const Recommend = (props: RecommendProps) => {
         list={props.list}
         defaultValue={props.defaultValue}
       />
-      <MyDatePicker 
-        onOk={(val: any)=>{
+      <MyDatePicker
+        onOk={(val: any) => {
           props.dispatch({
             type: 'recommend/setDateFields',
             payload: {
@@ -112,7 +113,7 @@ const Recommend = (props: RecommendProps) => {
             }
           })
         }}
-        onCancel={()=>{
+        onCancel={() => {
           props.dispatch({
             type: 'recommend/setFields',
             payload: {
@@ -124,6 +125,27 @@ const Recommend = (props: RecommendProps) => {
         title='看房日期'
         visible={props.dateVisible}
         defaultDate={props.ViewingDate}
+      />
+      <MyModalSelect
+        height={UnitConvert.dpi(900)}
+        visible={props.moreCustVisible}
+        onOk={() => {
+
+        }}
+        onCancel={() => {
+          props.dispatch({
+            type: 'recommend/setFields',
+            payload: {
+              key: 'moreCustVisible',
+              val: false
+            }
+          })
+        }}
+        list={[]}
+        title='客户购房需求'
+        custView={
+          <MoreCust />
+        }
       />
     </SafeAreaView>
   );

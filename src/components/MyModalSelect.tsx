@@ -1,18 +1,10 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Modal, ModalProps, StyleProp, TextStyle } from 'react-native';
 import { Picker } from '@react-native-community/picker';
-import CommonStyle from '@/utils/constant/Style';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { UnitConvert } from '@/utils/unitConvert';
 import { Constant } from '@/utils/constant/Constant';
-
-// 数据字典每一项
-type dicListType = {
-  DicCode: number
-  DicName: string
-  SubTypeCode: number
-  BaseTypeCode: number
-}
+import { dicType } from '@/models/Recommend';
 
 interface Iprops {
   height?: number                             // 模态框的高度
@@ -27,9 +19,9 @@ interface Iprops {
   okStyle?: StyleProp<TextStyle>              // 头部确定按钮样式
   onCancel: Function                          // 点击取消按钮回调
   onOk: Function                              // 点击确定按钮回调
-  list: Array<dicListType>                    // 数据字典数据源
-  defaultValue: string | number | undefined   // 初始值
-  // onSelect: Function                          // 选中的回调函数
+  list: dicType[]                             // 数据字典数据源
+  defaultValue?: string | number | undefined  // 初始值
+  // onSelect: Function                       // 选中的回调函数
 }
 
 type MyModalSelectProps = Iprops & ModalProps
@@ -108,7 +100,8 @@ MyModalSelect.defaultProps = {
   headerHeight: UnitConvert.dpi(80),
   cancelText: '取消',
   okText: '确定',
-  title: '实例'
+  title: '实例',
+  defaultValue: ''
 }
 
 export default MyModalSelect;

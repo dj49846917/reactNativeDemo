@@ -15,7 +15,8 @@ const mapStateToProps = (state: RootState) => {
     MobilePhone: state.recommend.MobilePhone,
     IDCard: state.recommend.IDCard,
     RegionId: state.recommend.RegionId,
-    ViewingDate: state.recommend.ViewingDate
+    ViewingDate: state.recommend.ViewingDate,
+    dicArr: state.recommend.dicArr
     // num: state.home.num,
     // loading: state.loading.effects['home/asyncAdd']
   }
@@ -25,7 +26,6 @@ const connector = connect(mapStateToProps)
 type ModalState = ConnectedProps<typeof connector> // 定义connect的类型
 
 interface CustomerProps extends ModalState {
-  dicArr: Array<any>
 }
 
 const Customer = (props: CustomerProps) => {
@@ -146,7 +146,15 @@ const Customer = (props: CustomerProps) => {
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
-            callBack={()=>{}}
+            callBack={()=>{
+              props.dispatch({
+                type: 'recommend/setFields',
+                payload: {
+                  key: 'moreCustVisible',
+                  val: true
+                }
+              })
+            }}
           />
           <View style={CommonStyle.sizedBox}></View>
           <MyTextInput
