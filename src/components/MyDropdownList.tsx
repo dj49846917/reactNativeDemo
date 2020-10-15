@@ -21,6 +21,7 @@ interface MyDropdownListProps {
   bgColor?: string,                                         // 背景颜色
   readonly?: boolean                                        // 是否只读
   callBack: Function                                        // 点击的回调
+  longSelectWord: boolean                                   // 一行两列下，选中的文字多一点
 }
 
 const MyDropdownList = (props: MyDropdownListProps) => {
@@ -50,7 +51,7 @@ const MyDropdownList = (props: MyDropdownListProps) => {
                     )
                 }
               </View>
-              <Image source={ENV_ICON.icon_right} style={styles.icon} />
+              <Image source={ENV_ICON.icon_right} style={props.longSelectWord ?styles.icon1 : styles.icon} />
             </TouchableOpacity>
           )
       }
@@ -66,7 +67,8 @@ MyDropdownList.defaultProps = {
   required: false,
   labelWidth: UnitConvert.dpi(228),
   bgColor: '#fff',
-  placeHolder: '请选择'
+  placeHolder: '请选择',
+  longSelectWord: false
 }
 
 export default MyDropdownList;
@@ -93,11 +95,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   box_select: {
-    flex: 1
+    flex: 1,
+  },
+  icon1: {
+    width: UnitConvert.dpi(60),
+    height: UnitConvert.dpi(60),
+    position: 'absolute',
+    right: UnitConvert.dpi(-20),
+    marginLeft: UnitConvert.dpi(10)
   },
   icon: {
     width: UnitConvert.dpi(60),
-    height: UnitConvert.dpi(60)
+    height: UnitConvert.dpi(60),
   },
   box_select_text: {
     color: '#000',

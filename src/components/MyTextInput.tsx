@@ -110,8 +110,8 @@ export default class MyTextInput extends Component<inputProps, IState> {
                     this.props.getFieldsValue(val)
                   }}
                   style={[{
-                    width: this.props.showLabel ? this.props.width - this.props.labelWidth - UnitConvert.dpi(60) : this.props.width - UnitConvert.dpi(60),
-                    fontSize: UnitConvert.dpi(30)
+                    width: this.props.showClearIcon ? this.props.width - this.props.labelWidth - UnitConvert.dpi(60) : this.props.width - this.props.labelWidth,
+                    fontSize: UnitConvert.dpi(30),
                   }, this.props.inputStyle]}
                 />
                 {this.showClearComponent()}
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   box_input: {
     flex: 1,
-    position: 'relative'
+    position: 'relative',
   },
   box_ipnut_clear: {
     position: 'absolute',

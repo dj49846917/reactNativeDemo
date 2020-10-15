@@ -8,6 +8,7 @@ import MyDropdownList from '@/components/MyDropdownList';
 import { connect, ConnectedProps } from 'react-redux'
 import { RootState } from '@/models/index'
 import { getSubTypeList, findDicName } from '@/utils/utils';
+import RecommandBtn from '@/pages/Recommend/RecommandBtn';
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -16,7 +17,8 @@ const mapStateToProps = (state: RootState) => {
     IDCard: state.recommend.IDCard,
     RegionId: state.recommend.RegionId,
     ViewingDate: state.recommend.ViewingDate,
-    dicArr: state.recommend.dicArr
+    dicArr: state.recommend.dicArr,
+    Remark: state.recommend.Remark
     // num: state.home.num,
     // loading: state.loading.effects['home/asyncAdd']
   }
@@ -30,14 +32,13 @@ interface CustomerProps extends ModalState {
 
 const Customer = (props: CustomerProps) => {
   const [fileds, setFileds] = React.useState({
-    needs: '',            // 购房需求        
-    Remark: '',           // 备注
+    needs: '',            // 购房需求
   })
   return (
     <View style={[CommonStyle.content, { backgroundColor: Constant.defaultBgColor }]}>
       <View style={CommonStyle.sizedBox}></View>
       <ScrollView style={CommonStyle.content}>
-        <KeyboardAvoidingView style={CommonStyle.content} behavior={Platform.OS ==='ios' ? 'padding' : 'position'} keyboardVerticalOffset={400}>
+        <KeyboardAvoidingView style={CommonStyle.content} behavior={Platform.OS === 'ios' ? 'padding' : 'position'} keyboardVerticalOffset={400}>
           <MyTextInput
             flelds='客户姓名'
             required
@@ -105,7 +106,7 @@ const Customer = (props: CustomerProps) => {
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
-            callBack={()=>{
+            callBack={() => {
               // 过滤数据字典
               const dic = getSubTypeList(props.dicArr, 1110)
               props.dispatch({
@@ -128,7 +129,7 @@ const Customer = (props: CustomerProps) => {
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
-            callBack={()=>{
+            callBack={() => {
               props.dispatch({
                 type: 'recommend/setFields',
                 payload: {
@@ -146,7 +147,7 @@ const Customer = (props: CustomerProps) => {
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
-            callBack={()=>{
+            callBack={() => {
               props.dispatch({
                 type: 'recommend/setFields',
                 payload: {
@@ -161,7 +162,7 @@ const Customer = (props: CustomerProps) => {
             flelds='备注'
             placeholder='请输入备注'
             multiline
-            defaultValue={fileds.Remark}
+            defaultValue={props.Remark}
             height={UnitConvert.dpi(160)}
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
@@ -174,6 +175,13 @@ const Customer = (props: CustomerProps) => {
                   val: code
                 }
               })
+            }}
+          />
+          <RecommandBtn
+            tipTitle='《客源温馨提示》'
+            tipCallback={() => { }}
+            save={(code: boolean) => {
+              console.log(code)
             }}
           />
         </KeyboardAvoidingView>

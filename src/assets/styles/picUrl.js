@@ -29,6 +29,8 @@ export const ENV_ICON = {
   icon_kefu: require("@/assets/images/icon/icon_kefu.png"),
   icon_sz: require("@/assets/images/icon/icon_sz.png"),
   icon_off: require("@/assets/images/icon/icon_off.png"),
+  select_no: require("@/assets/images/icon/select_no.png"),
+  select: require("@/assets/images/icon/select.png"),
 }
 
 export const ENV_IMAGE = {

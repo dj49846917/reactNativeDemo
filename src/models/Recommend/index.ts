@@ -24,8 +24,26 @@ export interface RecommendState {
   title: string                                 // 标题
   list: dicType[]                               // 数据源
   defaultValue: string | number | undefined     // 初始值
-  key: string                                  // 字段名
-  dicArr: dicType[]                            // 数据字典   
+  key: string                                   // 字段名
+  dicArr: dicType[]                             // 数据字典 
+  SourceByOwner: number | undefined             // 房屋来源
+  OwnerName: string                             // 业主姓名
+  OwnerPhone: string                            // 业主电话
+  AssetName: string                             // 小区名称
+  PropertyAddress: string                       // 房屋座落
+  ProposalPrice: string | undefined             // 意向卖价
+  PropertyArea: string                          // 建筑面积
+  PropertyInsideArea: string                    // 套内面积
+  PropertyUsufructGetType: number | undefined   // 土地性质
+  HuXingTypeF: number | undefined               // 户型房
+  HouseTypeHouse: number | undefined            // 房屋类型
+  RegionIdHouse: number | undefined             // 房屋区域
+  Renovation: number | undefined                // 装修情况
+  Floor: number | undefined                     // 房屋楼层
+  isElevator: number | undefined                // 有无电梯
+  isMortgage: number | undefined                // 有无抵押
+  DebtMoney: string                             // 抵押金额
+  mortgageBank: string                          // 抵押银行/公司
 }
 
 // 定义model的类型
@@ -61,7 +79,25 @@ const initailState: RecommendState = {
   list: [],
   defaultValue: undefined,
   key: '',
-  dicArr: []
+  dicArr: [],
+  SourceByOwner: undefined,
+  OwnerName: '',
+  OwnerPhone: '',
+  AssetName: '',
+  PropertyAddress: '',
+  ProposalPrice: undefined,
+  PropertyArea: '',
+  PropertyInsideArea: '',
+  PropertyUsufructGetType: undefined,
+  HuXingTypeF: undefined,
+  HouseTypeHouse: undefined,
+  RegionIdHouse: undefined,
+  Renovation: undefined,
+  Floor: undefined,
+  isElevator: undefined,
+  isMortgage: undefined,
+  DebtMoney: '',
+  mortgageBank: '',
 }
 
 const Recommend: RecommendModel = {
