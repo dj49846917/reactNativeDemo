@@ -15,7 +15,6 @@ import moment from 'moment';
 import MoreCust from './MoreCust';
 
 function mapStateToProps(state: RootState) {
-  console.log('state.recommend.key', state.recommend.key)
   return {
     visible: state.recommend.visible,
     title: state.recommend.title,

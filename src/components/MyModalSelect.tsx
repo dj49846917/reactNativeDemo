@@ -33,12 +33,34 @@ export interface MyModalSelectState {
 }
 
 const MyModalSelect = (props: MyModalSelectProps) => {
-  console.log('2323', props.list, props.defaultValue)
   const [selectItem, setSelectItem] = React.useState<MyModalSelectState>({
     val: props.defaultValue,
     index: undefined,
     item: {}
   })
+
+  React.useEffect(() => {
+    if (props.list.length > 0) {
+      if (props.defaultValue) {
+        props.list.forEach((item, index) => {
+          if(item.DicCode === props.defaultValue) {
+            setSelectItem({
+              val: props.defaultValue,
+              index,
+              item: props.list[index]
+            })
+          }
+        })
+      } else {
+        setSelectItem({
+          val: props.list[0].DicCode,
+          index: 0,
+          item: props.list[0]
+        })
+      }
+    }
+  }, [props.list])
+
   return (
     <Modal
       {...props}
@@ -64,7 +86,12 @@ const MyModalSelect = (props: MyModalSelectProps) => {
                 <View style={styles.modal_header_item2}>
                   <Text style={[styles.modal_header_title, props.titleStyle]}>{props.title}</Text>
                 </View>
-                <TouchableOpacity style={styles.modal_header_item} onPress={() => props.onOk(selectItem)}>
+                <TouchableOpacity
+                  style={styles.modal_header_item}
+                  onPress={() => {
+                    props.onOk(selectItem)
+                  }}
+                >
                   <Text style={[styles.modal_header_text, props.okStyle]}>{props.okText}</Text>
                 </TouchableOpacity>
               </View>
