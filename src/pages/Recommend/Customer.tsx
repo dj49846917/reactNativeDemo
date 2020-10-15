@@ -38,7 +38,7 @@ const Customer = (props: CustomerProps) => {
     <View style={[CommonStyle.content, { backgroundColor: Constant.defaultBgColor }]}>
       <View style={CommonStyle.sizedBox}></View>
       <ScrollView style={CommonStyle.content}>
-        <KeyboardAvoidingView style={CommonStyle.content} behavior={Platform.OS === 'ios' ? 'padding' : 'position'} keyboardVerticalOffset={400}>
+        <KeyboardAvoidingView style={CommonStyle.content} behavior='padding' keyboardVerticalOffset={200}>
           <MyTextInput
             flelds='客户姓名'
             required
