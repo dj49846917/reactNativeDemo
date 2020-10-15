@@ -48,7 +48,7 @@ const House = (props: HouseProps) => {
     <View style={CommonStyle.content}>
       <View style={CommonStyle.sizedBox}></View>
       <ScrollView style={{ flex: 1 }}>
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'position'} keyboardVerticalOffset={400}>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior='padding' keyboardVerticalOffset={200}>
           <MyDropdownList
             required
             flelds='房屋来源'
