@@ -9,6 +9,7 @@ import { connect, ConnectedProps } from 'react-redux'
 import { RootState } from '@/models/index'
 import { getSubTypeList, findDicName } from '@/utils/utils';
 import RecommandBtn from '@/pages/Recommend/RecommandBtn';
+import MyErrorNotice from '@/components/MyErrorNotice';
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -47,6 +48,16 @@ const Customer = (props: CustomerProps) => {
             defaultValue={props.UserName}
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
+            }}
+            onBlur={()=>{
+              if(!props.UserName) {
+                MyErrorNotice({
+                  content: '推荐人姓名不能为空',
+                  containerStyle: {
+                    backgroundColor: 'red'
+                  }
+                })
+              }
             }}
             getFieldsValue={(code: string) => {
               props.dispatch({
