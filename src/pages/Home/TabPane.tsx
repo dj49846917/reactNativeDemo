@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import CommonStyle from '@/utils/constant/Style'
-import { listType } from '@/components/MyTab'
 import CommonAssetAuction from '@/components/CommonAssetAuction';
 import { AssetAutionData, AssetDic, JudicialAuctionData } from '@/assets/data/AssetAuction';
 import { SecondHouseData } from '@/assets/data/SecondHouse';
 import CommonSecondHouseList from '@/components/CommonSecondHoseList';
+import { tabItemType } from '../Recommend';
 
 interface TabPaneProps {
-  row: listType
+  row: tabItemType
 }
 
 const TabPane = (props: TabPaneProps) => {

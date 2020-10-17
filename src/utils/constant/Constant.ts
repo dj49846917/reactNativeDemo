@@ -19,9 +19,9 @@ export const Constant = {
     { url: ENV_ICON.icon_pg, text: '评估服务' },
   ],
   home_tab_arr: [                    // 首页tab
-    { id: '1', text: '资产拍卖' },
-    { id: '2', text: '司法拍卖' },
-    { id: '3', text: '二手房' },
+    { id: '1', val: '资产拍卖' },
+    { id: '2', val: '司法拍卖' },
+    { id: '3', val: '二手房' },
   ],
   account_category_arr: [ // 我的
     { id: '0', icon_url: ENV_ICON.icon_zl, title: '我的资料' },
@@ -49,12 +49,12 @@ export const Constant = {
     { DicCode: 5, DicName: '140㎡以上', AreaMin: 140, AreaMax: undefined },
   ],
   houseTypeArr: [ // 户型多选框的数据源
-    { Value: 'HuXingTypeF eq 1', DicName: '一室', DicCode: 1, select: false, id: 0 },
-    { Value: 'HuXingTypeF eq 2', DicName: '二室', DicCode: 2, select: false, id: 1 },
-    { Value: 'HuXingTypeF eq 3', DicName: '三室', DicCode: 3, select: false, id: 2 },
-    { Value: 'HuXingTypeF eq 4', DicName: '四室', DicCode: 4, select: false, id: 3 },
-    { Value: 'HuXingTypeF eq 5', DicName: '五室', DicCode: 5, select: false, id: 4 },
-    { Value: 'HuXingTypeF gt 5', DicName: '五室以上', DicCode: 6, select: false, id: 5 },
+    { DicName: '一室', DicCode: 1, select: false, id: 0 },
+    { DicName: '二室', DicCode: 2, select: false, id: 1 },
+    { DicName: '三室', DicCode: 3, select: false, id: 2 },
+    { DicName: '四室', DicCode: 4, select: false, id: 3 },
+    { DicName: '五室', DicCode: 5, select: false, id: 4 },
+    { DicName: '五室以上', DicCode: 6, select: false, id: 5 },
   ],
   FloorDic: [ // 楼层
     { DicName: '1层', DicCode: 1 },

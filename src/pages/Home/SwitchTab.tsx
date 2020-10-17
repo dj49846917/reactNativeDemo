@@ -3,18 +3,14 @@ import { Text, View, StyleSheet } from 'react-native';
 import { UnitConvert } from '@/utils/unitConvert';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Constant } from '@/utils/constant/Constant';
-
-type homeTabType = {
-  id: string,
-  text: string
-}
+import { tabItemType } from '../Recommend';
 
 interface SwitchTabProps {
-  list: Array<homeTabType>
+  list: Array<tabItemType>
 }
 
 const SwitchTab = (props: SwitchTabProps) => {
-  const [row, setRow] = React.useState<homeTabType>(Constant.home_tab_arr[0])
+  const [row, setRow] = React.useState<tabItemType>(Constant.home_tab_arr[0])
   return (
     <View style={styles.home_tab}>
       <Text style={styles.home_tab_left}>为你推荐</Text>
@@ -27,7 +23,7 @@ const SwitchTab = (props: SwitchTabProps) => {
                 setRow(item)
               }} 
             >
-              <Text style={row.id === item.id ? styles.home_tab_right_text_active : styles.home_tab_right_text}>{item.text}</Text>
+              <Text style={row.id === item.id ? styles.home_tab_right_text_active : styles.home_tab_right_text}>{item.val}</Text>
             </TouchableOpacity>
           ))
         }

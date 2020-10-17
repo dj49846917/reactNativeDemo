@@ -2,14 +2,10 @@ import * as React from 'react';
 import { Text, View, StyleSheet, FlexStyle, TouchableOpacity, TextStyle } from 'react-native';
 import { UnitConvert } from '@/utils/unitConvert';
 import { Constant } from '@/utils/constant/Constant';
-
-export type listType = {
-  id: string,
-  val: string
-}
+import { tabItemType } from '@/pages/Recommend';
 
 interface MyTabProps {
-  list: Array<listType>          // 数据源
+  list: tabItemType[]             // 数据源
   width: number                  // tab整体的宽度
   height: number                 // tab的整体高度
   padding: number                // tab距左右两边的间距
@@ -26,7 +22,7 @@ const MyTab = (props: MyTabProps) => {
     <View style={{ width: props.width, height: props.height, paddingHorizontal: props.padding }}>
       <View style={[styles.tab_box, props.tabStyle]}>
         {
-          props.list.map((item: listType, index: number) => (
+          props.list.map((item: tabItemType, index: number) => (
             <TouchableOpacity
               onPress={() => {
                 props.onChange(item, index)

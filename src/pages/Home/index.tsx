@@ -8,15 +8,16 @@ import Addvertisement from '@/pages/Home/Addvertisement';
 import { ScrollView } from 'react-native-gesture-handler';
 import CommonStyle from '@/utils/constant/Style';
 import { UnitConvert } from '@/utils/unitConvert';
-import MyTab, { listType } from '@/components/MyTab';
+import MyTab from '@/components/MyTab';
 import TabPane from '@/pages/Home/TabPane';
+import { tabType, tabItemType } from '../Recommend';
 
 interface HomeProps {
 
 }
 
 const Home = (props: HomeProps) => {
-  const [tab, setTab] = useState({
+  const [tab, setTab] = useState<tabType>({
     current: 0,
     row: Constant.collection_tab_arr[0]
   })
@@ -50,7 +51,7 @@ const Home = (props: HomeProps) => {
             showUnderLine={false}
             current={tab.current}
             list={Constant.collection_tab_arr}
-            onChange={(item: listType, index: number)=>{
+            onChange={(item: tabItemType, index: number)=>{
               setTab({
                 current: index,
                 row: item

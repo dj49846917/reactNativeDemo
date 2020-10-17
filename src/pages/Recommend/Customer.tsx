@@ -10,6 +10,7 @@ import { RootState } from '@/models/index'
 import { getSubTypeList, findDicName } from '@/utils/utils';
 import RecommandBtn from '@/pages/Recommend/RecommandBtn';
 import MyErrorNotice from '@/components/MyErrorNotice';
+import { dicType } from '@/models/Recommend';
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -19,7 +20,7 @@ const mapStateToProps = (state: RootState) => {
     RegionId: state.recommend.RegionId,
     ViewingDate: state.recommend.ViewingDate,
     dicArr: state.recommend.dicArr,
-    Remark: state.recommend.Remark
+    Remark: state.recommend.Remark,
     // num: state.home.num,
     // loading: state.loading.effects['home/asyncAdd']
   }
@@ -29,12 +30,16 @@ const connector = connect(mapStateToProps)
 type ModalState = ConnectedProps<typeof connector> // 定义connect的类型
 
 interface CustomerProps extends ModalState {
+  HouseTypeSelectRow: dicType,
+  AreaSelectRow: dicType,
+  HuXingTypeSelectRow: dicType,
+  needs: string
 }
 
 const Customer = (props: CustomerProps) => {
-  const [fileds, setFileds] = React.useState({
-    needs: '',            // 购房需求
-  })
+
+  const saveCust = () => {}
+
   return (
     <View style={[CommonStyle.content, { backgroundColor: Constant.defaultBgColor }]}>
       <View style={CommonStyle.sizedBox}></View>
@@ -49,8 +54,8 @@ const Customer = (props: CustomerProps) => {
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
-            onBlur={()=>{
-              if(!props.UserName) {
+            onBlur={() => {
+              if (!props.UserName) {
                 MyErrorNotice({
                   content: '推荐人姓名不能为空',
                   containerStyle: {
@@ -154,7 +159,7 @@ const Customer = (props: CustomerProps) => {
             showLabel
             flelds='购房需求'
             placeHolder='可多选'
-            defaultValue={fileds.needs}
+            defaultValue={props.needs}
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
@@ -192,7 +197,7 @@ const Customer = (props: CustomerProps) => {
             tipTitle='《客源温馨提示》'
             tipCallback={() => { }}
             save={(code: boolean) => {
-              console.log(code)
+              saveCust()
             }}
           />
         </KeyboardAvoidingView>
