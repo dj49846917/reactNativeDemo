@@ -7,6 +7,8 @@ export interface dicType {
   DicName?: string
   SubTypeCode?: number | undefined
   BaseTypeCode?: number | undefined
+  AreaMin?: number
+  AreaMax?: number
 }
 
 // 定义 state的类型
@@ -43,6 +45,7 @@ export interface RecommendState {
   isMortgage: number | undefined                // 有无抵押
   DebtMoney: string                             // 抵押金额
   mortgageBank: string                          // 抵押银行/公司
+  RemarkHouse: string                           // 备注(房源)
 }
 
 // 定义model的类型
@@ -95,7 +98,8 @@ const initailState: RecommendState = {
   isElevator: undefined,
   isMortgage: undefined,
   DebtMoney: '',
-  mortgageBank: ''
+  mortgageBank: '',
+  RemarkHouse: ''
 }
 
 const Recommend: RecommendModel = {

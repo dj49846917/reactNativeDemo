@@ -31,7 +31,7 @@ const MyErrorNotice = (props: MyErrorNoticeProps) => {
     containerStyle: {
       marginTop: Platform.OS == 'android' ? 4 : 24,
       width: width,
-      backgroundColor: '#fea827', height: 70 / 750 * width,
+      backgroundColor: '#fea827', height: 50 / 750 * width,
       padding: 0,
       borderRadius: 0,
       justifyContent: 'center'
