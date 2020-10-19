@@ -112,60 +112,6 @@ export default class BottomTabs extends Component<IProps> {
           }}
         />
       </Tab.Navigator>
-      // <Tab.Navigator
-      //   tabBarOptions={{
-      //     activeTintColor: '#c71622'
-      //   }}
-      // >
-      //   <Tab.Screen
-      //     name='Home'
-      //     component={Home}
-      //     options={{
-      //       tabBarLabel: '首页',
-      //       tabBarIcon: ({ focused, color, size }) => {
-      //         return (
-      //           <Image source={focused ? ENV_ICON.icon_footer_home_red : ENV_ICON.icon_footer_home} />
-      //         )
-      //       }
-      //     }}
-      //   />
-      //   <Tab.Screen
-      //     name='Recommend'
-      //     component={Recommend}
-      //     options={{
-      //       tabBarLabel: '推荐',
-      //       tabBarIcon: ({ focused, color, size }) => {
-      //         return (
-      //           <Image source={focused ? ENV_ICON.icon_footer_recommend_red : ENV_ICON.icon_footer_recommend} />
-      //         )
-      //       }
-      //     }}
-      //   />
-      //   <Tab.Screen
-      //     name='Collection'
-      //     component={Collection}
-      //     options={{
-      //       tabBarLabel: '收藏',
-      //       tabBarIcon: ({ focused, color, size }) => {
-      //         return (
-      //           <Image source={focused ? ENV_ICON.icon_footer_collect_red : ENV_ICON.icon_footer_collect} />
-      //         )
-      //       }
-      //     }}
-      //   />
-      //   <Tab.Screen
-      //     name='Account'
-      //     component={Account}
-      //     options={{
-      //       tabBarLabel: '用户',
-      //       tabBarIcon: ({ focused, color, size }) => {
-      //         return (
-      //           <Image source={focused ? ENV_ICON.icon_footer_user_red : ENV_ICON.icon_footer_user} />
-      //         )
-      //       }
-      //     }}
-      //   />
-      // </Tab.Navigator>
     )
   }
 }

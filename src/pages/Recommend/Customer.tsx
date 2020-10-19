@@ -11,6 +11,7 @@ import { getSubTypeList, findDicName, validFieldsDefault, validFieldsPhone, vali
 import RecommandBtn from '@/pages/Recommend/RecommandBtn';
 import { dicType } from '@/models/Recommend';
 import MyErrorNotice from '@/components/MyErrorNotice';
+import MyToastShort from '@/components/MyToastShort';
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -68,6 +69,7 @@ const Customer = (props: CustomerProps) => {
         operatorrid: 1002
       }
       console.log('params', params)
+      MyToastShort({content: '保存成功'})
     }
   }
 

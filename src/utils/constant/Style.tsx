@@ -13,7 +13,7 @@ const CommonStyle = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   commonBorder: {
     borderBottomColor: Constant.commonBorderColor,

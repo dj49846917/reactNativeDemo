@@ -7,6 +7,7 @@ import { Constant } from '@/utils/constant/Constant';
 import { dicType } from '@/models/Recommend';
 
 interface Iprops {
+  custormAllView?: React.ReactNode            // 自定义所有的视图
   height?: number                             // 模态框的高度
   headerView?: React.ReactNode                // 自定义头部
   custView?: React.ReactNode                  // 自定义主体内容
@@ -21,7 +22,7 @@ interface Iprops {
   onOk: Function                              // 点击确定按钮回调
   list: dicType[]                             // 数据字典数据源
   defaultValue?: string | number | undefined  // 初始值
-  // onSelect: Function                       // 选中的回调函数
+  position: string                            // 弹窗内容的位置(top, center, bottom)
 }
 
 type MyModalSelectProps = Iprops & ModalProps
@@ -43,7 +44,7 @@ const MyModalSelect = (props: MyModalSelectProps) => {
     if (props.list.length > 0) {
       if (props.defaultValue) {
         props.list.forEach((item, index) => {
-          if(item.DicCode === props.defaultValue) {
+          if (item.DicCode === props.defaultValue) {
             setSelectItem({
               val: props.defaultValue,
               index,
@@ -67,56 +68,65 @@ const MyModalSelect = (props: MyModalSelectProps) => {
       animationType='slide'
       transparent
     >
-      <View style={styles.modal}>
+      <View style={[styles.modal, { flexDirection: props.position === 'top' ? 'column-reverse' : 'column' }]}>
         <View style={styles.modal_height}></View>
         <View style={[styles.content, { height: props.height }]}>
-          {
-            props.headerView ? props.headerView : (
-              <View style={[styles.modal_header, { height: props.headerHeight }]}>
-                <TouchableOpacity style={styles.modal_header_item} onPress={() => {
-                  setSelectItem({
-                    val: props.defaultValue,
-                    index: undefined,
-                    item: {}
-                  })
-                  props.onCancel()
-                }}>
-                  <Text style={[styles.modal_header_text, props.cancelStyle]}>{props.cancelText}</Text>
-                </TouchableOpacity>
-                <View style={styles.modal_header_item2}>
-                  <Text style={[styles.modal_header_title, props.titleStyle]}>{props.title}</Text>
-                </View>
-                <TouchableOpacity
-                  style={styles.modal_header_item}
-                  onPress={() => {
-                    props.onOk(selectItem)
-                  }}
-                >
-                  <Text style={[styles.modal_header_text, props.okStyle]}>{props.okText}</Text>
-                </TouchableOpacity>
-              </View>
-            )
-          }
-          {
-            props.custView ? props.custView : (
-              <Picker
-                selectedValue={selectItem.val}
-                style={styles.modal_content}
-                onValueChange={(itemValue, itemIndex) => {
-                  setSelectItem({
-                    val: itemValue,
-                    index: itemIndex,
-                    item: props.list[itemIndex]
-                  })
-                }}
-              >
-                {props.list.map((item, index) => (
-                  <Picker.Item key={index} label={item.DicName} value={item.DicCode} />
-                ))}
-              </Picker>
-            )
-          }
+          {props.custormAllView ? props.custormAllView : (
+            <View>
+              {
+                props.headerView ? props.headerView : (
+                  <View style={[styles.modal_header, { height: props.headerHeight }]}>
+                    <TouchableOpacity style={styles.modal_header_item} onPress={() => {
+                      setSelectItem({
+                        val: props.defaultValue,
+                        index: undefined,
+                        item: {}
+                      })
+                      props.onCancel()
+                    }}>
+                      <Text style={[styles.modal_header_text, props.cancelStyle]}>{props.cancelText}</Text>
+                    </TouchableOpacity>
+                    <View style={styles.modal_header_item2}>
+                      <Text style={[styles.modal_header_title, props.titleStyle]}>{props.title}</Text>
+                    </View>
+                    <TouchableOpacity
+                      style={styles.modal_header_item}
+                      onPress={() => {
+                        props.onOk(selectItem)
+                      }}
+                    >
+                      <Text style={[styles.modal_header_text, props.okStyle]}>{props.okText}</Text>
+                    </TouchableOpacity>
+                  </View>
+                )
+              }
+              {
+                props.custView ? props.custView : (
+                  <Picker
+                    selectedValue={selectItem.val}
+                    style={styles.modal_content}
+                    onValueChange={(itemValue, itemIndex) => {
+                      setSelectItem({
+                        val: itemValue,
+                        index: itemIndex,
+                        item: props.list[itemIndex]
+                      })
+                    }}
+                  >
+                    {props.list.map((item, index) => (
+                      <Picker.Item key={index} label={item.DicName} value={String(item.DicCode)} />
+                    ))}
+                  </Picker>
+                )
+              }
+            </View>
+          )}
         </View>
+        {
+          props.position === 'center' ? (
+            <View style={styles.modal_height}></View>
+          ) : null
+        }
       </View>
     </Modal>
   );
@@ -128,14 +138,18 @@ MyModalSelect.defaultProps = {
   cancelText: '取消',
   okText: '确定',
   title: '实例',
-  defaultValue: ''
+  defaultValue: '',
+  list: [],
+  onCancel: () => { },
+  onOk: () => { },
+  position: 'bottom'
 }
 
 export default MyModalSelect;
 
 const styles = StyleSheet.create({
   modal: {
-    flex: 1
+    flex: 1,
   },
   modal_height: {
     flex: 1,

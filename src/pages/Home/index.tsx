@@ -13,7 +13,6 @@ import TabPane from '@/pages/Home/TabPane';
 import { tabType, tabItemType } from '../Recommend';
 
 interface HomeProps {
-
 }
 
 const Home = (props: HomeProps) => {

@@ -8,6 +8,7 @@ export const ENV_ICON = {
   icon_footer_user: require('@/assets/images/icon/icon_footer_user.png'), // 我的
   icon_footer_user_red: require('@/assets/images/icon/icon_footer_user_red.png'),
   icon_down: require('@/assets/images/icon/icon_down.png'),
+  icon_up: require("@/assets/images/icon/icon_up.png"),
   icon_top_msg: require('@/assets/images/icon/icon_top_msg.png'),
   input_search: require('@/assets/images/icon/input_search.png'),
   icon_jjr: require('@/assets/images/icon/icon_jjr.png'),
@@ -31,10 +32,12 @@ export const ENV_ICON = {
   icon_off: require("@/assets/images/icon/icon_off.png"),
   select_no: require("@/assets/images/icon/select_no.png"),
   select: require("@/assets/images/icon/select.png"),
+  icon_top_loc: require("@/assets/images/icon/icon_top_loc.png"),
 }
 
 export const ENV_IMAGE = {
   banner1: require('@/assets/images/image/banner1.png'),
+  banner2: require('@/assets/images/image/banner2.jpg'),
   p1: require('@/assets/images/image/p1.png'),
   p2: require('@/assets/images/image/p2.png'),
   p3: require('@/assets/images/image/p3.png'),

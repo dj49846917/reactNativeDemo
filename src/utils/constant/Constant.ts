@@ -40,6 +40,12 @@ export const Constant = {
     { id: '0', val: '客源' },
     { id: '1', val: '房源' },
   ],
+  assetAuction_tab_arr: [ // 司法拍卖，资产拍卖
+    { id: '0', val: '区域' },
+    { id: '1', val: '价格' },
+    { id: '2', val: '拍卖状态' },
+    { id: '3', val: '拍卖时间' },
+  ],
   recommend_area_arr: [
     { DicCode: 0, DicName: '小于60㎡', AreaMin: 0, AreaMax: 60 },
     { DicCode: 1, DicName: '60-80㎡', AreaMin: 60, AreaMax: 80 },

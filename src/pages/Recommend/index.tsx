@@ -43,7 +43,7 @@ export type tabItemType = {
   val: string
 }
 
-type tabType = {
+export type tabType = {
   current: number,
   row: tabItemType
 }

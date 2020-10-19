@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import { StyleSheet, SafeAreaView, View } from 'react-native';
 import CommonStyle from '@/utils/constant/Style';
 import MyTab from '@/components/MyTab';
 import { Constant } from '@/utils/constant/Constant';
 import NavBar from '@/pages/Collection/NavBar';
 import TabPane from './TabPane';
-import { tabType, tabItemType } from '../Recommend';
+import { tabItemType } from '../Recommend';
 
 interface CollectionProps { }
 
 const Collection = (props: CollectionProps) => {
-  const [tab, setTab] = useState<tabType>({
+  const [tab, setTab] = useState({
     current: 0,
     row: Constant.collection_tab_arr[0]
   })
@@ -28,6 +28,7 @@ const Collection = (props: CollectionProps) => {
           })
         }}
       />
+      <View style={CommonStyle.sizedBox}></View>
       {/* 主体内容 */}
       <TabPane row={tab.row} />
     </SafeAreaView>
