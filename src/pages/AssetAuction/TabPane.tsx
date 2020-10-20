@@ -1,24 +1,15 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import CommonStyle from '@/utils/constant/Style'
 import CommonAssetAuction from '@/components/CommonAssetAuction';
 import { AssetAutionData, AssetDic, JudicialAuctionData } from '@/assets/data/AssetAuction';
-import { SecondHouseData } from '@/assets/data/SecondHouse';
-import CommonSecondHouseList from '@/components/CommonSecondHoseList';
-import { tabItemType } from '../Recommend';
 
 interface TabPaneProps {
-  row: tabItemType
+  title: string
 }
 
 const TabPane = (props: TabPaneProps) => {
-  if(props.row.val === '资产拍卖') {
-    return (
-      <ScrollView style={CommonStyle.container}>
-        <CommonAssetAuction list={AssetAutionData} comDic={AssetDic} />
-      </ScrollView>
-    )
-  } else if(props.row.val === '司法拍卖') {
+  if (props.title === '司法拍卖') {
     return (
       <ScrollView style={CommonStyle.container}>
         <CommonAssetAuction list={JudicialAuctionData} comDic={AssetDic} />
@@ -27,7 +18,7 @@ const TabPane = (props: TabPaneProps) => {
   } else {
     return (
       <ScrollView style={CommonStyle.container}>
-        <CommonSecondHouseList list={SecondHouseData} comDic={AssetDic} />
+        <CommonAssetAuction list={AssetAutionData} comDic={AssetDic} />
       </ScrollView>
     )
   }

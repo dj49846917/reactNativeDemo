@@ -3,12 +3,13 @@ import { Text, View, StyleSheet, KeyboardAvoidingView, TextInput, ScrollView, Pl
 import CommonStyle from '@/utils/constant/Style';
 import { UnitConvert } from '@/utils/unitConvert';
 import MyDropdownList from '@/components/MyDropdownList';
-import { findDicName, getSubTypeList } from '@/utils/utils';
+import { findDicName, getSubTypeList, validFieldsDefault, validFieldsPhone, validFieldsPosiveNumber } from '@/utils/utils';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '@/models/index';
 import MyTextInput from '@/components/MyTextInput';
 import { Constant } from '@/utils/constant/Constant';
 import RecommandBtn from '@/pages/Recommend/RecommandBtn';
+import MyErrorNotice from '@/components/MyErrorNotice';
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -31,6 +32,7 @@ const mapStateToProps = (state: RootState) => {
     isMortgage: state.recommend.isMortgage,
     DebtMoney: state.recommend.DebtMoney,
     mortgageBank: state.recommend.mortgageBank,
+    RemarkHouse: state.recommend.RemarkHouse,
     // num: state.home.num,
     // loading: state.loading.effects['home/asyncAdd']
   }
@@ -44,6 +46,59 @@ interface HouseProps extends ModalState {
 }
 
 const House = (props: HouseProps) => {
+  // 保存房源
+  const saveHouse = (code: boolean) => {
+    if (!code) {
+      MyErrorNotice({ content: '请阅读推荐房源相关温馨提示' })
+      return
+    }
+    if (!props.SourceByOwner) {
+      MyErrorNotice({ content: '请选择房屋来源' })
+      return
+    }
+    const a = validFieldsDefault(props.OwnerName, '被推荐人姓名不能为空')
+    const b = validFieldsPhone(props.OwnerPhone, true, '请输入正确的电话号码', '被推荐人电话不能为空')
+    const c = validFieldsDefault(props.AssetName, '小区名称不能为空')
+    const d = validFieldsPosiveNumber(props.ProposalPrice, false, '请输入正确的意向卖价', '')
+    const e = validFieldsPosiveNumber(props.PropertyArea, false, '请输入正确的建筑面积', '')
+    const f = validFieldsPosiveNumber(props.PropertyInsideArea, false, '请输入正确的套内面积', '')
+    let g;
+    if (props.isMortgage === 1000001) {
+      g = validFieldsPosiveNumber(props.DebtMoney, true, '请输入正确的抵押金额', '请输入抵押金额')
+    } else {
+      g = true
+    }
+    if (a && b && c && d && e && f && g) {
+      const content = {
+        SourceByOwner: props.SourceByOwner || null,
+        OwnerName: props.OwnerName || null,
+        OwnerPhone: props.OwnerPhone || null,
+        AssetName: props.AssetName || null,
+        PropertyAddress: props.PropertyAddress || null,
+        ProposalPrice: Number(props.ProposalPrice) * 10000 || null,
+        PropertyArea: props.PropertyArea || null,
+        PropertyInsideArea: props.PropertyInsideArea || null,
+        PropertyUsufructGetType: props.PropertyUsufructGetType || null,
+        HuXingTypeF: props.HuXingTypeF || null,
+        HouseType: props.HouseTypeHouse || null,
+        RegionId: props.RegionIdHouse || null,
+        Renovation: props.Renovation || null,
+        Floor: props.Floor || null,
+        isElevator: props.isElevator || null,
+        isMortgage: props.isMortgage || null,
+        DebtMoney: Number(props.DebtMoney) * 10000 || null,
+        mortgageBank: props.mortgageBank || null,
+        Remark: props.RemarkHouse || null,
+        Attachment: '' || null
+      }
+      const params = {
+        data: JSON.stringify(content),
+        operatorrid: 1011
+      }
+      console.log('params', params)
+    }
+  }
+
   return (
     <View style={CommonStyle.content}>
       <View style={CommonStyle.sizedBox}></View>
@@ -76,6 +131,7 @@ const House = (props: HouseProps) => {
             flelds='业主姓名'
             required
             // showClearIcon
+            onBlur={() => { validFieldsDefault(props.OwnerName, '被推荐人姓名不能为空') }}
             placeholder='请输入被推荐人姓名'
             defaultValue={props.OwnerName}
             lableStyle={{
@@ -95,6 +151,7 @@ const House = (props: HouseProps) => {
             flelds='业主电话'
             required
             // showClearIcon
+            onBlur={() => { validFieldsPhone(props.OwnerPhone, true, '请输入正确的电话号码', '被推荐人电话不能为空') }}
             placeholder='业主电话'
             keyboardType='phone-pad'
             defaultValue={props.OwnerPhone}
@@ -115,6 +172,7 @@ const House = (props: HouseProps) => {
             flelds='小区名称'
             required
             // showClearIcon
+            onBlur={() => { validFieldsDefault(props.AssetName, '小区名称不能为空') }}
             placeholder='请输入小区名称'
             defaultValue={props.AssetName}
             lableStyle={{
@@ -152,6 +210,7 @@ const House = (props: HouseProps) => {
             placeholder='请输入意向卖价'
             keyboardType={'numeric'}
             defaultValue={props.ProposalPrice}
+            onBlur={() => { validFieldsPosiveNumber(props.ProposalPrice, false, '请输入正确的意向卖价', '') }}
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
@@ -172,6 +231,7 @@ const House = (props: HouseProps) => {
               placeholder='请输入'
               keyboardType={'numeric'}
               defaultValue={props.PropertyArea}
+              onBlur={() => { validFieldsPosiveNumber(props.PropertyArea, false, '请输入正确的建筑面积', '') }}
               getFieldsValue={(code: string) => {
                 props.dispatch({
                   type: 'recommend/setFields',
@@ -191,6 +251,7 @@ const House = (props: HouseProps) => {
               placeholder='请输入'
               keyboardType={'numeric'}
               defaultValue={props.PropertyInsideArea}
+              onBlur={() => { validFieldsPosiveNumber(props.PropertyInsideArea, false, '请输入正确的套内面积', '') }}
               getFieldsValue={(code: string) => {
                 props.dispatch({
                   type: 'recommend/setFields',
@@ -401,6 +462,7 @@ const House = (props: HouseProps) => {
                   placeholder='抵押金额(万元)'
                   keyboardType={'numeric'}
                   defaultValue={props.DebtMoney}
+                  onBlur={() => { validFieldsPosiveNumber(props.DebtMoney, true, '请输入正确的抵押金额', '') }}
                   lableStyle={{
                     paddingLeft: UnitConvert.dpi(30)
                   }}
@@ -435,11 +497,32 @@ const House = (props: HouseProps) => {
               </>
             ) : null
           }
+          <View style={CommonStyle.sizedBox}></View>
+          <MyTextInput
+            flelds='备注'
+            placeholder='请输入备注'
+            multiline
+            defaultValue={props.RemarkHouse}
+            height={UnitConvert.dpi(160)}
+            lableStyle={{
+              paddingLeft: UnitConvert.dpi(30)
+            }}
+            getFieldsValue={(code: string) => {
+              props.dispatch({
+                type: 'recommend/setFields',
+                payload: {
+                  key: 'RemarkHouse',
+                  val: code
+                }
+              })
+            }}
+          />
           <RecommandBtn
             tipTitle='《房源温馨提示》'
             tipCallback={() => { }}
             save={(code: boolean) => {
               console.log(code)
+              saveHouse(code)
             }}
           />
         </KeyboardAvoidingView>

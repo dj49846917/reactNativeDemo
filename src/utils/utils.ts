@@ -6,6 +6,8 @@ import {
 } from 'react-native';
 import { Constant } from './constant/Constant';
 import moment from 'moment'
+import MyErrorNotice from '@/components/MyErrorNotice';
+import VerifyUtil from './VerifyUtil';
 
 // 获取顶部状态栏的高度
 export function getStatusBarHeight() {
@@ -93,9 +95,94 @@ export function getSubTypeList(list: any[], subTypeCode: number) {
 //根据字典code获取字典名称
 export function findDicName(list: any[], code: number | undefined, defaultVal = "") {
   try {
-      return list.find(x=>x.DicCode == code).DicName;
-  } catch(e) {
-      return  defaultVal
-  ;
+    return list.find(x => x.DicCode == code).DicName;
+  } catch (e) {
+    return defaultVal;
+  }
 }
+
+// 校验是否为空
+export function validFieldsDefault(value: string, title: string) {
+  if (value) {
+    return true
+  } else {
+    MyErrorNotice({ content: title });
+    return false;
+  }
+}
+
+// 校验电话的正确性
+export function validFieldsPhone(value: string, isRequired: boolean, title: string, emptyTitle: string) {
+  if (isRequired) { // 必输
+    if (value) {
+      if (!VerifyUtil.CanEmptyPhone(value)) {
+        MyErrorNotice({ content: title });
+        return false;
+      } else {
+        return true
+      }
+    } else {
+      MyErrorNotice({ content: emptyTitle });
+      return false;
+    }
+  } else {
+    if (!VerifyUtil.CanEmptyPhone(value)) {
+      MyErrorNotice({ content: title });
+      return false;
+    } else {
+      return true
+    }
+  }
+}
+
+// 校验身份证的正确性
+export function validFieldsIdCard(value: string, isRequired: boolean, title:string, emptyTitle:string) {
+  if (isRequired) { // 必输
+    if (value) {
+      if (!VerifyUtil.CanEmptyPhone(value)) {
+        MyErrorNotice({content: title});
+        return false;
+      } else {
+        return true
+      }
+    } else {
+      MyErrorNotice({content: emptyTitle});
+      return false;
+    }
+  } else {
+    if (!VerifyUtil.CanEmptyIDCard(value)) {
+      MyErrorNotice({content: title});
+      return false;
+    } else {
+      return true
+    }
+  }
+}
+
+// 校验数据为正数
+export function validFieldsPosiveNumber(value: string | undefined, isRequired: boolean, title:string, emptyTitle:string) {
+  if (isRequired) { // 必输
+    if (value) {
+      if (!VerifyUtil.isPosiveNumber(value)) {
+        MyErrorNotice({content: title});
+        return false;
+      } else {
+        return true
+      }
+    } else {
+      MyErrorNotice({content: emptyTitle});
+      return false;
+    }
+  } else {
+    if (value) {
+      if (!VerifyUtil.isPosiveNumber(value)) {
+        MyErrorNotice({content: title});
+        return false;
+      } else {
+        return true
+      }
+    } else {
+      return true
+    }
+  }
 }

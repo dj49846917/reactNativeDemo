@@ -7,9 +7,11 @@ import { Constant } from '@/utils/constant/Constant';
 import MyDropdownList from '@/components/MyDropdownList';
 import { connect, ConnectedProps } from 'react-redux'
 import { RootState } from '@/models/index'
-import { getSubTypeList, findDicName } from '@/utils/utils';
+import { getSubTypeList, findDicName, validFieldsDefault, validFieldsPhone, validFieldsIdCard } from '@/utils/utils';
 import RecommandBtn from '@/pages/Recommend/RecommandBtn';
+import { dicType } from '@/models/Recommend';
 import MyErrorNotice from '@/components/MyErrorNotice';
+import MyToastShort from '@/components/MyToastShort';
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -19,7 +21,7 @@ const mapStateToProps = (state: RootState) => {
     RegionId: state.recommend.RegionId,
     ViewingDate: state.recommend.ViewingDate,
     dicArr: state.recommend.dicArr,
-    Remark: state.recommend.Remark
+    Remark: state.recommend.Remark,
     // num: state.home.num,
     // loading: state.loading.effects['home/asyncAdd']
   }
@@ -29,12 +31,48 @@ const connector = connect(mapStateToProps)
 type ModalState = ConnectedProps<typeof connector> // 定义connect的类型
 
 interface CustomerProps extends ModalState {
+  HouseTypeSelectRow: dicType,
+  AreaSelectRow: dicType,
+  HuXingTypeSelectRow: dicType,
+  needs: string
 }
 
 const Customer = (props: CustomerProps) => {
-  const [fileds, setFileds] = React.useState({
-    needs: '',            // 购房需求
-  })
+  // 保存客源
+  const saveCust = (code: boolean) => {
+    if (!code) {
+      MyErrorNotice({ content: '请阅读推荐房源相关温馨提示' })
+      return
+    }
+    const phone = validFieldsPhone(props.MobilePhone, true, '请输入正确的电话号码', '被推荐人电话不能为空')
+    const user = validFieldsDefault(props.UserName, '被推荐人姓名不能为空')
+    const idCard = validFieldsIdCard(props.IDCard, false, '请输入正确的身份证号', '被推荐人身份证号不能为空')
+    if (!props.RegionId) {
+      MyErrorNotice({ content: '请选择意向城市' })
+      return
+    }
+    if (user && phone && idCard && props.RegionId) {
+      const content = {
+        UserName: props.UserName || null,
+        MobilePhone: props.MobilePhone || null,
+        IDCard: props.IDCard || null,
+        RegionId: props.RegionId || null,
+        ViewingDate: props.ViewingDate || null,
+        HouseType: props.HouseTypeSelectRow.DicCode || null,
+        HuXingTypeF: props.HuXingTypeSelectRow.DicCode || null,
+        AreaMin: props.AreaSelectRow.AreaMin || null,
+        AreaMax: props.AreaSelectRow.AreaMax || null,
+        Remark: props.Remark || null,
+      }
+      const params = {
+        data: JSON.stringify(content),
+        operatorrid: 1002
+      }
+      console.log('params', params)
+      MyToastShort({content: '保存成功'})
+    }
+  }
+
   return (
     <View style={[CommonStyle.content, { backgroundColor: Constant.defaultBgColor }]}>
       <View style={CommonStyle.sizedBox}></View>
@@ -49,15 +87,8 @@ const Customer = (props: CustomerProps) => {
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
-            onBlur={()=>{
-              if(!props.UserName) {
-                MyErrorNotice({
-                  content: '推荐人姓名不能为空',
-                  containerStyle: {
-                    backgroundColor: 'red'
-                  }
-                })
-              }
+            onBlur={() => {
+              validFieldsDefault(props.UserName, '被推荐人姓名不能为空')
             }}
             getFieldsValue={(code: string) => {
               props.dispatch({
@@ -76,6 +107,9 @@ const Customer = (props: CustomerProps) => {
             placeholder='请输入被推荐人电话'
             keyboardType='phone-pad'
             defaultValue={props.MobilePhone}
+            onBlur={() => {
+              validFieldsPhone(props.MobilePhone, true, '请输入正确的电话号码', '被推荐人电话不能为空')
+            }}
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
@@ -97,6 +131,7 @@ const Customer = (props: CustomerProps) => {
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
+            onBlur={() => { validFieldsIdCard(props.IDCard, false, '请输入正确的身份证号', '被推荐人身份证号不能为空') }}
             getFieldsValue={(code: string) => {
               props.dispatch({
                 type: 'recommend/setFields',
@@ -154,7 +189,7 @@ const Customer = (props: CustomerProps) => {
             showLabel
             flelds='购房需求'
             placeHolder='可多选'
-            defaultValue={fileds.needs}
+            defaultValue={props.needs}
             lableStyle={{
               paddingLeft: UnitConvert.dpi(30)
             }}
@@ -192,7 +227,7 @@ const Customer = (props: CustomerProps) => {
             tipTitle='《客源温馨提示》'
             tipCallback={() => { }}
             save={(code: boolean) => {
-              console.log(code)
+              saveCust(code)
             }}
           />
         </KeyboardAvoidingView>

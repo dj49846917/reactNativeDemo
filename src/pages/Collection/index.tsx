@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import { StyleSheet, SafeAreaView, View } from 'react-native';
 import CommonStyle from '@/utils/constant/Style';
-import MyTab, { listType } from '@/components/MyTab';
+import MyTab from '@/components/MyTab';
 import { Constant } from '@/utils/constant/Constant';
 import NavBar from '@/pages/Collection/NavBar';
 import TabPane from './TabPane';
+import { tabItemType } from '../Recommend';
 
 interface CollectionProps { }
 
@@ -20,13 +21,14 @@ const Collection = (props: CollectionProps) => {
       <MyTab
         current={tab.current}
         list={Constant.collection_tab_arr}
-        onChange={(item: listType, index: number)=>{
+        onChange={(item: tabItemType, index: number)=>{
           setTab({
             current: index,
             row: item
           })
         }}
       />
+      <View style={CommonStyle.sizedBox}></View>
       {/* 主体内容 */}
       <TabPane row={tab.row} />
     </SafeAreaView>

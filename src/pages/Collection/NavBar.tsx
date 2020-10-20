@@ -14,35 +14,47 @@ const NavBar = (props: CollectionProps) => {
     <>
       {
         visible ? (
-          <View style={[CommonStyle.commonHeaderBox, styles.collection_header_box]}>
-            <View style={styles.collection_header_nav}>
-              <TouchableOpacity
-                style={CommonStyle.search_icon}
-                onPress={() => { }}
-              >
-                <Image source={ENV_ICON.input_search} />
-              </TouchableOpacity>
-              <MyTextInput
-                flelds='name'
-                showClearIcon
-                width={UnitConvert.dpi(604)}
-                height={UnitConvert.dpi(66)}
-                inputStyle={{
-                  width: UnitConvert.dpi(500),
-                  marginLeft: UnitConvert.dpi(70)
-                }}
-                showLabel={false}
-                getFieldsValue={(val: string) => {
-                  console.log('val', val)
-                }}
-              />
-            </View>
-            <TouchableOpacity onPress={() => {
+          <DefaultNavigationHeader
+            showLeftIcon={false}
+            mode='input'
+            showRightSecondIcon
+            rightSecondIconType='text'
+            rightSecondIconText='取消'
+            placeholder='请输入小区名或商圈名'
+            inputWidth={UnitConvert.dpi(624)}
+            rightSecondCallBack={() => {
               setVisible(false)
-            }}>
-              <Text style={styles.collection_header_btn}>取消</Text>
-            </TouchableOpacity>
-          </View>
+            }}
+          />
+          // <View style={[CommonStyle.commonHeaderBox, styles.collection_header_box]}>
+          //   <View style={styles.collection_header_nav}>
+          //     <TouchableOpacity
+          //       style={CommonStyle.search_icon}
+          //       onPress={() => { }}
+          //     >
+          //       <Image source={ENV_ICON.input_search} />
+          //     </TouchableOpacity>
+          //     <MyTextInput
+          //       flelds='name'
+          //       showClearIcon
+          //       width={UnitConvert.dpi(604)}
+          //       height={UnitConvert.dpi(66)}
+          //       inputStyle={{
+          //         width: UnitConvert.dpi(500),
+          //         marginLeft: UnitConvert.dpi(70)
+          //       }}
+          //       showLabel={false}
+          //       getFieldsValue={(val: string) => {
+          //         console.log('val', val)
+          //       }}
+          //     />
+          //   </View>
+          //   <TouchableOpacity onPress={() => {
+          //     setVisible(false)
+          //   }}>
+          //     <Text style={styles.collection_header_btn}>取消</Text>
+          //   </TouchableOpacity>
+          // </View>
         ) : (
             <DefaultNavigationHeader
               showLeftIcon={false}

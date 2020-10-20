@@ -3,10 +3,12 @@ import { Reducer } from 'react'
 import { RecommendDicArr } from '@/assets/data/Recommend'
 
 export interface dicType {
-  DicCode: number
-  DicName: string
-  SubTypeCode?: number
-  BaseTypeCode?: number
+  DicCode?: number | undefined
+  DicName?: string
+  SubTypeCode?: number | undefined
+  BaseTypeCode?: number | undefined
+  AreaMin?: number
+  AreaMax?: number
 }
 
 // 定义 state的类型
@@ -16,7 +18,6 @@ export interface RecommendState {
   IDCard: string,                               // 身份证号
   RegionId: number | undefined,                 // 意向区域
   ViewingDate: string,                          // 看房日期
-  needs: string,                                // 购房需求        
   Remark: string,                               // 备注
   visible: boolean                              // 打开下拉框弹窗
   dateVisible: boolean                          // 看房日期弹窗状态
@@ -44,6 +45,7 @@ export interface RecommendState {
   isMortgage: number | undefined                // 有无抵押
   DebtMoney: string                             // 抵押金额
   mortgageBank: string                          // 抵押银行/公司
+  RemarkHouse: string                           // 备注(房源)
 }
 
 // 定义model的类型
@@ -70,7 +72,6 @@ const initailState: RecommendState = {
   IDCard: '',
   RegionId: undefined,
   ViewingDate: '',
-  needs: '',
   Remark: '',
   visible: false,
   dateVisible: false,
@@ -98,6 +99,7 @@ const initailState: RecommendState = {
   isMortgage: undefined,
   DebtMoney: '',
   mortgageBank: '',
+  RemarkHouse: ''
 }
 
 const Recommend: RecommendModel = {

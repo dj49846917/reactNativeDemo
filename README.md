@@ -800,7 +800,93 @@
     ```
 
   4. 详细说明文档请看：https://github.com/magicismight/react-native-root-toast
-    
+
+## 提示组件react-native-root-toast
+使用步骤：
+  1. 下载核心包：
+    ```
+      npm install --save react-native-root-toast
+      npm install --save react-native-root-siblings
+    ```
+
+  2. 在react-native版本大于0.62时，需要在根路径src/index.tsx中插入一个挂载点：
+    ```
+      import { RootSiblingParent } from 'react-native-root-siblings';
+
+      return (
+        <RootSiblingParent>  // <- use RootSiblingParent to wrap your root component
+          <App />
+        </RootSiblingParent>
+      );
+    ```
+
+  3. 具体使用：
+    * 函数式：
+      ```
+        import Toast from 'react-native-root-toast';
+
+        let toast = Toast.show('This is a message', {
+            duration: Toast.durations.LONG,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            delay: 0,
+            onShow: () => {
+                // calls on toast\`s appear animation start
+            },
+            onShown: () => {
+                // calls on toast\`s appear animation end.
+            },
+            onHide: () => {
+                // calls on toast\`s hide animation start.
+            },
+            onHidden: () => {
+                // calls on toast\`s hide animation end.
+            }
+        });
+
+        setTimeout(function () {
+            Toast.hide(toast);
+        }, 500);
+      ```
+
+    * 组件式：
+      ```
+        import React, {Component} from 'react-native';
+        import Toast from 'react-native-root-toast';
+
+        class Example extends Component{
+            constructor() {
+                super(...arguments);
+                this.state = {
+                    visible: false
+                };
+            }
+
+            componentDidMount() {
+                setTimeout(() => this.setState({
+                    visible: true
+                }), 2000); // show toast after 2s
+
+                setTimeout(() => this.setState({
+                    visible: false
+                }), 5000); // hide toast after 5s
+            };
+
+            render() {
+                return <Toast
+                    visible={this.state.visible}
+                    position={50}
+                    shadow={false}
+                    animation={false}
+                    hideOnPress={true}
+                >This is a message</Toast>;
+            }
+        }
+      ```
+  
+  4. 详细文档：https://github.com/magicismight/react-native-root-toast#readme
 ## 弹窗组件react-native-modalbox
 使用步骤：    
   1. 下载核心包：

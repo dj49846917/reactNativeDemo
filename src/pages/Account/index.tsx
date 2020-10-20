@@ -6,8 +6,11 @@ import { UnitConvert } from '@/utils/unitConvert';
 import { ENV_ICON } from '@/assets/styles/picUrl';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Constant } from '@/utils/constant/Constant';
+import { RootStackNavigation } from '@/router/index';
 
-interface AccountProps { }
+interface AccountProps {
+  navigation: RootStackNavigation
+}
 
 const Account = (props: AccountProps) => {
   // 登录图标 
@@ -70,7 +73,9 @@ const Account = (props: AccountProps) => {
       <LogonComponent />
       {/* 广告 */}
       <TouchableOpacity
-        onPress={() => { }}
+        onPress={() => {
+          props.navigation.navigate('Recommend', {})
+        }}
         style={styles.account_addbox}
       >
         <Image source={ENV_ICON.vip} style={styles.accout_add} />

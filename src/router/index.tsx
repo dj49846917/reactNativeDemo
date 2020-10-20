@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, StackNavigationProp, HeaderStyleInterpolators, CardStyleInterpolators } from '@react-navigation/stack'
 import BottomTabs from '@/router/BottomTabs'
 import Demo from '@/pages/demo'
+import AssetAuction from '@/pages/AssetAuction'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
   Tab: {
@@ -11,6 +12,12 @@ export type RootStackList = { // 定义类型别名，用于约束navigator组�
   Demo: {
     screen?: string
   },
+  Recommend: {
+    screen?: string
+  },
+  AssetAuction: {
+    screen?: string
+  }
 }
 
 // 该类型申明约束每一个页面组件的props
@@ -44,6 +51,11 @@ export default class Navigator extends Component {
           <Stack.Screen
             name="Demo"
             component={Demo}
+          />
+          <Stack.Screen
+            name="AssetAuction"
+            component={AssetAuction}
+            options={{ header: () => null }}
           />
         </Stack.Navigator>
       </NavigationContainer>

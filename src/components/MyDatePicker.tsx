@@ -28,7 +28,7 @@ interface Iprops {
 type MyDatePickerProps = Iprops & ModalProps
 
 const MyDatePicker = (props: MyDatePickerProps) => {
-  const [val, setVal] = React.useState('')
+  const [val, setVal] = React.useState(new Date())
   
   let d = moment(props.defaultDate ? props.defaultDate : new Date(), 'YYYY-MM-DD');
   return (
@@ -52,7 +52,12 @@ const MyDatePicker = (props: MyDatePickerProps) => {
                 <View style={styles.modal_header_item2}>
                   <Text style={[styles.modal_header_title, props.titleStyle]}>{props.title}</Text>
                 </View>
-                <TouchableOpacity style={styles.modal_header_item} onPress={() => props.onOk(val)}>
+                <TouchableOpacity 
+                  style={styles.modal_header_item} 
+                  onPress={() => {
+                    props.onOk(val)
+                  }}
+                >
                   <Text style={[styles.modal_header_text, props.okStyle]}>{props.okText}</Text>
                 </TouchableOpacity>
               </View>
