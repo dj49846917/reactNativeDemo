@@ -33,6 +33,7 @@ export const ENV_ICON = {
   select_no: require("@/assets/images/icon/select_no.png"),
   select: require("@/assets/images/icon/select.png"),
   icon_top_loc: require("@/assets/images/icon/icon_top_loc.png"),
+  icon_gou_red: require("@/assets/images/icon/icon_gou_red.png"),
 }
 
 export const ENV_IMAGE = {

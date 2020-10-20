@@ -114,4 +114,13 @@ export const Constant = {
     { DicName: '49层', DicCode: 49 },
     { DicName: '50层', DicCode: 50 }
   ],
+  auctionPriceArr: [ // 价格多选框的数据源
+    { DicName: '40万以下', DicCode: 0, MinPrice: 0, MaxPrice: 400000, select: false, id: 0 },
+    { DicName: '40-60万', DicCode: 1, MinPrice: 400000, MaxPrice: 600000, select: false, id: 1 },
+    { DicName: '60-80万', DicCode: 2, MinPrice: 600000, MaxPrice: 800000, select: false, id: 2 },
+    { DicName: '80-100万', DicCode: 3, MinPrice: 800000, MaxPrice: 1000000, select: false, id: 3 },
+    { DicName: '100-150万', DicCode: 4, MinPrice: 1000000, MaxPrice: 1500000, select: false, id: 4 },
+    { DicName: '150-200万', DicCode: 5, MinPrice: 1500000, MaxPrice: 2000000, select: false, id: 5 },
+    { DicName: '200万以上', DicCode: 6, MinPrice: 2000000, MaxPrice: 100000000, select: false, id: 6 },
+  ],
 }

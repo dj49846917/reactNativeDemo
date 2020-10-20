@@ -26,35 +26,6 @@ const NavBar = (props: CollectionProps) => {
               setVisible(false)
             }}
           />
-          // <View style={[CommonStyle.commonHeaderBox, styles.collection_header_box]}>
-          //   <View style={styles.collection_header_nav}>
-          //     <TouchableOpacity
-          //       style={CommonStyle.search_icon}
-          //       onPress={() => { }}
-          //     >
-          //       <Image source={ENV_ICON.input_search} />
-          //     </TouchableOpacity>
-          //     <MyTextInput
-          //       flelds='name'
-          //       showClearIcon
-          //       width={UnitConvert.dpi(604)}
-          //       height={UnitConvert.dpi(66)}
-          //       inputStyle={{
-          //         width: UnitConvert.dpi(500),
-          //         marginLeft: UnitConvert.dpi(70)
-          //       }}
-          //       showLabel={false}
-          //       getFieldsValue={(val: string) => {
-          //         console.log('val', val)
-          //       }}
-          //     />
-          //   </View>
-          //   <TouchableOpacity onPress={() => {
-          //     setVisible(false)
-          //   }}>
-          //     <Text style={styles.collection_header_btn}>取消</Text>
-          //   </TouchableOpacity>
-          // </View>
         ) : (
             <DefaultNavigationHeader
               showLeftIcon={false}

@@ -8,6 +8,7 @@ import { Constant } from './constant/Constant';
 import moment from 'moment'
 import MyErrorNotice from '@/components/MyErrorNotice';
 import VerifyUtil from './VerifyUtil';
+import { PriceType } from '@/components/CommonPrice';
 
 // 获取顶部状态栏的高度
 export function getStatusBarHeight() {
@@ -185,4 +186,35 @@ export function validFieldsPosiveNumber(value: string | undefined, isRequired: b
       return true
     }
   }
+}
+
+/**
+ * 价格多选
+ * 
+ * @param {*} obj 
+ * @param {*} originArr 
+ * @param {*} parseArr 
+ * @param {*} key 
+ * @param {*} row 
+ * @param {*} index 
+ */
+export function selectItemPrice(originArr: PriceType[], parseArr: any[], row: PriceType, index: number) {
+  if (row.select) {
+    parseArr.splice(parseArr.findIndex((x: any) => {
+      return x === row.DicCode;
+    }), 1);
+  } else {
+    parseArr.push(row.DicCode);
+  }
+  originArr[index].select = !row.select;
+  // obj.setState({
+  //   [key]: originArr,
+  //   minPrice: '', // 最低价格
+  //   maxPrice: '', // 最高价格
+  // })
+  const obj = {
+    originArr,
+    parseArr,
+  }
+  return obj
 }
