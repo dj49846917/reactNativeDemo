@@ -873,6 +873,33 @@
   3. 详细文档请看：https://github.com/beefe/react-native-picker
   4. 它也有局限性，就是一些样式不能自定义
 
+## 时间选择组件rmc-date-picker
+使用步骤：   
+  1. 下载核心包：
+    ```
+      npm install --save rmc-date-picker
+    ```
+  
+  2. 使用：
+    ```
+      import DatePicker from 'rmc-date-picker'
+
+      <DatePicker
+        defaultDate={moment(new Date()).toDate()}
+        locale={lang}
+        mode={props.modeType}
+        maxDate={moment().add(30, 'y').toDate()}
+        minDate={moment([1980, 1, 1, 1, 1, 1]).toDate()}
+        onDateChange={(v) => {
+          console.log('v', v)
+        }}
+      />
+    ``` 
+  
+  3. 详细文档: https://www.npmjs.com/package/rmc-date-picker
+  
+  4. 详细代码请看：
+
 # 项目实战开发
 ## 底部导航栏添加图标
   * 将项目中用到的图片放到assets/images文件夹下
@@ -1129,73 +1156,8 @@
         return (
           <View style={CommonStyle.content}>
             <View style={CommonStyle.sizedBox}></View>
-            <Text>111</Text>
             <ScrollView style={{flex: 1}}>
-              <KeyboardAvoidingView style={{ flex: 1 }} behavior='position' keyboardVerticalOffset={200}>
-                <TextInput
-                  style={{ height: UnitConvert.dpi(100) }}
-                  placeholder="请输入新密码"
-                  placeholderTextColor="#cccccc"
-                  maxLength={16}
-                  secureTextEntry={true}
-                  onChangeText={() => { }}
-                />
-                <TextInput
-                  style={{ height: UnitConvert.dpi(100) }}
-                  placeholder="请输入新密码"
-                  placeholderTextColor="#cccccc"
-                  maxLength={16}
-                  secureTextEntry={true}
-                  onChangeText={() => { }}
-                />
-                <TextInput
-                  style={{ height: UnitConvert.dpi(100) }}
-                  placeholder="请输入新密码"
-                  placeholderTextColor="#cccccc"
-                  maxLength={16}
-                  secureTextEntry={true}
-                  onChangeText={() => { }}
-                />
-                <TextInput
-                  style={{ height: UnitConvert.dpi(100) }}
-                  placeholder="请输入新密码"
-                  placeholderTextColor="#cccccc"
-                  maxLength={16}
-                  secureTextEntry={true}
-                  onChangeText={() => { }}
-                />
-                <TextInput
-                  style={{ height: UnitConvert.dpi(100) }}
-                  placeholder="请输入新密码"
-                  placeholderTextColor="#cccccc"
-                  maxLength={16}
-                  secureTextEntry={true}
-                  onChangeText={() => { }}
-                />
-                <TextInput
-                  style={{ height: UnitConvert.dpi(100) }}
-                  placeholder="请输入新密码"
-                  placeholderTextColor="#cccccc"
-                  maxLength={16}
-                  secureTextEntry={true}
-                  onChangeText={() => { }}
-                />
-                <TextInput
-                  style={{ height: UnitConvert.dpi(100) }}
-                  placeholder="请输入新密码"
-                  placeholderTextColor="#cccccc"
-                  maxLength={16}
-                  secureTextEntry={true}
-                  onChangeText={() => { }}
-                />
-                <TextInput
-                  style={{ height: UnitConvert.dpi(100) }}
-                  placeholder="请输入新密码"
-                  placeholderTextColor="#cccccc"
-                  maxLength={16}
-                  secureTextEntry={true}
-                  onChangeText={() => { }}
-                />
+              <KeyboardAvoidingView style={{ flex: 1 }} behavior='padding' keyboardVerticalOffset={200}>
                 <TextInput
                   style={{ height: UnitConvert.dpi(100) }}
                   placeholder="请输入新密码"
@@ -1224,4 +1186,4 @@
         },
       });
 
-    ```
+    ``` 
