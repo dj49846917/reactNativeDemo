@@ -1,0 +1,173 @@
+export const AgentListData = [{
+	"ID": 1,
+	"MappingUserName": "wupeng",
+	"UserName": "吴鹏",
+	"RegionJson": "[{\"id\":\"1110001\",\"text\":\"江北区\"}]",
+	"CreateTime": "2020-07-01T17:18:40+08:00",
+	"CreateUser": "zhangyi",
+	"UpdateTime": "2020-07-01T17:18:40+08:00",
+	"UpdateUser": "zhangyi",
+	"SeeCount": 0,
+	"TransactionCount": 0,
+	"HeadPortrait": "http://resources.cy-credit.com/group1/M00/19/A4/bwofjl67XhiAH2eXAAAGwmqUwHU557.png"
+}, {
+	"ID": 2,
+	"MappingUserName": "dujiang",
+	"UserName": "杜江",
+	"RegionJson": "[{\"id\":\"1110002\",\"text\":\"渝北区\"}]",
+	"CreateTime": "2020-07-06T10:19:20+08:00",
+	"CreateUser": "zhangyi",
+	"UpdateTime": "2020-07-06T10:19:20+08:00",
+	"UpdateUser": "zhangyi",
+	"SeeCount": 0,
+	"TransactionCount": 0,
+	"HeadPortrait": null
+}, {
+	"ID": 3,
+	"MappingUserName": "mali",
+	"UserName": "马丽",
+	"RegionJson": "[{\"id\":\"1110002\",\"text\":\"渝北区\"},{\"id\":\"1110003\",\"text\":\"渝中区\"},{\"id\":\"1110006\",\"text\":\"沙坪坝区\"}]",
+	"CreateTime": "2020-07-06T10:19:28+08:00",
+	"CreateUser": "zhangyi",
+	"UpdateTime": "2020-09-22T16:40:45+08:00",
+	"UpdateUser": "mali1",
+	"SeeCount": 2,
+	"TransactionCount": 5,
+	"HeadPortrait": "http://183.230.176.174:8989/group1/M00/01/0B/wKgKKV9e5ZaAOUWvAAC2rO7vbTU886.JPG"
+}, {
+	"ID": 4,
+	"MappingUserName": "zhangyi",
+	"UserName": "小人物",
+	"RegionJson": "[{\"id\":\"1110005\",\"text\":\"九龙坡区\"}]",
+	"CreateTime": "2020-07-06T10:19:36+08:00",
+	"CreateUser": "zhangyi",
+	"UpdateTime": "2020-08-21T14:07:54+08:00",
+	"UpdateUser": "mali",
+	"SeeCount": 0,
+	"TransactionCount": 4,
+	"HeadPortrait": "http://resources.cy-credit.com/group1/M00/16/26/bwofjl5GROOAcP2BAAVQo8sY2is763.jpg"
+}, {
+	"ID": 5,
+	"MappingUserName": "yuanmingjun1",
+	"UserName": "袁明均1",
+	"RegionJson": "[{\"id\":\"1110009\",\"text\":\"巴南区\"}]",
+	"CreateTime": "2020-09-23T15:27:30+08:00",
+	"CreateUser": "zhangyi",
+	"UpdateTime": "2020-09-23T15:27:30+08:00",
+	"UpdateUser": "zhangyi",
+	"SeeCount": 0,
+	"TransactionCount": 4,
+	"HeadPortrait": null
+}]
+
+export const AgentListDic = [{
+	"DicCode": 1110001,
+	"DicName": "江北区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110002,
+	"DicName": "渝北区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110003,
+	"DicName": "渝中区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110004,
+	"DicName": "北碚区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110005,
+	"DicName": "九龙坡区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110006,
+	"DicName": "沙坪坝区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110007,
+	"DicName": "大渡口区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110008,
+	"DicName": "南岸区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110009,
+	"DicName": "巴南区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110010,
+	"DicName": "永川区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110011,
+	"DicName": "两江新区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110012,
+	"DicName": "璧山区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110013,
+	"DicName": "涪陵区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110014,
+	"DicName": "綦江区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110015,
+	"DicName": "江津区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110016,
+	"DicName": "合川区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110017,
+	"DicName": "大足区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110018,
+	"DicName": "长寿区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110019,
+	"DicName": "铜梁区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110020,
+	"DicName": "南川区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110021,
+	"DicName": "万盛区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110022,
+	"DicName": "北部新区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}]

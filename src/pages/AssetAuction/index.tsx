@@ -44,10 +44,11 @@ type IrouteTypes = {
   title: string
 }
 
-type IState = {
+export type IState = {
   dicArr: dicType[],
   areaSelectedItem: dicType,
-  Location: number | undefined
+  Location: number | undefined,
+  visible?: boolean
 }
 
 // 数据字典多选的每项
@@ -226,7 +227,7 @@ const AssetAuction = (props: AssetAuctionProps) => {
     // 区域
     if (tab.current === 0) {
       return (
-        <View style={CommonStyle.container}>
+        <SafeAreaView style={CommonStyle.container}>
           {Platform.OS === 'android' ? null : <View style={{ height: props.barHeight }}></View>}
           {showNav()}
           {showTab()}
@@ -271,7 +272,7 @@ const AssetAuction = (props: AssetAuctionProps) => {
               })
             }}
           />
-        </View>
+        </SafeAreaView>
       )
     } else if (tab.current === 1) {
       // 价格

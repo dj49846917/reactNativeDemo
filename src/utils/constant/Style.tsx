@@ -127,6 +127,12 @@ const CommonStyle = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: UnitConvert.dpi(30)
   },
+
+  commonListMarginTop: {
+    width: UnitConvert.w,
+    height: UnitConvert.dpi(20),
+    backgroundColor: Constant.defaultBgColor
+  },
 })
 
 export default CommonStyle

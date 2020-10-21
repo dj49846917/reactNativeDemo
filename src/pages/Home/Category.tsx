@@ -25,6 +25,9 @@ const Category = (props: CategoryProps) => {
       case '二手房源':
         navigation.navigate('SecondHouse', { title: item.text })
         break;
+      case '置业经理':
+        navigation.navigate('AgentList', { title: item.text })
+        break;
       default:
         break;
     }

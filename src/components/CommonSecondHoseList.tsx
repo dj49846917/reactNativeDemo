@@ -6,6 +6,7 @@ import CommonStyle from '@/utils/constant/Style';
 import { filterDicName, parseMoney } from '@/utils/utils';
 import { Constant } from '@/utils/constant/Constant';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 interface CommonSecondHouseListProps {
   list: Array<any>,
@@ -33,11 +34,14 @@ const showTipText = (props: CommonSecondHouseListProps, item: any) => {
 }
 
 const CommonSecondHouseList = (props: CommonSecondHouseListProps) => {
+  const navigation = useNavigation()
   return (
     <>
       {
         props.list.map(item => (
-          <TouchableOpacity style={styles.list} key={item.ID} onPress={() => { }}>
+          <TouchableOpacity style={styles.list} key={item.ID} onPress={() => {
+            navigation.navigate('SecondHouseDetail', item)
+          }}>
             <ImageBackground source={item.PicUrl ? { uri: item.PicUrl } : ENV_IMAGE.left_img} style={CommonStyle.left_img}>
               {showTipText(props, item)}
             </ImageBackground>
