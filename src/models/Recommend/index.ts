@@ -9,6 +9,7 @@ export interface dicType {
   BaseTypeCode?: number | undefined
   AreaMin?: number
   AreaMax?: number
+  select?: boolean
 }
 
 // 定义 state的类型

@@ -6,8 +6,8 @@ import { RootState } from '@/models/index'
 
 function mapStateToProps(state: RootState) {
   return {
-    num: state.home.num,
-    loading: state.loading.effects['home/asyncAdd']
+    num: state.template.num,
+    loading: state.loading.effects['template/asyncAdd']
   }
 }
 

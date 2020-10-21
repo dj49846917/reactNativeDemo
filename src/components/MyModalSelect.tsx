@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Modal, ModalProps, StyleProp, TextStyle } from 'react-native';
+import { Text, View, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { UnitConvert } from '@/utils/unitConvert';
 import { Constant } from '@/utils/constant/Constant';
 import { dicType } from '@/models/Recommend';
+import Modal, { ModalProps } from 'react-native-modalbox';
 
 interface Iprops {
+  visible: boolean                            // 打开弹窗
   custormAllView?: React.ReactNode            // 自定义所有的视图
   height?: number                             // 模态框的高度
   headerView?: React.ReactNode                // 自定义头部
@@ -65,11 +67,15 @@ const MyModalSelect = (props: MyModalSelectProps) => {
   return (
     <Modal
       {...props}
-      animationType='slide'
-      transparent
+      isDisabled={false}
+      swipeToClose={false}
+      backButtonClose={false}
+      backdropPressToClose={false}
+      style={{height: props.height}}
+      isOpen={props.visible}
+      // coverScreen
     >
-      <View style={[styles.modal, { flexDirection: props.position === 'top' ? 'column-reverse' : 'column' }]}>
-        <View style={styles.modal_height}></View>
+      <View style={styles.modal}>
         <View style={[styles.content, { height: props.height }]}>
           {props.custormAllView ? props.custormAllView : (
             <View>
@@ -122,11 +128,6 @@ const MyModalSelect = (props: MyModalSelectProps) => {
             </View>
           )}
         </View>
-        {
-          props.position === 'center' ? (
-            <View style={styles.modal_height}></View>
-          ) : null
-        }
       </View>
     </Modal>
   );
@@ -151,16 +152,16 @@ const styles = StyleSheet.create({
   modal: {
     flex: 1,
   },
-  modal_height: {
-    flex: 1,
-    backgroundColor: '#000',
-    opacity: 0.6,
-  },
+  // modal_height: {
+  //   flex: 1,
+  //   backgroundColor: '#000',
+  //   opacity: 0.6,
+  // },
   content: {
     width: UnitConvert.w,
     height: UnitConvert.dpi(300),
-    backgroundColor: '#fff',
-    opacity: 1
+    // backgroundColor: '#fff',
+    // opacity: 1
   },
   modal_header: {
     flexDirection: 'row',

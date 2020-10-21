@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Modal, ModalProps, StyleProp, TextStyle } from 'react-native';
+import { Text, View, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import DatePicker from 'rmc-date-picker'
 import lang from 'rmc-date-picker/lib/locale/zh_CN'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { UnitConvert } from '@/utils/unitConvert';
 import { Constant } from '@/utils/constant/Constant';
 import moment from 'moment';
+import Modal, { ModalProps } from 'react-native-modalbox';
 
 interface Iprops {
   defaultDate: any                            // 初始值
@@ -29,16 +30,19 @@ type MyDatePickerProps = Iprops & ModalProps
 
 const MyDatePicker = (props: MyDatePickerProps) => {
   const [val, setVal] = React.useState(new Date())
-  
+
   let d = moment(props.defaultDate ? props.defaultDate : new Date(), 'YYYY-MM-DD');
   return (
     <Modal
       {...props}
-      animationType='slide'
-      transparent
+      isDisabled={false}
+      swipeToClose={false}
+      backButtonClose={false}
+      backdropPressToClose={false}
+      style={{height: props.height}}
     >
       <View style={styles.modal}>
-        <View style={styles.modal_height}></View>
+        {/* <View style={styles.modal_height}></View> */}
         <View style={[styles.content, { height: props.height }]}>
           {
             props.headerView ? props.headerView : (
@@ -52,8 +56,8 @@ const MyDatePicker = (props: MyDatePickerProps) => {
                 <View style={styles.modal_header_item2}>
                   <Text style={[styles.modal_header_title, props.titleStyle]}>{props.title}</Text>
                 </View>
-                <TouchableOpacity 
-                  style={styles.modal_header_item} 
+                <TouchableOpacity
+                  style={styles.modal_header_item}
                   onPress={() => {
                     props.onOk(val)
                   }}
@@ -90,24 +94,18 @@ MyDatePicker.defaultProps = {
   modeType: 'date',
   maxDate: moment().add(30, 'y').toDate(),
   minDate: moment([1980, 1, 1, 1, 1, 1]).toDate(),
+  position: 'bottom'
 }
 
 export default MyDatePicker;
 
 const styles = StyleSheet.create({
   modal: {
-    flex: 1
-  },
-  modal_height: {
     flex: 1,
-    backgroundColor: '#000',
-    opacity: 0.6,
   },
   content: {
     width: UnitConvert.w,
     height: UnitConvert.dpi(300),
-    backgroundColor: '#fff',
-    opacity: 1
   },
   modal_header: {
     flexDirection: 'row',

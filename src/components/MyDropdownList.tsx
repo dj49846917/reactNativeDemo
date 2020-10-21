@@ -22,11 +22,13 @@ interface MyDropdownListProps {
   readonly?: boolean                                        // 是否只读
   callBack: Function                                        // 点击的回调
   longSelectWord: boolean                                   // 一行两列下，选中的文字多一点
+  boxStyle?: StyleProp<ViewStyle>                           // 盒子的样式
+  showSelectIcon: boolean                                   // 是否展示右侧的箭头
 }
 
 const MyDropdownList = (props: MyDropdownListProps) => {
   return (
-    <View style={[styles.box, { height: props.height, width: props.width, backgroundColor: props.bgColor }]}>
+    <View style={[styles.box, props.boxStyle, { height: props.height, width: props.width, backgroundColor: props.bgColor }]}>
       {props.showLabel ? (
         <View style={[styles.box_label, { width: props.labelWidth }, props.lableStyle]}>
           <Text style={styles.box_label_text}>{props.flelds}</Text>
@@ -41,7 +43,7 @@ const MyDropdownList = (props: MyDropdownListProps) => {
             <Text style={[props.textStyle, styles.box_select_text]}>{props.defaultValue}</Text>
           </View>
         ) : (
-            <TouchableOpacity onPress={()=>{props.callBack()}} style={[styles.box_select_btn, { width: props.width - props.labelWidth}]}>
+            <TouchableOpacity onPress={() => { props.callBack() }} style={[styles.box_select_btn, { width: props.width - props.labelWidth }]}>
               <View style={[styles.box_select, props.selectStyle]}>
                 {
                   props.defaultValue ? (
@@ -51,7 +53,12 @@ const MyDropdownList = (props: MyDropdownListProps) => {
                     )
                 }
               </View>
-              <Image source={ENV_ICON.icon_right} style={props.longSelectWord ?styles.icon1 : styles.icon} />
+              {
+                props.showSelectIcon ? (
+                  <Image source={ENV_ICON.icon_right} style={props.longSelectWord ? styles.icon1 : styles.icon} />
+                ) : null
+              }
+
             </TouchableOpacity>
           )
       }
@@ -68,7 +75,8 @@ MyDropdownList.defaultProps = {
   labelWidth: UnitConvert.dpi(228),
   bgColor: '#fff',
   placeHolder: '请选择',
-  longSelectWord: false
+  longSelectWord: false,
+  showSelectIcon: true
 }
 
 export default MyDropdownList;

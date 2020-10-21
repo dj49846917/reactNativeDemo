@@ -82,7 +82,51 @@ const CommonStyle = StyleSheet.create({
   modal: {
     flex: 1,
     backgroundColor: '#f1f1f1'
-  }
+  },
+
+  type: {
+    width: UnitConvert.w,
+    paddingTop: UnitConvert.dpi(42),
+    paddingHorizontal: UnitConvert.dpi(32)
+  },
+  type_title: {
+    fontSize: UnitConvert.dpi(30),
+    color: '#000',
+    marginBottom: UnitConvert.dpi(34)
+  },
+  type_item: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  type_item_text: {
+    fontSize: UnitConvert.dpi(26),
+    width: UnitConvert.dpi(150),
+    backgroundColor: '#f5f5f5',
+    color: '#666',
+    height: UnitConvert.dpi(44),
+    lineHeight: UnitConvert.dpi(44),
+    marginRight: UnitConvert.dpi(21),
+    textAlign: 'center',
+    marginBottom: UnitConvert.dpi(26),
+    borderRadius: UnitConvert.dpi(4)
+  },
+  type_item_text_active: {
+    fontSize: UnitConvert.dpi(26),
+    width: UnitConvert.dpi(150),
+    backgroundColor: '#ffeced',
+    color: '#c71622',
+    height: UnitConvert.dpi(44),
+    lineHeight: UnitConvert.dpi(44),
+    marginRight: UnitConvert.dpi(21),
+    textAlign: 'center',
+    marginBottom: UnitConvert.dpi(26),
+    borderRadius: UnitConvert.dpi(4)
+  },
+  sec_price_input: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: UnitConvert.dpi(30)
+  },
 })
 
 export default CommonStyle

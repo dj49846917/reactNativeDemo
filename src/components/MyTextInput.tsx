@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TextInput, TextInputProps, Image, TouchableHighlight, StyleProp, ViewStyle, Keyboard } from 'react-native'
+import { Text, StyleSheet, View, TextInput, TextInputProps, Image, TouchableHighlight, StyleProp, ViewStyle, Keyboard, TextStyle } from 'react-native'
 import { UnitConvert } from '@/utils/unitConvert'
 import CommonStyle from '@/utils/constant/Style'
 import { ENV_ICON } from '@/assets/styles/picUrl'
@@ -11,7 +11,7 @@ export interface Iprops {
   showLabel: boolean,                        // 是否展示左侧的标题栏
   labelWidth: number                         // 标题栏的宽度
   lableStyle: StyleProp<ViewStyle>,          // 文字提示的样式
-  inputStyle: StyleProp<ViewStyle>,          // 输入框区域的样式
+  inputStyle: StyleProp<TextStyle>,          // 输入框区域的样式
   required: boolean,                         // 是否必输
   flelds: string,                            // 字段名
   defaultValue: string | Function,          // 初始值 

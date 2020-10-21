@@ -1,23 +1,23 @@
 import { Model, Effect } from 'dva-core-ts'
 import { Reducer } from 'react'
 
-export interface HomeState {
+export interface TemplateState {
   num: number
 }
 
-interface HomeModel extends Model {
+interface TemplateModel extends Model {
   namespace: string;
-  state: HomeState;
+  state: TemplateState;
   reducers: {
-    add: Reducer<HomeState, any>;
-    asyncAddResult: Reducer<HomeState, any>;
+    add: Reducer<TemplateState, any>;
+    asyncAddResult: Reducer<TemplateState, any>;
   }
   effects: {
     asyncAdd: Effect
   }
 }
 
-const initialState: HomeState = {
+const initialState: TemplateState = {
   num: 0
 }
 
@@ -30,8 +30,8 @@ function delay(code: codeType) {
   return code.num + code.initNumber
 }
 
-const Home: HomeModel = {
-  namespace: 'home',
+const Template: TemplateModel = {
+  namespace: 'template',
   state: initialState,
   effects: {
     *asyncAdd({ payload }, { call, put }) {
@@ -60,4 +60,4 @@ const Home: HomeModel = {
   }
 }
 
-export default Home
+export default Template
