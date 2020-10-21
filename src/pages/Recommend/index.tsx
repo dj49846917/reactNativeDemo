@@ -212,7 +212,7 @@ const Recommend = (props: RecommendProps) => {
           })
         }}
         title='看房日期'
-        visible={props.dateVisible}
+        isOpen={props.dateVisible}
         defaultDate={props.ViewingDate}
       />
       <MyModalSelect

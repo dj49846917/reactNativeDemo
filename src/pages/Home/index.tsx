@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Text, View, StyleSheet, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, SafeAreaView, Platform, StatusBar, NativeModules } from 'react-native';
 import Search from '@/pages/Home/Search';
 import Swiper from '@/pages/Home/Swiper';
 import Category from '@/pages/Home/Category';
@@ -11,8 +11,20 @@ import { UnitConvert } from '@/utils/unitConvert';
 import MyTab from '@/components/MyTab';
 import TabPane from '@/pages/Home/TabPane';
 import { tabType, tabItemType } from '../Recommend';
+import { RootState } from '@/models/index';
+import { ConnectedProps, connect } from 'react-redux';
 
-interface HomeProps {
+function mapStateToProps(state: RootState) {
+  return {
+    barHeight: state.home.barHeight
+    // loading: state.loading.effects['home/asyncAdd']
+  }
+}
+
+const connector = connect(mapStateToProps)
+type ModelState = ConnectedProps<typeof connector> // 定义connect的类型
+
+interface HomeProps extends ModelState {
 }
 
 const Home = (props: HomeProps) => {
@@ -20,6 +32,32 @@ const Home = (props: HomeProps) => {
     current: 0,
     row: Constant.collection_tab_arr[0]
   })
+
+  useEffect(()=>{
+    getStatusBarHeight()
+  }, [])
+
+  // 获取导航栏的高度
+  const getStatusBarHeight = () => {
+    if (Platform.OS === 'android') {
+      props.dispatch({
+        type: 'home/getBarHeight',
+        payload: {
+          barHeight: StatusBar.currentHeight
+        }
+      })
+    } else {
+      const { StatusBarManager } = NativeModules;
+      StatusBarManager.getHeight((statusBarHeight: { height: number }) => {
+        props.dispatch({
+          type: 'home/getBarHeight',
+          payload: {
+            barHeight: statusBarHeight.height
+          }
+        })
+      });
+    }
+  }
 
   return (
     <SafeAreaView style={CommonStyle.container}>
@@ -65,7 +103,7 @@ const Home = (props: HomeProps) => {
   );
 };
 
-export default Home;
+export default connector(Home);
 
 const styles = StyleSheet.create({
   home_tab: {

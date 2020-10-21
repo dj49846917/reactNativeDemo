@@ -6,7 +6,7 @@ import {
   StatusBar,
   NativeModules
 } from 'react-native';
-import { getStatusBarHeight } from '@/utils/utils'
+// import { getStatusBarHeight } from '@/utils/utils'
 
 // 手机屏幕的宽高
 const { height, width } = Dimensions.get('window');
@@ -24,11 +24,11 @@ type UnitConvertType = {
   h: number,
   ToDeviceWidth: Function,
   ToDeviceHeight: Function,
-  statusBarHeight: number | undefined
+  // statusBarHeight: number | undefined
 }
 
 //屏幕单位转换
-export const UnitConvert:UnitConvertType = {
+export let UnitConvert:UnitConvertType = {
   px1: 1 / PixelRatio.get(),
   dpi: (w: number) => {
     return w / designWidth * width;
@@ -37,5 +37,5 @@ export const UnitConvert:UnitConvertType = {
   h: height,
   ToDeviceWidth: (w: number) => { return w * designWidth / width; },
   ToDeviceHeight: (h: number) => { return h * designHeight / height; },
-  statusBarHeight: getStatusBarHeight(),
+  // statusBarHeight: getStatusBarHeight(),
 }
