@@ -4,6 +4,7 @@ import { createStackNavigator, StackNavigationProp, HeaderStyleInterpolators, Ca
 import BottomTabs from '@/router/BottomTabs'
 import Demo from '@/pages/demo'
 import AssetAuction from '@/pages/AssetAuction'
+import SecondHouse from '@/pages/SecondHouse'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
   Tab: {
@@ -12,10 +13,13 @@ export type RootStackList = { // 定义类型别名，用于约束navigator组�
   Demo: {
     screen?: string
   },
-  Recommend: {
+  Recommend: { // 推荐
     screen?: string
   },
-  AssetAuction: {
+  AssetAuction: { // 资产拍卖
+    screen?: string
+  },
+  SecondHouse: { // 二手房
     screen?: string
   }
 }
@@ -55,6 +59,11 @@ export default class Navigator extends Component {
           <Stack.Screen
             name="AssetAuction"
             component={AssetAuction}
+            options={{ header: () => null }}
+          />
+          <Stack.Screen
+            name="SecondHouse"
+            component={SecondHouse}
             options={{ header: () => null }}
           />
         </Stack.Navigator>

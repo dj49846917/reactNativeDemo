@@ -37,6 +37,7 @@ export const ENV_ICON = {
 }
 
 export const ENV_IMAGE = {
+  banner: require('@/assets/images/image/banner.jpg'),
   banner1: require('@/assets/images/image/banner1.png'),
   banner2: require('@/assets/images/image/banner2.jpg'),
   p1: require('@/assets/images/image/p1.png'),

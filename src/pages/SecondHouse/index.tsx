@@ -9,26 +9,23 @@ import { UnitConvert } from '@/utils/unitConvert';
 import { Constant } from '@/utils/constant/Constant';
 import MyTab from '@/components/MyTab';
 import { tabItemType } from '../Recommend';
-import TabPane from './TabPane';
 import MyModalSelect from '@/components/MyModalSelect';
 import CommonArea from '@/components/CommonArea';
 import { RootState } from '@/models/index';
 import { connect, ConnectedProps } from 'react-redux';
 import { getSubTypeList, getStatusBarHeight } from '@/utils/utils';
 import { dicType } from '@/models/Recommend';
-import { AssetDic } from '@/assets/data/AssetAuction';
 import CommonModalBottomBtn from '@/components/CommonModalBottomBtn';
 import CommonPrice from '@/components/CommonPrice';
 import CommonCheckboxDic from '@/components/CommonCheckboxDic';
-import AuctionTime from './AuctionTime';
 import MyDatePicker from '@/components/MyDatePicker';
 import moment from 'moment';
+import { SecondHouseDic } from '@/assets/data/SecondHouse';
+import TabPane from './TabPane';
 
 function mapStateToProps(state: RootState) {
   return {
     barHeight: state.home.barHeight
-    // dicArr: state.assetAuction.dicArr,
-    // loading: state.loading.effects['home/asyncAdd']
   }
 }
 
@@ -36,7 +33,7 @@ const connector = connect(mapStateToProps)
 
 type ModalState = ConnectedProps<typeof connector> // 定义connect的类型
 
-interface AssetAuctionProps extends ModalState {
+interface SecondHouseProps extends ModalState {
   navigation: RootStackNavigation
 }
 
@@ -61,10 +58,10 @@ export type commonDicState = {
 }
 
 type checkboxDicState = {
-  statusArr: commonDicState[]
+  houseTypeArr: commonDicState[]
 }
 
-const AssetAuction = (props: AssetAuctionProps) => {
+const SecondHouse = (props: SecondHouseProps) => {
   const route = useRoute<RouteProp<Record<string, IrouteTypes>, string>>()
   // 搜索框的字段
   const [AssetName, setAssetName] = React.useState('')
@@ -83,29 +80,15 @@ const AssetAuction = (props: AssetAuctionProps) => {
   const [price, setPrice] = React.useState({
     priceArr: Constant.auctionPriceArr, // 数据源
   })
-  // 状态要用到的字段
-  const [status, setStatus] = React.useState<checkboxDicState>({
-    statusArr: []
-  })
-
-  const [auctionTime, setAuctionTime] = React.useState({
-    beginDate: '',                        // 开始日期
-    endDate: '',                          // 结束日期
-    dateModal: false,                     // 日期弹窗状态
-    dateType: ''                          // 日期类型(begin,end)
+  // 户型要用到的字段
+  const [houseType, setHouseType] = React.useState<checkboxDicState>({
+    houseTypeArr: Constant.houseTypeArr
   })
 
   React.useEffect(() => {
-    // 查询数据字典
-    // props.dispatch({
-    //   type: 'assetAuction/getSysDic',
-    //   payload: {
-    //     params: [1000, 1110, 2003, 2033, 2032, 2004, 4700]
-    //   }
-    // })
     const dicCodeArr = [1000, 1110, 2003, 2033, 2032, 2004, 4700]
     let arr: dicType[] = []
-    AssetDic.forEach(item => {
+    SecondHouseDic.forEach(item => {
       dicCodeArr.forEach((it: number) => {
         if (item.SubTypeCode === it) {
           arr.push(item)
@@ -115,18 +98,6 @@ const AssetAuction = (props: AssetAuctionProps) => {
     setFields({
       ...fields,
       dicArr: arr
-    })
-
-    // 组装状态的数组
-    const StatusArrParam: commonDicState[] = [] // 状态
-    arr.map(item => {
-      if (item.SubTypeCode === 4700) { // 状态
-        item.select = false
-        StatusArrParam.push(item)
-      }
-    })
-    setStatus({
-      statusArr: StatusArrParam
     })
   }, [])
 
@@ -169,12 +140,12 @@ const AssetAuction = (props: AssetAuctionProps) => {
     return (
       <MyTab
         current={tab.current}
-        list={Constant.assetAuction_tab_arr}
+        list={Constant.secondHouse_tab_arr}
         showUnderLine={false}
         height={UnitConvert.dpi(80)}
         tabStyle={{
-          paddingLeft: UnitConvert.dpi(50),
-          paddingRight: UnitConvert.dpi(20),
+          paddingLeft: UnitConvert.dpi(70),
+          paddingRight: UnitConvert.dpi(40),
           flexDirection: 'row',
           justifyContent: 'space-between',
           height: UnitConvert.dpi(80)
@@ -319,7 +290,7 @@ const AssetAuction = (props: AssetAuctionProps) => {
           {showNav()}
           {showTab()}
           <CommonCheckboxDic
-            list={status.statusArr}
+            list={houseType.houseTypeArr}
             title='拍卖状态'
           />
           <CommonModalBottomBtn
@@ -346,24 +317,6 @@ const AssetAuction = (props: AssetAuctionProps) => {
           {Platform.OS === 'android' ? null : <View style={{ height: props.barHeight }}></View>}
           {showNav()}
           {showTab()}
-          <AuctionTime
-            startTimeCallBack={() => {
-              setAuctionTime({
-                ...auctionTime,
-                dateModal: true,
-                dateType: 'begin'
-              })
-            }}
-            endTimeCallBack={() => {
-              setAuctionTime({
-                ...auctionTime,
-                dateModal: true,
-                dateType: 'end'
-              })
-            }}
-            defaultStartTime={auctionTime.beginDate}
-            defaultEndTime={auctionTime.endDate}
-          />
           <CommonModalBottomBtn
             cancelClick={() => {
               setTab({
@@ -385,56 +338,6 @@ const AssetAuction = (props: AssetAuctionProps) => {
     }
   }
 
-  const showDatePicker = () => {
-    if (auctionTime.dateType === 'begin') {
-      return (
-        <MyDatePicker
-          onOk={(v: string) => {
-            setAuctionTime({
-              ...auctionTime,
-              beginDate: v ? moment(v).format('YYYY-MM-DD') : '',
-              dateModal: false
-            })
-          }}
-          onCancel={() => {
-            setAuctionTime({
-              ...auctionTime,
-              dateModal: false
-            })
-          }}
-          defaultDate={auctionTime.beginDate ? moment(auctionTime.beginDate).format('YYYY-MM-DD') :
-            moment(new Date()).format('YYYY-MM-DD')}
-          maxDate={moment().add(30, 'y').toDate()}
-          isOpen={auctionTime.dateModal}
-          title="开始时间"
-        />
-      )
-    } else {
-      return (
-        <MyDatePicker
-          onOk={(v: string) => {
-            setAuctionTime({
-              ...auctionTime,
-              endDate: v ? moment(v).format('YYYY-MM-DD') : '',
-              dateModal: false
-            })
-          }}
-          onCancel={() => {
-            setAuctionTime({
-              ...auctionTime,
-              dateModal: false
-            })
-          }}
-          defaultDate={auctionTime.endDate ? moment(auctionTime.endDate).format('YYYY-MM-DD') :
-            moment(new Date()).format('YYYY-MM-DD')}
-          maxDate={moment().add(30, 'y').toDate()}
-          isOpen={auctionTime.dateModal}
-          title="结束时间"
-        />
-      )
-    }
-  }
-
   return (
     <SafeAreaView style={CommonStyle.container}>
       {/* 顶部搜索 */}
@@ -442,19 +345,17 @@ const AssetAuction = (props: AssetAuctionProps) => {
       {showModal()}
       {/* banner图 */}
       <View style={styles.asset_banner_box}>
-        <Image source={ENV_IMAGE.banner2} style={styles.asset_banner} />
+        <Image source={ENV_IMAGE.banner} style={styles.asset_banner} />
       </View>
       {/* 选项卡 */}
       {showTab()}
       <View style={CommonStyle.sizedBox}></View>
-      <TabPane title={route.params.title ? route.params.title : '司法拍卖'} />
-      {/* {showModal()} */}
-      {showDatePicker()}
+      <TabPane />
     </SafeAreaView>
   );
 };
 
-export default connector(AssetAuction);
+export default connector(SecondHouse);
 
 const styles = StyleSheet.create({
   asset_banner_box: {

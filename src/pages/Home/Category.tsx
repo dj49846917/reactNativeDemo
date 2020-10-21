@@ -22,6 +22,9 @@ const Category = (props: CategoryProps) => {
       case '资产拍卖':
         navigation.navigate('AssetAuction', { title: item.text })
         break;
+      case '二手房源':
+        navigation.navigate('SecondHouse', { title: item.text })
+        break;
       default:
         break;
     }
