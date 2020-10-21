@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, SafeAreaView, Image } from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView, Image, Platform } from 'react-native';
 import CommonStyle from '@/utils/constant/Style';
 import DefaultNavigationHeader from '@/components/DefaultNavigationHeader';
 import { useRoute, RouteProp } from '@react-navigation/native';
@@ -133,13 +133,13 @@ const AssetAuction = (props: AssetAuctionProps) => {
   // 获取modal的高度
   const getModalHeight = () => {
     if (tab.current === 0) { // 区域
-      return UnitConvert.dpi(910) + props.barHeight
+      return Platform.OS === 'android' ? UnitConvert.dpi(910) : UnitConvert.dpi(910) + props.barHeight
     } else if (tab.current === 1) { // 价格
-      return UnitConvert.dpi(610) + props.barHeight
+      return Platform.OS === 'android' ? UnitConvert.dpi(610) : UnitConvert.dpi(610) + props.barHeight
     } else if (tab.current === 2) { // 拍卖状态
-      return UnitConvert.dpi(520) + props.barHeight
+      return Platform.OS === 'android' ? UnitConvert.dpi(520) : UnitConvert.dpi(520) + props.barHeight
     } else { // 拍卖时间
-      return UnitConvert.dpi(470) + props.barHeight
+      return Platform.OS === 'android' ? UnitConvert.dpi(470) : UnitConvert.dpi(470) + props.barHeight
     }
   }
 
@@ -227,7 +227,7 @@ const AssetAuction = (props: AssetAuctionProps) => {
     if (tab.current === 0) {
       return (
         <View style={CommonStyle.container}>
-          <View style={{height: props.barHeight}}></View>
+          {Platform.OS === 'android' ? null : <View style={{ height: props.barHeight }}></View>}
           {showNav()}
           {showTab()}
           <CommonArea
@@ -277,7 +277,7 @@ const AssetAuction = (props: AssetAuctionProps) => {
       // 价格
       return (
         <SafeAreaView style={CommonStyle.container}>
-          <View style={{height: props.barHeight}}></View>
+          {Platform.OS === 'android' ? null : <View style={{ height: props.barHeight }}></View>}
           {showNav()}
           {showTab()}
           <CommonPrice
@@ -315,7 +315,7 @@ const AssetAuction = (props: AssetAuctionProps) => {
     } else if (tab.current === 2) {
       return (
         <SafeAreaView style={CommonStyle.container}>
-          <View style={{height: props.barHeight}}></View>
+          {Platform.OS === 'android' ? null : <View style={{ height: props.barHeight }}></View>}
           {showNav()}
           {showTab()}
           <CommonCheckboxDic
@@ -343,7 +343,7 @@ const AssetAuction = (props: AssetAuctionProps) => {
     } else {
       return (
         <SafeAreaView style={CommonStyle.container}>
-          <View style={{height: props.barHeight}}></View>
+          {Platform.OS === 'android' ? null : <View style={{ height: props.barHeight }}></View>}
           {showNav()}
           {showTab()}
           <AuctionTime
@@ -404,7 +404,7 @@ const AssetAuction = (props: AssetAuctionProps) => {
             })
           }}
           defaultDate={auctionTime.beginDate ? moment(auctionTime.beginDate).format('YYYY-MM-DD') :
-          moment(new Date()).format('YYYY-MM-DD')}
+            moment(new Date()).format('YYYY-MM-DD')}
           maxDate={moment().add(30, 'y').toDate()}
           isOpen={auctionTime.dateModal}
           title="开始时间"

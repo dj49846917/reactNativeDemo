@@ -1273,3 +1273,6 @@
       });
 
     ``` 
+
+## textInput在android中，如果字体大小太小，垂直方向无法居中的问题：
+  解决办法：在textInput中的设置padding: 0
