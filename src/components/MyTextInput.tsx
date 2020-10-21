@@ -112,6 +112,8 @@ export default class MyTextInput extends Component<inputProps, IState> {
                   style={[{
                     width: this.props.showClearIcon ? this.props.width - this.props.labelWidth - UnitConvert.dpi(60) : this.props.width - this.props.labelWidth,
                     fontSize: UnitConvert.dpi(30),
+                    padding: 0,
+                    textAlignVertical: 'center'
                   }, this.props.inputStyle]}
                 />
                 {this.showClearComponent()}
