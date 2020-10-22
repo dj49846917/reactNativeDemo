@@ -8,6 +8,7 @@ import SecondHouse from '@/pages/SecondHouse'
 import SecondHouseDetail from '@/pages/SecondHouseDetail'
 import AgentList from '@/pages/AgentList'
 import AgentInfo from '@/pages/AgentInfo'
+import Assetment from '@/pages/Assetment'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
   Tab: {
@@ -32,6 +33,9 @@ export type RootStackList = { // 定义类型别名，用于约束navigator组�
     screen?: string
   },
   AgentInfo: { // 置业经理详情
+    screen?: string
+  },
+  Assetment: { // 置业经理详情
     screen?: string
   }
 }
@@ -91,6 +95,11 @@ export default class Navigator extends Component {
           <Stack.Screen
             name="AgentInfo"
             component={AgentInfo}
+            options={{ header: () => null }}
+          />
+          <Stack.Screen
+            name="Assetment"
+            component={Assetment}
             options={{ header: () => null }}
           />
         </Stack.Navigator>

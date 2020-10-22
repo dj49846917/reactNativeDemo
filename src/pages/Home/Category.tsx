@@ -28,6 +28,9 @@ const Category = (props: CategoryProps) => {
       case '置业经理':
         navigation.navigate('AgentList', { title: item.text })
         break;
+      case '评估服务':
+        navigation.navigate('Assetment', { title: item.text })
+        break;
       default:
         break;
     }

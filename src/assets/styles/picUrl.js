@@ -35,6 +35,8 @@ export const ENV_ICON = {
   icon_top_loc: require("@/assets/images/icon/icon_top_loc.png"),
   icon_gou_red: require("@/assets/images/icon/icon_gou_red.png"),
   icon_msg_red: require("@/assets/images/icon/icon_msg_red.png"),
+  icon_top_left_white: require("@/assets/images/icon/icon_top_left_white.png"),
+  icon_top_share_white: require("@/assets/images/icon/icon_top_share_white.png"),
 }
 
 export const ENV_IMAGE = {
@@ -46,4 +48,5 @@ export const ENV_IMAGE = {
   p3: require('@/assets/images/image/p3.png'),
   left_img: require('@/assets/images/image/left_img.jpg'),
   timg: require('@/assets/images/image/timg.jpeg'),
+  broker_bg: require('@/assets/images/image/broker_bg.png'),
 }
