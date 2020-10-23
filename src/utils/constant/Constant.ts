@@ -129,4 +129,10 @@ export const Constant = {
     { DicName: '150-200万', DicCode: 5, MinPrice: 1500000, MaxPrice: 2000000, select: false, id: 5 },
     { DicName: '200万以上', DicCode: 6, MinPrice: 2000000, MaxPrice: 100000000, select: false, id: 6 },
   ],
+  secondShareIconTab: [
+    { id: '0', icon: ENV_ICON.weixin, text: '微信' },
+    { id: '1', icon: ENV_ICON.pyq, text: '朋友圈' },
+    { id: '2', icon: ENV_ICON.QQ, text: 'QQ' },
+    { id: '3', icon: ENV_ICON.duanxin, text: '短信' }
+  ],
 }

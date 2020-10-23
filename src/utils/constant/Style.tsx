@@ -133,6 +133,44 @@ const CommonStyle = StyleSheet.create({
     height: UnitConvert.dpi(20),
     backgroundColor: Constant.defaultBgColor
   },
+
+  modalContainer: {
+    width: UnitConvert.w,
+    height: UnitConvert.dpi(290)
+  },
+  modal_icon_box: {
+    width: UnitConvert.w,
+    paddingHorizontal: UnitConvert.dpi(20),
+    paddingTop: UnitConvert.dpi(50),
+    height: UnitConvert.dpi(208),
+    borderBottomWidth: UnitConvert.dpi(2),
+    borderBottomColor: '#F1F1F1',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  modal_icon_item: {
+    width: UnitConvert.dpi(80),
+    alignItems: 'center'
+  },
+  modal_icon: {
+    width: UnitConvert.dpi(80),
+    height: UnitConvert.dpi(80)
+  },
+  modal_icon_text: {
+    marginTop: UnitConvert.dpi(10),
+    fontSize: UnitConvert.dpi(26),
+    color: '#666'
+  },
+  modal_close_box: {
+    width: UnitConvert.w,
+    height: UnitConvert.dpi(80),
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  modal_close_text: {
+    fontSize: UnitConvert.dpi(28),
+    color: '#000'
+  }
 })
 
 export default CommonStyle

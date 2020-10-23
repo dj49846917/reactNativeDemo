@@ -37,6 +37,13 @@ export const ENV_ICON = {
   icon_msg_red: require("@/assets/images/icon/icon_msg_red.png"),
   icon_top_left_white: require("@/assets/images/icon/icon_top_left_white.png"),
   icon_top_share_white: require("@/assets/images/icon/icon_top_share_white.png"),
+  icon_js: require("@/assets/images/icon/icon_js.png"),
+  icon_top_heart_white: require("@/assets/images/icon/icon_top_heart_white.png"),
+  weixin: require("@/assets/images/icon/weixin.png"),
+  pyq: require("@/assets/images/icon/pyq.png"),
+  QQ: require("@/assets/images/icon/QQ.png"),
+  duanxin: require("@/assets/images/icon/duanxin.png"),
+  icon_top_share_black: require("@/assets/images/icon/icon_top_share_black.png"),
 }
 
 export const ENV_IMAGE = {
@@ -49,4 +56,5 @@ export const ENV_IMAGE = {
   left_img: require('@/assets/images/image/left_img.jpg'),
   timg: require('@/assets/images/image/timg.jpeg'),
   broker_bg: require('@/assets/images/image/broker_bg.png'),
+  banner_pg: require('@/assets/images/image/banner-pg.png'),
 }

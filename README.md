@@ -986,6 +986,68 @@
   
   4. 详细代码请看：
 
+## 轮播组件react-native-swiper
+使用步骤：
+  1. 下载核心包：
+    ```
+      npm install --save react-native-swiper
+    ```
+
+  2. 使用：
+    ```
+      import React, { Component } from 'react'
+      import { AppRegistry, StyleSheet, Text, View } from 'react-native'
+      
+      import Swiper from 'react-native-swiper'
+      
+      const styles = StyleSheet.create({
+        wrapper: {},
+        slide1: {
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#9DD6EB'
+        },
+        slide2: {
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#97CAE5'
+        },
+        slide3: {
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#92BBD9'
+        },
+        text: {
+          color: '#fff',
+          fontSize: 30,
+          fontWeight: 'bold'
+        }
+      })
+      
+      export default class SwiperComponent extends Component {
+        render() {
+          return (
+            <Swiper style={styles.wrapper} showsButtons={true}>
+              <View style={styles.slide1}>
+                <Text style={styles.text}>Hello Swiper</Text>
+              </View>
+              <View style={styles.slide2}>
+                <Text style={styles.text}>Beautiful</Text>
+              </View>
+              <View style={styles.slide3}>
+                <Text style={styles.text}>And simple</Text>
+              </View>
+            </Swiper>
+          )
+        }
+      }
+    ```
+
+  3. 详细文档请看：https://www.npmjs.com/package/react-native-swiper
+
 # 项目实战开发
 ## 底部导航栏添加图标
   * 将项目中用到的图片放到assets/images文件夹下

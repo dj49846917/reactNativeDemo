@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { UnitConvert } from '@/utils/unitConvert';
 import { Constant } from '@/utils/constant/Constant';
 import { ENV_IMAGE } from '@/assets/styles/picUrl';
 import { getStatusColor, filterDicName, parseMoney } from '@/utils/utils';
 import CommonStyle from '@/utils/constant/Style';
+import { useNavigation } from '@react-navigation/native';
 
 interface CommonAssetAuctionProps {
   list: Array<any>,
@@ -12,12 +13,19 @@ interface CommonAssetAuctionProps {
 }
 
 const CommonAssetAuction = (props: CommonAssetAuctionProps) => {
+  const navigation = useNavigation()
   return (
     <>
       {
         props.list.map(item => (
           (
-            <View style={styles.list} key={item.ID}>
+            <TouchableOpacity 
+              style={styles.list} 
+              key={item.ID}
+              onPress={()=>{
+                navigation.navigate('AssetAuctionDetail', item)
+              }}
+            >
               <Image source={ENV_IMAGE.left_img} style={CommonStyle.left_img} />
               <View style={CommonStyle.list_right}>
                 <Text style={CommonStyle.list_right_address} numberOfLines={1}>{item.Address}</Text>
@@ -35,7 +43,7 @@ const CommonAssetAuction = (props: CommonAssetAuctionProps) => {
                   <Text style={styles.list_right_tip_time}>{getStatusColor(item, item.SaleStartTime)}</Text>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           )
         ))
       }

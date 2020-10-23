@@ -9,6 +9,7 @@ import moment from 'moment'
 import MyErrorNotice from '@/components/MyErrorNotice';
 import VerifyUtil from './VerifyUtil';
 import { PriceType } from '@/components/CommonPrice';
+import { ENV_ICON } from '@/assets/styles/picUrl';
 
 // 获取顶部状态栏的高度
 export function getStatusBarHeight() {
@@ -94,7 +95,7 @@ export function getSubTypeList(list: any[], subTypeCode: number) {
 }
 
 //根据字典code获取字典名称
-export function findDicName(list: any[], code: number | undefined, defaultVal = "") {
+export function findDicName(list: any[], code: number | undefined | string, defaultVal = "") {
   try {
     return list.find(x => x.DicCode == code).DicName;
   } catch (e) {
@@ -103,7 +104,7 @@ export function findDicName(list: any[], code: number | undefined, defaultVal = 
 }
 
 // 校验是否为空
-export function validFieldsDefault(value: string, title: string) {
+export function validFieldsDefault(value: string | number | undefined, title: string) {
   if (value) {
     return true
   } else {
@@ -217,4 +218,34 @@ export function selectItemPrice(originArr: PriceType[], parseArr: any[], row: Pr
     parseArr,
   }
   return obj
+}
+
+/**
+ * 登录后的用户头像
+ * 
+ * @param {图片地址} url 
+ */
+export function getImg(url: string) {
+  if (url) {
+    return { uri: url }
+  } else {
+    return ENV_ICON.pic_user
+  }
+}
+
+/**
+ * html解码
+ * 
+ * @param {需要解码的html代码片段} str 
+ */
+export function htmlDecodeByRegExp(str: string) {
+  var temp = "";
+  if (str.length == 0) return "";
+  temp = str.replace(/&amp;/g, "&");
+  temp = temp.replace(/&lt;/g, "<");
+  temp = temp.replace(/&gt;/g, ">");
+  temp = temp.replace(/&nbsp;/g, " ");
+  temp = temp.replace(/&#39;/g, "\'");
+  temp = temp.replace(/&quot;/g, "\"");
+  return temp;
 }
