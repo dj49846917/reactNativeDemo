@@ -249,3 +249,64 @@ export function htmlDecodeByRegExp(str: string) {
   temp = temp.replace(/&quot;/g, "\"");
   return temp;
 }
+
+//通过身份证号码获取性别
+export function getGenderByIdNumber(idtext: string) {
+  var gender = '';
+  if (idtext) {
+      var n = idtext.substring(idtext.length - 2, idtext.length - 1);
+      if (n % 2 == 0) {
+          gender = '女';
+      }
+      else {
+          gender = '男';
+      }
+  }
+  return gender;
+}
+
+//根据身份证获取生日
+export function getBirthDayByIdNumber(idtext: string) {
+  var birthday = "";
+  if (idtext) {
+      if (idtext.length == 15) {
+          birthday = "19" + idtext.substring(6, 12);
+      }
+      else if (idtext.length == 18) {
+          birthday = idtext.substring(6, 14);
+      }
+
+      birthday = birthday.substring(0, 4) + "-" + birthday.substring(4, 6) + "-" + birthday.substring(6, 8);
+  }
+  return birthday;
+}
+
+// 校验手机号码
+export function validPhone(val: string) {
+  if (!VerifyUtil.isPhone(val)) {
+    MyErrorNotice({ content: '请填写正确的手机号码' });
+    return false;
+  } else {
+    return true;
+  }
+}
+
+// 校验登录密码
+export function validLoginPassword(val: string) {
+  if (!VerifyUtil.isEmpty(val)) {
+    MyErrorNotice({ content: '登录密码不能为空哦～' });
+    return false;
+  } else {
+    return true;
+  }
+}
+
+// 验证密码是否为空
+export function endEditCompare(v: string) {
+  if (!v) {
+    MyErrorNotice({ content: '密码不能为空哦～' });
+    return false;
+  } else {
+    return true
+  }
+}

@@ -30,7 +30,7 @@ const MyToastShort = (props: MyToastShortProps) => {
   });
   setTimeout(function () {
     Toast.hide(toast);
-  }, 500);
+  }, 1000);
 };
 
 export default MyToastShort;

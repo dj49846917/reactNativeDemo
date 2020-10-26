@@ -1,4 +1,5 @@
 export const ENV_ICON = {
+  icon_top_off: require("@/assets/images/icon/icon_top_off.png"),
   icon_footer_home: require('@/assets/images/icon/icon_footer_home.png'), // 首页
   icon_footer_home_red: require('@/assets/images/icon/icon_footer_home_red.png'),
   icon_footer_recommend: require('@/assets/images/icon/icon_footer_recommend.png'), // 推荐
@@ -44,6 +45,9 @@ export const ENV_ICON = {
   QQ: require("@/assets/images/icon/QQ.png"),
   duanxin: require("@/assets/images/icon/duanxin.png"),
   icon_top_share_black: require("@/assets/images/icon/icon_top_share_black.png"),
+  login_logo:require("@/assets/images/icon/login_logo.png"),
+  bg_card: require("@/assets/images/icon/bg_card.png"),
+  icon_del_white: require("@/assets/images/icon/icon_del_white.png"),
 }
 
 export const ENV_IMAGE = {

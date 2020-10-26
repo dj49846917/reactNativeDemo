@@ -20,6 +20,7 @@ export interface Iprops {
   clearIconSource: number,                   // 清除按钮的图标路径
   bgColor: string,                            // 背景颜色
   readOnly: boolean,                        // 是否只读
+  clearIconStyle?: StyleProp<ViewStyle>      // 清除按钮的样式
 }
 
 type inputProps = Iprops & TextInputProps // TextInputProps为textInput的所有属性类型
@@ -63,7 +64,7 @@ export default class MyTextInput extends Component<inputProps, IState> {
         return (
           <TouchableHighlight
             underlayColor='transparent'
-            style={[styles.box_ipnut_clear, CommonStyle.img]}
+            style={[styles.box_ipnut_clear, CommonStyle.img, this.props.clearIconStyle]}
             onPress={() => {
               this.inputRef.clear() // 清除数据
               this.setState({

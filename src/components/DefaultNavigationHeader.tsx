@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, View, Image } from 'react-native'
+import { Text, StyleSheet, View, Image, StyleProp, ViewStyle } from 'react-native'
 import CommonStyle from '@/utils/constant/Style'
 import { RootStackNavigation } from '../router'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -27,7 +27,8 @@ interface IProps {
   getSearchData: Function                     // 输入的值
   defaultValue: string | undefined            // 输入框初始值
   placeholder?: string                        // input的提示
-  inputWidth?: number                         // input的宽度             
+  inputWidth?: number                         // input的宽度   
+  rightSecondStyle?: StyleProp<ViewStyle>     // 右侧第二个按钮的样式    
 }
 
 const DefaultNavigationHeader = (props: IProps) => {
@@ -124,7 +125,9 @@ const DefaultNavigationHeader = (props: IProps) => {
         }
         {
           props.showRightSecondIcon ? (
-            <TouchableOpacity onPress={() => props.rightSecondCallBack()}>
+            <TouchableOpacity onPress={() => props.rightSecondCallBack()}
+              style={props.rightSecondStyle}
+            >
               {
                 props.rightSecondIconType === 'img' ? (
                   // @ts-ignore
@@ -224,7 +227,7 @@ const styles = StyleSheet.create({
     height: UnitConvert.dpi(60),
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   header_right2: {
     flex: 1,
@@ -238,7 +241,7 @@ const styles = StyleSheet.create({
     height: UnitConvert.dpi(60),
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   header_right_second_img: {
     marginRight: UnitConvert.dpi(10),

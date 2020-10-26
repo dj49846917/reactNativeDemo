@@ -7,16 +7,40 @@ import { ENV_ICON } from '@/assets/styles/picUrl';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Constant } from '@/utils/constant/Constant';
 import { RootStackNavigation } from '@/router/index';
+import { useNavigation } from '@react-navigation/native';
 
 interface AccountProps {
   navigation: RootStackNavigation
 }
 
 const Account = (props: AccountProps) => {
+  const navigation = useNavigation()
+  // 点击列
+  const handleClick = (item: { id?: string; icon_url?: string; title: string; }) => {
+    switch (item.title) {
+      case '我的资料':
+        navigation.navigate('MyInfomation')
+        break;
+      case '我的推荐':
+        navigation.navigate('MyRecommend')
+        break;
+      case '我的银行卡':
+        navigation.navigate('MyCard')
+        break;
+      default:
+        break;
+    }
+  }
+
   // 登录图标 
   const LogonComponent = () => {
     return (
-      <View style={styles.account_user}>
+      <TouchableOpacity
+        style={styles.account_user}
+        onPress={() => {
+          navigation.navigate('Login')
+        }}
+      >
         <Image source={ENV_ICON.pic_user} style={styles.account_user_icon} />
         <View style={styles.account_user_right}>
           <View style={styles.account_user_right_box}>
@@ -25,10 +49,10 @@ const Account = (props: AccountProps) => {
           </View>
           <Image source={ENV_ICON.icon_right} style={CommonStyle.img} />
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
-  
+
   //主体内容
   const List = () => {
     return (
@@ -38,7 +62,7 @@ const Account = (props: AccountProps) => {
           Constant.account_category_arr.map(item => (
             <TouchableOpacity
               style={styles.account_list_item} key={item.id}
-              onPress={() => { }}
+              onPress={() => handleClick(item)}
             >
               <Image style={styles.account_list_item_left} source={item.icon_url} />
               <View style={styles.account_list_item_right}>
@@ -50,7 +74,9 @@ const Account = (props: AccountProps) => {
         }
         <TouchableOpacity
           style={[styles.account_list_item, { marginTop: UnitConvert.dpi(20) }]}
-          onPress={() => { }}
+          onPress={() => {
+            navigation.navigate('Settings')
+          }}
         >
           <Image style={styles.account_list_item_left} source={ENV_ICON.icon_sz} />
           <View style={styles.account_list_item_right}>

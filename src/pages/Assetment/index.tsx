@@ -12,6 +12,7 @@ import { dicType } from '@/models/Recommend';
 import MyModalSelect, { MyModalSelectState } from '@/components/MyModalSelect';
 import { AssetmentDic } from '@/assets/data/Assetment';
 import MyErrorNotice from '@/components/MyErrorNotice';
+import MyModalTip from '@/components/MyModalTip';
 
 interface AssetmentProps { }
 
@@ -44,6 +45,7 @@ const Assetment = (props: AssetmentProps) => {
     defaultValue: undefined,                // 初始值
     key: '',                                // 字段名
   })
+  const [ status, setStatus ] = React.useState(false)
 
   React.useEffect(() => {
     const res = AssetmentDic
@@ -86,6 +88,7 @@ const Assetment = (props: AssetmentProps) => {
         lstJsonAttachment: ''
       }
       console.log('params', params)
+      setStatus(true)
     }
   }
 
@@ -141,7 +144,6 @@ const Assetment = (props: AssetmentProps) => {
             }}
           />
           <MyDropdownList
-            required
             flelds='房屋类型'
             placeHolder='请选择房屋类型'
             defaultValue={findDicName(getSubTypeList(fields.dicArr, 1310), fields.SourceByOwner)}
@@ -161,7 +163,6 @@ const Assetment = (props: AssetmentProps) => {
             }}
           />
           <MyDropdownList
-            required
             flelds='房屋区域'
             placeHolder='请选择房屋区域'
             defaultValue={findDicName(getSubTypeList(fields.dicArr, 1110), fields.RegionDistrict)}
@@ -216,6 +217,18 @@ const Assetment = (props: AssetmentProps) => {
     )
   }
 
+  // 估值结果
+  const showModalTip = () => {
+    return (
+      <MyModalTip
+        visible={status}
+        callback={()=>{
+          setStatus(false)
+        }}
+      />
+    )
+  }
+
   return (
     <SafeAreaView style={CommonStyle.container}>
       <DefaultNavigationHeader
@@ -229,6 +242,7 @@ const Assetment = (props: AssetmentProps) => {
       <View style={CommonStyle.sizedBox}></View>
       {showForm()}
       {showModal()}
+      {showModalTip()}
     </SafeAreaView>
   );
 };
