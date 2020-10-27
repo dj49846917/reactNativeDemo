@@ -22,6 +22,7 @@ import MyDatePicker from '@/components/MyDatePicker';
 import moment from 'moment';
 import { SecondHouseDic } from '@/assets/data/SecondHouse';
 import TabPane from './TabPane';
+import { ScrollView } from 'react-native-gesture-handler';
 
 function mapStateToProps(state: RootState) {
   return {
@@ -56,9 +57,18 @@ export type commonDicState = {
   select?: boolean,
   id?: number
 }
-
+// 价格
 type checkboxDicState = {
   houseTypeArr: commonDicState[]
+}
+// 更多
+type moreState = {
+  areaArr: commonDicState[],
+  orientationsArr: commonDicState[],
+  floorTypeArr: commonDicState[],
+  renovationArr: commonDicState[],
+  isElevatorArr: commonDicState[],
+  propertyPurpose: commonDicState[]
 }
 
 const SecondHouse = (props: SecondHouseProps) => {
@@ -85,19 +95,63 @@ const SecondHouse = (props: SecondHouseProps) => {
     houseTypeArr: Constant.houseTypeArr
   })
 
+  // 更多要用到的字段
+  const [more, setMore] = React.useState<moreState>({
+    areaArr: Constant.areaArr,
+    orientationsArr: [],
+    floorTypeArr: [],
+    renovationArr: [],
+    isElevatorArr: [],
+    propertyPurpose: []
+  })
+
   React.useEffect(() => {
     const dicCodeArr = [1000, 1110, 2003, 2033, 2032, 2004, 4700]
     let arr: dicType[] = []
+    const orientationsArrParam: commonDicState[] = [] // 朝向
+    const floorTypeArrParam: commonDicState[] = [] // 楼层级别
+    const renovationArrParam: commonDicState[] = [] // 装修状况
+    const isElevatorArrParam: commonDicState[] = [] // 有无电梯
+    const propertyPurposeParam: commonDicState[] = [] // 房屋用途
     SecondHouseDic.forEach(item => {
       dicCodeArr.forEach((it: number) => {
         if (item.SubTypeCode === it) {
           arr.push(item)
         }
       })
+      const newItem: commonDicState = item
+      if (item.SubTypeCode === 2033) { // 朝向
+        newItem.select = false
+        orientationsArrParam.push(newItem)
+      }
+      if (item.SubTypeCode === 2032) { // 楼层级别
+        newItem.select = false
+        floorTypeArrParam.push(newItem)
+      }
+      if (item.SubTypeCode === 2004) { // 装修状况
+        newItem.select = false
+        renovationArrParam.push(newItem)
+      }
+      if (item.SubTypeCode === 1000) { // 是否有电梯
+        newItem.select = false
+        isElevatorArrParam.push(newItem)
+      }
+      if (item.SubTypeCode === 2003) { // 房屋用途
+        newItem.select = false
+        propertyPurposeParam.push(newItem)
+      }
     })
     setFields({
       ...fields,
-      dicArr: arr
+      dicArr: arr,
+    })
+    setMore({
+      ...more,
+      orientationsArr: orientationsArrParam,
+      floorTypeArr: floorTypeArrParam,
+      renovationArr: renovationArrParam,
+      isElevatorArr: isElevatorArrParam,
+      propertyPurpose: propertyPurposeParam,
     })
   }, [])
 
@@ -107,10 +161,10 @@ const SecondHouse = (props: SecondHouseProps) => {
       return Platform.OS === 'android' ? UnitConvert.dpi(910) : UnitConvert.dpi(910) + props.barHeight
     } else if (tab.current === 1) { // 价格
       return Platform.OS === 'android' ? UnitConvert.dpi(610) : UnitConvert.dpi(610) + props.barHeight
-    } else if (tab.current === 2) { // 拍卖状态
+    } else if (tab.current === 2) { // 户型
       return Platform.OS === 'android' ? UnitConvert.dpi(520) : UnitConvert.dpi(520) + props.barHeight
-    } else { // 拍卖时间
-      return Platform.OS === 'android' ? UnitConvert.dpi(470) : UnitConvert.dpi(470) + props.barHeight
+    } else { // 更多
+      return Platform.OS === 'android' ? UnitConvert.dpi(800) : UnitConvert.h
     }
   }
 
@@ -317,6 +371,28 @@ const SecondHouse = (props: SecondHouseProps) => {
           {Platform.OS === 'android' ? null : <View style={{ height: props.barHeight }}></View>}
           {showNav()}
           {showTab()}
+          <ScrollView style={CommonStyle.container}>
+            <CommonCheckboxDic
+              list={more.orientationsArr}
+              title='朝向'
+            />
+            <CommonCheckboxDic
+              list={more.floorTypeArr}
+              title='楼层'
+            />
+            <CommonCheckboxDic
+              list={more.renovationArr}
+              title='装修'
+            />
+            <CommonCheckboxDic
+              list={more.isElevatorArr}
+              title='电梯'
+            />
+            <CommonCheckboxDic
+              list={more.propertyPurpose}
+              title='用途'
+            />
+          </ScrollView>
           <CommonModalBottomBtn
             cancelClick={() => {
               setTab({

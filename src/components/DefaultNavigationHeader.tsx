@@ -1,14 +1,13 @@
 import React from 'react'
 import { Text, StyleSheet, View, Image, StyleProp, ViewStyle } from 'react-native'
 import CommonStyle from '@/utils/constant/Style'
-import { RootStackNavigation } from '../router'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { ENV_ICON } from '@/assets/styles/picUrl'
 import { UnitConvert } from '@/utils/unitConvert'
 import MyTextInput from './MyTextInput'
 
 interface IProps {
-  navigation?: RootStackNavigation,
+  navigation?: any,
   title?: string | Function | undefined,      // 标题
   showBorder?: boolean,                       // 是否展示border
   showLeftIcon?: boolean,                     // 是否展示左边的图标

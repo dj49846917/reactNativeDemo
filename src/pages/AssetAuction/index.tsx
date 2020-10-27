@@ -20,9 +20,9 @@ import { AssetDic } from '@/assets/data/AssetAuction';
 import CommonModalBottomBtn from '@/components/CommonModalBottomBtn';
 import CommonPrice from '@/components/CommonPrice';
 import CommonCheckboxDic from '@/components/CommonCheckboxDic';
-import AuctionTime from './AuctionTime';
 import MyDatePicker from '@/components/MyDatePicker';
 import moment from 'moment';
+import CommonTimeSearch from '@/components/CommonTimeSearch';
 
 function mapStateToProps(state: RootState) {
   return {
@@ -347,7 +347,8 @@ const AssetAuction = (props: AssetAuctionProps) => {
           {Platform.OS === 'android' ? null : <View style={{ height: props.barHeight }}></View>}
           {showNav()}
           {showTab()}
-          <AuctionTime
+          <CommonTimeSearch
+            title='拍卖时间'
             startTimeCallBack={() => {
               setAuctionTime({
                 ...auctionTime,

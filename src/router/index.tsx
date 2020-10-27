@@ -17,6 +17,8 @@ import MyCard from '@/pages/Account/MyCard'
 import AddCard from '@/pages/Account/MyCard/AddCard'
 import EditInfo from '@/pages/Account/MyInfomation/EditInfo'
 import Settings from '@/pages/Account/Settings'
+import MessageAlert from '@/pages/Account/Settings/MessageAlert'
+import ModifyPas from '@/pages/Account/Settings/ModifyPas'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
   Tab: {
@@ -65,6 +67,12 @@ export type RootStackList = { // 定义类型别名，用于约束navigator组�
     screen?: string
   },
   Settings: { // 添加银行卡
+    screen?: string
+  },
+  MessageAlert: { // 消息提醒
+    screen?: string
+  },
+  ModifyPas: { // 修改密码
     screen?: string
   },
   Login: { // 登录
@@ -166,6 +174,16 @@ export default function Navigator () {
         <Stack.Screen
           name="Settings"
           component={Settings}
+          options={{ header: () => null }}
+        />
+        <Stack.Screen
+          name="MessageAlert"
+          component={MessageAlert}
+          options={{ header: () => null }}
+        />
+        <Stack.Screen
+          name="ModifyPas"
+          component={ModifyPas}
           options={{ header: () => null }}
         />
         <Stack.Screen

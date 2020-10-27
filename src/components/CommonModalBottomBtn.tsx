@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     marginLeft: UnitConvert.dpi(26),
     height: UnitConvert.dpi(70),
     flexDirection: 'row',
-    marginTop: UnitConvert.dpi(20)
+    marginTop: UnitConvert.dpi(20),
+    marginBottom: UnitConvert.dpi(50)
   },
   btn_cancel: {
     width: UnitConvert.dpi(334),

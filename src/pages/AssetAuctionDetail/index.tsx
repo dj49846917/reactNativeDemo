@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 import CommonStyle from '@/utils/constant/Style';
 import DefaultNavigationHeader from '@/components/DefaultNavigationHeader';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -8,6 +8,8 @@ import { WebView } from 'react-native-webview';
 import { AssetAutionDetailData } from '@/assets/data/AssetAuctionDetail';
 import { UnitConvert } from '@/utils/unitConvert';
 import { htmlDecodeByRegExp } from '@/utils/utils';
+import Modal from 'react-native-modalbox';
+import { Constant } from '@/utils/constant/Constant';
 
 interface AssetAuctionDetailProps { }
 
@@ -18,6 +20,7 @@ type Istate = {
 const AssetAuctionDetail = (props: AssetAuctionDetailProps) => {
   const navigation = useNavigation()
   const route = useRoute<any>()
+  const [visible, setVisible] = React.useState(false)
   const [ fields, setFields ] = React.useState<Istate>({
     data: {}
   })
@@ -79,6 +82,33 @@ const AssetAuctionDetail = (props: AssetAuctionDetailProps) => {
     }
   }
 
+  const showModal = () => {
+    return (
+      <Modal
+        isOpen={visible}
+        style={CommonStyle.modalContainer}
+        isDisabled={false}
+        swipeToClose={false}
+        backButtonClose={false}
+        backdropPressToClose={true}
+        position={"bottom"}
+        onClosed={() => { setVisible(false) }}
+      >
+        <View style={CommonStyle.modal_icon_box}>
+          {Constant.secondShareIconTab.map(item => (
+            <TouchableOpacity key={item.id} style={CommonStyle.modal_icon_item} onPress={() => {}}>
+              <Image source={item.icon} style={CommonStyle.modal_icon} />
+              <Text style={CommonStyle.modal_icon_text}>{item.text}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+        <TouchableOpacity style={CommonStyle.modal_close_box} onPress={() => setVisible(false)}>
+          <Text style={CommonStyle.modal_close_text}>取消</Text>
+        </TouchableOpacity>
+      </Modal>
+    )
+  }
+
   return (
     <SafeAreaView style={CommonStyle.container}>
       <DefaultNavigationHeader
@@ -92,9 +122,12 @@ const AssetAuctionDetail = (props: AssetAuctionDetailProps) => {
           navigation.goBack()
         }}
         rightFirstCallBack={() => { }}
-        rightSecondCallBack={() => { }}
+        rightSecondCallBack={() => {
+          setVisible(true)
+        }}
       />
       {showContent()}
+      {showModal()}
     </SafeAreaView>
   );
 };

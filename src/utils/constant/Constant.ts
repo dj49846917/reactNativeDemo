@@ -129,6 +129,17 @@ export const Constant = {
     { DicName: '150-200万', DicCode: 5, MinPrice: 1500000, MaxPrice: 2000000, select: false, id: 5 },
     { DicName: '200万以上', DicCode: 6, MinPrice: 2000000, MaxPrice: 100000000, select: false, id: 6 },
   ],
+  areaArr: [ // 建筑面积
+    { DicName: '30㎡以下', DicCode: 0, MinPrice: 0, MaxPrice: 30, select: false, id: 0 },
+    { DicName: '30-50㎡', DicCode: 1, MinPrice: 30, MaxPrice: 50, select: false, id: 1 },
+    { DicName: '50-70㎡', DicCode: 2, MinPrice: 50, MaxPrice: 70, select: false, id: 2 },
+    { DicName: '70-90㎡', DicCode: 3, MinPrice: 70, MaxPrice: 90, select: false, id: 3 },
+    { DicName: '90-120㎡', DicCode: 4, MinPrice: 90, MaxPrice: 120, select: false, id: 4 },
+    { DicName: '120-150㎡', DicCode: 5, MinPrice: 120, MaxPrice: 150, select: false, id: 5 },
+    { DicName: '150-200㎡', DicCode: 6, MinPrice: 150, MaxPrice: 200, select: false, id: 6 },
+    { DicName: '200-300㎡', DicCode: 7, MinPrice: 200, MaxPrice: 300, select: false, id: 7 },
+    { DicName: '300㎡以上', DicCode: 8, MinPrice: 300, MaxPrice: 10000, select: false, id: 8 },
+  ],
   secondShareIconTab: [
     { id: '0', icon: ENV_ICON.weixin, text: '微信' },
     { id: '1', icon: ENV_ICON.pyq, text: '朋友圈' },
