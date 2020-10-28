@@ -19,6 +19,7 @@ import EditInfo from '@/pages/Account/MyInfomation/EditInfo'
 import Settings from '@/pages/Account/Settings'
 import MessageAlert from '@/pages/Account/Settings/MessageAlert'
 import ModifyPas from '@/pages/Account/Settings/ModifyPas'
+import Default from '@/pages/Default'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
   Tab: {
@@ -77,6 +78,9 @@ export type RootStackList = { // 定义类型别名，用于约束navigator组�
   },
   Login: { // 登录
     screen?: string
+  },
+  Default: { // 启动页
+    screen?: string
   }
 }
 
@@ -99,7 +103,7 @@ export default function Navigator () {
           gestureEnabled: true,
           gestureDirection: 'horizontal',
         }}
-        initialRouteName='Login'
+        initialRouteName='Default'
       >
         <Stack.Screen
           name="Tab"
@@ -191,6 +195,13 @@ export default function Navigator () {
           name="Login"
           component={Login}
           options={{ header: () => null }}
+        />
+        <Stack.Screen
+          name="Default"
+          component={Default}
+          options={{
+            header: () => null
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

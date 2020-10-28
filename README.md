@@ -1093,41 +1093,7 @@
           Storage.remove('user')
     ```
 
-  3. 将AsyncStorage封装为同步方法：
-    ```
-      import AsyncStorage from '@react-native-community/async-storage';
-      export default class Storage {
-
-        static cache: { [key: string]: string } = {}
-
-        static get(key: string) {
-            return this.cache[key]
-        }
-
-        static set(key: string, value: string) {
-            if (this.cache[key] === value) return
-            this.cache[key] = value
-            AsyncStorage.setItem(key, value)
-        }
-
-        static remove(key: string) {
-            delete this.cache[key]
-            AsyncStorage.removeItem(key)
-        }
-      }
-
-      调用：
-        设置值: 
-          Storage.set('user', '张三')
-
-        获取值: 
-          console.log(Storage.get('user'))
-        
-        删除值:
-          Storage.remove('user')
-    ```
-
-  4. 详细文档请看：https://github.com/react-native-async-storage/async-storage
+  3. 详细文档请看：https://github.com/react-native-async-storage/async-storage
 
 # 项目实战开发
 ## 底部导航栏添加图标
@@ -1419,3 +1385,22 @@
 
 ## textInput在android中，如果字体大小太小，垂直方向无法居中的问题：
   解决办法：在textInput中的设置padding: 0
+
+## react-navigation重置路由
+  1. 需求：app第一次进来先判断是否登录，如果没有登录，就跳转到登录页面，登录了就跳转到首页，但是返回的时候，登录和启动页都不要显示
+  
+  2. 实现方法：
+    ```
+      使用CommonActions的reset方法重置路由
+
+      import { useNavigation, CommonActions } from '@react-navigation/native';
+
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [
+            { name: 'Login' },
+          ],
+        })
+      );
+    ``` 

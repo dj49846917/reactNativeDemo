@@ -6,7 +6,7 @@ import loginStyle from './style';
 import { ENV_ICON } from '@/assets/styles/picUrl';
 import { validPhone, endEditCompare } from '@/utils/utils';
 
-interface RegisterComponentProps { }
+interface RegisterComponentProps {}
 
 type registerState = {
   userPhone: string                                       // 手机号码

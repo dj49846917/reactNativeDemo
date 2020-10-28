@@ -1,6 +1,8 @@
 import { ENV_ICON } from "@/assets/styles/picUrl";
 
 export const Constant = {
+  STORAGE_PASSWORDKEY: 'password',   // 密码的key
+  STORAGE_USERKEY: 'user',           // 用户数据
   locName: '重庆',                    // 地址
   commonBorderColor: '#f1f1f1',      // 边框
   defaultBgColor: '#f4f4f4',         // 页面背景色

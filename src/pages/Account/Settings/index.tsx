@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 import CommonStyle from '@/utils/constant/Style';
 import DefaultNavigationHeader from '@/components/DefaultNavigationHeader';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, CommonActions } from '@react-navigation/native';
 import { UnitConvert } from '@/utils/unitConvert';
 import { Constant } from '@/utils/constant/Constant';
 import { ENV_ICON } from '@/assets/styles/picUrl';
 import MyToastShort from '@/components/MyToastShort';
 import MyModalComfirm from '@/components/MyModalComfirm';
+import Storage from '@/utils/Storage';
 
 interface SettingsProps { }
 
@@ -22,7 +23,17 @@ const Settings = (props: SettingsProps) => {
 
   // 点击退出按钮
   const exitLogin = () => {
+    Storage.delete(Constant.STORAGE_PASSWORDKEY)
+    Storage.delete(Constant.STORAGE_USERKEY)
     MyToastShort({ content: '退出成功' })
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          { name: 'Login' },
+        ],
+      })
+    );
   }
 
   // 主体内容

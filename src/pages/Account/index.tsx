@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, SafeAreaView, Image } from 'react-native';
 import DefaultNavigationHeader from '@/components/DefaultNavigationHeader';
 import CommonStyle from '@/utils/constant/Style';
@@ -8,13 +8,26 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Constant } from '@/utils/constant/Constant';
 import { RootStackNavigation } from '@/router/index';
 import { useNavigation } from '@react-navigation/native';
+import { RootState } from '@/models/index';
+import { connect, ConnectedProps } from 'react-redux';
+import { getImg } from '@/utils/utils';
 
-interface AccountProps {
+function mapStateToProps(state: RootState) {
+  return {
+    userData: state.login.userData
+  }
+}
+
+const connector = connect(mapStateToProps)
+type ModelState = ConnectedProps<typeof connector> // 定义connect的类型
+
+interface AccountProps extends ModelState {
   navigation: RootStackNavigation
 }
 
 const Account = (props: AccountProps) => {
   const navigation = useNavigation()
+
   // 点击列
   const handleClick = (item: { id?: string; icon_url?: string; title: string; }) => {
     switch (item.title) {
@@ -34,6 +47,7 @@ const Account = (props: AccountProps) => {
 
   // 登录图标 
   const LogonComponent = () => {
+    console.log('userData', props.userData)
     return (
       <TouchableOpacity
         style={styles.account_user}
@@ -50,6 +64,19 @@ const Account = (props: AccountProps) => {
           <Image source={ENV_ICON.icon_right} style={CommonStyle.img} />
         </View>
       </TouchableOpacity>
+    )
+  }
+
+  const loginSuccess = () => {
+    return (
+      <View style={styles.info}>
+        <Image source={getImg(props.userData.HeadPortrait)} style={styles.info_icon} />
+        <View style={styles.info_right}>
+          <View>
+            <Text style={styles.info_right_left_text}>{props.userData.NickName}</Text>
+          </View>
+        </View>
+      </View>
     )
   }
 
@@ -96,7 +123,7 @@ const Account = (props: AccountProps) => {
         showBorder={false}
       />
       {/* 登录图标 */}
-      <LogonComponent />
+      {JSON.stringify(props.userData) === '{}' ? LogonComponent() : loginSuccess()}
       {/* 广告 */}
       <TouchableOpacity
         onPress={() => {
@@ -112,7 +139,7 @@ const Account = (props: AccountProps) => {
   );
 };
 
-export default Account;
+export default connector(Account);
 
 const styles = StyleSheet.create({
   account_user: {
@@ -190,5 +217,33 @@ const styles = StyleSheet.create({
     width: UnitConvert.w,
     height: UnitConvert.dpi(20),
     backgroundColor: Constant.defaultBgColor
-  }
+  },
+  info: {
+    width: UnitConvert.w,
+    // height: UnitConvert.dpi(144),
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    paddingLeft: UnitConvert.dpi(44),
+    paddingRight: UnitConvert.dpi(30),
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: UnitConvert.dpi(26)
+  },
+  info_icon: {
+    width: UnitConvert.dpi(144),
+    height: UnitConvert.dpi(144),
+    marginRight: UnitConvert.dpi(28),
+    borderRadius: UnitConvert.dpi(72)
+  },
+  info_right: {
+    width: UnitConvert.w - UnitConvert.dpi(216),
+    height: UnitConvert.dpi(144),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  info_right_left_text: {
+    fontSize: UnitConvert.dpi(34),
+    color: '#000'
+  },
 });

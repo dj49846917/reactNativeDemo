@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image, TextInput, Keyboard } from 'react-native';
 import CommonStyle from '@/utils/constant/Style';
 import { ENV_ICON } from '@/assets/styles/picUrl';
@@ -6,8 +6,21 @@ import { useNavigation } from '@react-navigation/native';
 import loginStyle from './style';
 import { validPhone, validLoginPassword } from '@/utils/utils';
 import { StackActions } from '@react-navigation/native';
+import Storage from '@/utils/Storage';
+import { Constant } from '@/utils/constant/Constant';
+import { AccountUser } from '@/assets/data/Account';
+import { RootState } from '@/models/index';
+import { connect, ConnectedProps } from 'react-redux';
 
-export interface LoginComponentProps {
+function mapStateToProps(state: RootState) {
+  return {
+  }
+}
+
+const connector = connect(mapStateToProps)
+type ModelState = ConnectedProps<typeof connector> // 定义connect的类型
+
+export interface LoginComponentProps extends ModelState {
   mode: string                                                  // 登录的模式(login, register, forget)
   callBack: Function                                            // 切换页面的回调
 }
@@ -25,7 +38,7 @@ const LoginComponent = (props: LoginComponentProps) => {
     userPhone: '',
     loginPassword: '',
     notShowPassword: true,
-    tipStatus: false
+    tipStatus: false,
   })
 
   // 登录
@@ -33,6 +46,22 @@ const LoginComponent = (props: LoginComponentProps) => {
     const a = validPhone(loginFields.userPhone)
     const b = validLoginPassword(loginFields.loginPassword)
     if(a && b) {
+      const params = {
+        phone: loginFields.userPhone,
+        password: loginFields.loginPassword
+      }
+      // 登录成功后获取的用户数据
+      const userData = AccountUser
+      // 存储值
+      props.dispatch({
+        type: 'login/setLoginInfo',
+        payload: {
+          password: loginFields.loginPassword,
+          userData: JSON.stringify(AccountUser), 
+        }
+      })
+      Storage.set(Constant.STORAGE_USERKEY, userData)
+      Storage.set(Constant.STORAGE_PASSWORDKEY, loginFields.loginPassword)
       navigation.dispatch(
         StackActions.replace('Tab', {})
       );
@@ -142,7 +171,7 @@ const LoginComponent = (props: LoginComponentProps) => {
   );
 };
 
-export default LoginComponent;
+export default connector(LoginComponent);
 
 const styles = StyleSheet.create({
   

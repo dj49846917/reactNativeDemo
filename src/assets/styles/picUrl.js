@@ -51,6 +51,7 @@ export const ENV_ICON = {
   icon_btn_off: require("@/assets/images/icon/icon_btn_off.png"),
   icon_btn_on: require("@/assets/images/icon/icon_btn_on.png"),
   no_msg_center: require("@/assets/images/icon/no_msg_center.png"),
+  btn_start: require("@/assets/images/icon/btn_start.png"),
 }
 
 export const ENV_IMAGE = {
@@ -64,4 +65,5 @@ export const ENV_IMAGE = {
   timg: require('@/assets/images/image/timg.jpeg'),
   broker_bg: require('@/assets/images/image/broker_bg.png'),
   banner_pg: require('@/assets/images/image/banner-pg.png'),
+  welcome: require('@/assets/images/image/welcome.jpg'),
 }

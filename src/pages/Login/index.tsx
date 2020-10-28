@@ -24,6 +24,7 @@ const MyLogin = (props: MyLoginProps) => {
         )
       case 'register':
         return (
+          // @ts-ignore
           <RegisterComponent
             mode={mode}
             callBack={(v: string) => {
@@ -33,6 +34,7 @@ const MyLogin = (props: MyLoginProps) => {
         )
       case 'forget':
         return (
+          // @ts-ignore
           <ForgetPas
             mode={mode}
             callBack={(v: string) => {
