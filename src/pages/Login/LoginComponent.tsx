@@ -5,6 +5,7 @@ import { ENV_ICON } from '@/assets/styles/picUrl';
 import { useNavigation } from '@react-navigation/native';
 import loginStyle from './style';
 import { validPhone, validLoginPassword } from '@/utils/utils';
+import { StackActions } from '@react-navigation/native';
 
 export interface LoginComponentProps {
   mode: string                                                  // 登录的模式(login, register, forget)
@@ -26,6 +27,17 @@ const LoginComponent = (props: LoginComponentProps) => {
     notShowPassword: true,
     tipStatus: false
   })
+
+  // 登录
+  const doLogin = () => {
+    const a = validPhone(loginFields.userPhone)
+    const b = validLoginPassword(loginFields.loginPassword)
+    if(a && b) {
+      navigation.dispatch(
+        StackActions.replace('Tab', {})
+      );
+    }
+  }
 
   return (
     <View style={CommonStyle.container}>
@@ -98,6 +110,7 @@ const LoginComponent = (props: LoginComponentProps) => {
           style={loginStyle.login_btn}
           onPress={() => {
             Keyboard.dismiss()
+            doLogin()
           }}
         >
           <Text style={loginStyle.login_text}>登录</Text>

@@ -50,6 +50,7 @@ export const ENV_ICON = {
   icon_del_white: require("@/assets/images/icon/icon_del_white.png"),
   icon_btn_off: require("@/assets/images/icon/icon_btn_off.png"),
   icon_btn_on: require("@/assets/images/icon/icon_btn_on.png"),
+  no_msg_center: require("@/assets/images/icon/no_msg_center.png"),
 }
 
 export const ENV_IMAGE = {

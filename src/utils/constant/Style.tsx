@@ -15,6 +15,10 @@ const CommonStyle = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  content2: {
+    flex: 1,
+    backgroundColor: Constant.defaultBgColor
+  },
   commonBorder: {
     borderBottomColor: Constant.commonBorderColor,
     borderBottomWidth: UnitConvert.dpi(2)

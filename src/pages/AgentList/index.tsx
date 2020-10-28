@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, SafeAreaView, Platform } from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView, Platform, ScrollView } from 'react-native';
 import DefaultNavigationHeader from '@/components/DefaultNavigationHeader';
 import { ENV_ICON } from '@/assets/styles/picUrl';
 import { RootStackNavigation } from '@/router/index';
@@ -15,6 +15,8 @@ import Modal from 'react-native-modalbox';
 import { UnitConvert } from '@/utils/unitConvert';
 import { RootState } from '@/models/index';
 import { connect, ConnectedProps } from 'react-redux';
+import { Constant } from '@/utils/constant/Constant';
+import CommonNoData from '@/components/CommonNoData';
 
 function mapStateToProps(state: RootState) {
   return {
@@ -146,7 +148,16 @@ const AgentList = (props: AgentListProps) => {
       {/* 顶部搜索 */}
       {showNav()}
       <View style={CommonStyle.sizedBox}></View>
-      <TabPane list={list} />
+      {
+        list.length > 0 ? (
+          <ScrollView style={CommonStyle.content2}>
+            <TabPane list={list} />
+          </ScrollView>
+        ) : (
+          <CommonNoData style={CommonStyle.content2} />
+        )
+      }
+
       {showModal()}
     </SafeAreaView>
   );
@@ -155,5 +166,5 @@ const AgentList = (props: AgentListProps) => {
 export default connector(AgentList);
 
 const styles = StyleSheet.create({
-  container: {}
+
 });

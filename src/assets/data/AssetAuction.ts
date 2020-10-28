@@ -266,6 +266,7 @@ export const AssetAutionData = [{
 	"UpdateUser": "13983784926"
 }]
 
+
 export const AssetDic = [{
   "DicCode": 1000001,
   "DicName": "是",

@@ -6,6 +6,7 @@ import { AssetAutionData, AssetDic, JudicialAuctionData } from '@/assets/data/As
 import { SecondHouseData } from '@/assets/data/SecondHouse';
 import CommonSecondHouseList from '@/components/CommonSecondHoseList';
 import { tabItemType } from '../Recommend';
+import CommonNoData from '@/components/CommonNoData';
 
 interface TabPaneProps {
   tabType: string                       // 选中的id
@@ -13,23 +14,41 @@ interface TabPaneProps {
 
 const TabPane = (props: TabPaneProps) => {
   if (props.tabType === '1') {
-    return (
-      <ScrollView style={CommonStyle.container}>
-        <CommonAssetAuction list={AssetAutionData} comDic={AssetDic} />
-      </ScrollView>
-    )
+    if(Array.isArray(AssetAutionData) && AssetAutionData.length > 0) {
+      return (
+        <ScrollView style={CommonStyle.container}>
+          <CommonAssetAuction list={AssetAutionData} comDic={AssetDic} />
+        </ScrollView>
+      )
+    } else {
+      return (
+        <CommonNoData />
+      )
+    }
   } else if (props.tabType === '2') {
-    return (
-      <ScrollView style={CommonStyle.container}>
-        <CommonAssetAuction list={JudicialAuctionData} comDic={AssetDic} />
-      </ScrollView>
-    )
+    if(Array.isArray(JudicialAuctionData) && JudicialAuctionData.length > 0) {
+      return (
+        <ScrollView style={CommonStyle.container}>
+          <CommonAssetAuction list={JudicialAuctionData} comDic={AssetDic} />
+        </ScrollView>
+      )
+    } else {
+      return (
+        <CommonNoData />
+      )
+    }
   } else {
-    return (
-      <ScrollView style={CommonStyle.container}>
-        <CommonSecondHouseList list={SecondHouseData} comDic={AssetDic} />
-      </ScrollView>
-    )
+    if(Array.isArray(SecondHouseData) && SecondHouseData.length > 0) {
+      return (
+        <ScrollView style={CommonStyle.container}>
+          <CommonSecondHouseList list={SecondHouseData} comDic={AssetDic} />
+        </ScrollView>
+      )
+    } else {
+      return (
+        <CommonNoData />
+      )
+    }
   }
 };
 

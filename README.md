@@ -1048,6 +1048,87 @@
 
   3. 详细文档请看：https://www.npmjs.com/package/react-native-swiper
 
+## 缓存组件@react-native-community/async-storage（这是异步的）
+  1. 下载核心包：
+    ```
+      npm install -- save @react-native-community/async-storage
+    ```
+
+  2. 封装及使用：
+    ```
+      import AsyncStorage from "@react-native-community/async-storage";
+
+      export default class Storage {
+        // 获取key的值
+        static async get(key: string) {
+          return AsyncStorage.getItem(key)
+        }
+
+        // 设置Key的值
+        static async set(key: string, value: any) {
+          return AsyncStorage.setItem(key, value)
+        }
+
+        // 删除Key的值
+        static async delete(key: string) {
+          return AsyncStorage.removeItem(key)
+        }
+
+        // 删除所有的值
+        static async deleteAll() {
+          return AsyncStorage.clear()
+        }
+      }
+
+      调用：
+        设置值: 
+          Storage.set('user', '张三')
+
+        获取值: 
+          Storage.get('user').then(res=>{
+            console.log(res)
+          })
+        
+        删除值:
+          Storage.remove('user')
+    ```
+
+  3. 将AsyncStorage封装为同步方法：
+    ```
+      import AsyncStorage from '@react-native-community/async-storage';
+      export default class Storage {
+
+        static cache: { [key: string]: string } = {}
+
+        static get(key: string) {
+            return this.cache[key]
+        }
+
+        static set(key: string, value: string) {
+            if (this.cache[key] === value) return
+            this.cache[key] = value
+            AsyncStorage.setItem(key, value)
+        }
+
+        static remove(key: string) {
+            delete this.cache[key]
+            AsyncStorage.removeItem(key)
+        }
+      }
+
+      调用：
+        设置值: 
+          Storage.set('user', '张三')
+
+        获取值: 
+          console.log(Storage.get('user'))
+        
+        删除值:
+          Storage.remove('user')
+    ```
+
+  4. 详细文档请看：https://github.com/react-native-async-storage/async-storage
+
 # 项目实战开发
 ## 底部导航栏添加图标
   * 将项目中用到的图片放到assets/images文件夹下

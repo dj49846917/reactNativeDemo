@@ -99,6 +99,7 @@ export default function Navigator () {
           gestureEnabled: true,
           gestureDirection: 'horizontal',
         }}
+        initialRouteName='Login'
       >
         <Stack.Screen
           name="Tab"

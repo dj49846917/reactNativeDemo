@@ -9,15 +9,19 @@ import { ScrollView } from 'react-native-gesture-handler';
 import CommonStyle from '@/utils/constant/Style';
 import { UnitConvert } from '@/utils/unitConvert';
 import MyTab from '@/components/MyTab';
-import TabPane from '@/pages/Home/TabPane';
 import { tabType, tabItemType } from '../Recommend';
 import { RootState } from '@/models/index';
 import { ConnectedProps, connect } from 'react-redux';
+import { AssetAutionData, AssetDic, JudicialAuctionData } from '@/assets/data/AssetAuction';
+import CommonAssetAuction from '@/components/CommonAssetAuction';
+import CommonNoData from '@/components/CommonNoData';
+import { SecondHouseData } from '@/assets/data/SecondHouse';
+import CommonSecondHouseList from '@/components/CommonSecondHoseList';
+import Storage from '@/utils/Storage';
 
 function mapStateToProps(state: RootState) {
   return {
     barHeight: state.home.barHeight
-    // loading: state.loading.effects['home/asyncAdd']
   }
 }
 
@@ -33,7 +37,7 @@ const Home = (props: HomeProps) => {
     row: Constant.collection_tab_arr[0]
   })
 
-  useEffect(()=>{
+  useEffect(() => {
     getStatusBarHeight()
   }, [])
 
@@ -59,12 +63,11 @@ const Home = (props: HomeProps) => {
     }
   }
 
-  return (
-    <SafeAreaView style={CommonStyle.container}>
-      {/* 顶部搜索 */}
-      <Search />
-      {/* banner图 */}
-      <ScrollView style={CommonStyle.container}>
+  // 主体内容除开列表，目的是让无列表居中
+  const showContentWithoutList = () => {
+    return (
+      <>
+        {/* banner图 */}
         <Swiper />
         {/* 分类 */}
         <Category list={Constant.home_category_arr} />
@@ -88,7 +91,7 @@ const Home = (props: HomeProps) => {
             showUnderLine={false}
             current={tab.current}
             list={Constant.collection_tab_arr}
-            onChange={(item: tabItemType, index: number)=>{
+            onChange={(item: tabItemType, index: number) => {
               setTab({
                 current: index,
                 row: item
@@ -96,9 +99,71 @@ const Home = (props: HomeProps) => {
             }}
           />
         </View>
-        {/* 列表 */}
-        <TabPane row={tab.row} />
-      </ScrollView>
+      </>
+    )
+  }
+
+  // 主体内容
+  const showContent = () => {
+    if (tab.current === 0) {
+      if (Array.isArray(AssetAutionData) && AssetAutionData.length > 0) {
+        return (
+          <ScrollView style={CommonStyle.container}>
+            {showContentWithoutList()}
+            {/* 列表 */}
+            <CommonAssetAuction list={AssetAutionData} comDic={AssetDic} />
+          </ScrollView>
+        )
+      } else {
+        return (
+          <>
+            {showContentWithoutList()}
+            <CommonNoData />
+          </>
+        )
+      }
+    } else if (tab.current === 1) {
+      if (Array.isArray(JudicialAuctionData) && JudicialAuctionData.length > 0) {
+        return (
+          <ScrollView style={CommonStyle.container}>
+            {showContentWithoutList()}
+            {/* 列表 */}
+            <CommonAssetAuction list={JudicialAuctionData} comDic={AssetDic} />
+          </ScrollView>
+        )
+      } else {
+        return (
+          <>
+            {showContentWithoutList()}
+            <CommonNoData />
+          </>
+        )
+      }
+    } else {
+      if (Array.isArray(SecondHouseData) && SecondHouseData.length > 0) {
+        return (
+          <ScrollView style={CommonStyle.container}>
+            {showContentWithoutList()}
+            {/* 列表 */}
+            <CommonSecondHouseList list={SecondHouseData} comDic={AssetDic} />
+          </ScrollView>
+        )
+      } else {
+        return (
+          <>
+            {showContentWithoutList()}
+            <CommonNoData />
+          </>
+        )
+      }
+    }
+  }
+
+  return (
+    <SafeAreaView style={CommonStyle.container}>
+      {/* 顶部搜索 */}
+      <Search />
+      {showContent()}
     </SafeAreaView>
   );
 };
