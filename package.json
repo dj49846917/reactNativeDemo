@@ -10,7 +10,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "dev": "SET ENVFILE=.env.development && react-native run-android",
     "prod": "SET ENVFILE=.env.production && react-native run-android",
-    "release": "cd android && ./gradlew assembleRelease"
+    "release": "cd android && ./gradlew assembleRelease",
+    "bundle-ios": "react-native bundle --platform ios --dev false --entry-file index.js  --bundle-output  ios/bundle/index.ios.bundle  --assets-dest ios/bundle"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",

@@ -91,6 +91,45 @@
 
   * ![图标](img/app图标更换.png)
 
+# ios打包
+  1. 在ios文件夹下，新建bundle文件夹，通过命令将包编译到本地
+      ```
+        react-native bundle --platform ios --dev false --entry-file index.js  --bundle-output  ios/bundle/index.ios.bundle  --assets-dest ios/bundle
+      ```
+
+  2. 为了方便，在package.json中添加编译命令：
+      ```
+          "scripts": {
+            ...
+            "bundle-ios": "react-native bundle --platform ios --dev false --entry-file index.js  --bundle-output  ios/bundle/index.ios.bundle  --assets-dest ios/bundle"
+          },
+      ```
+
+  3. 打开xCode,引入ios文件夹，![引入ios目录](img/引入ios目录.jpg)
+  
+  4. 右键打开项目同名的iotApp的菜单，Add Files to "RNIos"， ![右键目录](img/引入ios目录.jpg)
+  
+  5. 选中bundle,勾选create foider refrences，![勾选](img/勾选.png)
+
+  6. 添加到项目中的文件夹必须是蓝色的，![蓝色](img/蓝色.png)
+
+  7. 修改xcode的debug状态，Xcode——Product——Schema——Edit Scheme，查看run选择的模式，将项目由debug状态改成release状态
+    * ![目录](img/找到编辑scheme.png)
+    * ![选择release](img/选择release.png)
+
+  8. 在左上角选中MyApp > Ceneric IOS Device, ![选择](img/选择打包.png)
+  
+  9. 点击xcode ios里的根目录，在General和Signing & Capabilities菜单中，填写项目信息 
+    * ![填写信息1](img/填写打包信息.png)
+    * ![填写信息2](img/填写打包信息2.png)
+  
+  10. 点击Product——Archive开始打包。显示build完成之后，显示如下弹框：点击Distribute App
+    * ![打包后选择](img/打包后选择1.png)
+    * ![打包后选择2](img/打包后选择2.png)
+    * ![打包后选择3](img/打包后选择3.png)
+    * ![打包后选择4](img/打包后选择4.png)
+    * ![打包后选择5](img/打包后选择5.png)
+
 # 项目开发经验
 ## UI框架react-native-mobile
 使用步骤：
