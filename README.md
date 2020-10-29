@@ -21,6 +21,76 @@
 
 ***
 
+# 打包APK
+  1. 生成keyStore
+       * 在当前目录下输入命令：
+        ```
+          keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+        ```
+
+       * 输入密码和确认的密码之后，其他不用填，一直回车, ![生成keyStore](/img/生成keyStore.png)
+
+  2. 将生成的my-release-key.keystore文件放到android/app文件夹下：![keystore放的位置](/img/keystore放的位置.png)
+
+  3. 编辑android\gradle.properties文件，添加如下的代码（注意把其中的****替换为相应密码）
+        ```
+          MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
+          MYAPP_RELEASE_KEY_ALIAS=my-key-alias
+          MYAPP_RELEASE_STORE_PASSWORD=123456
+          MYAPP_RELEASE_KEY_PASSWORD=123456
+        ```
+
+  4. 编辑android/app/build.gradle文件，添加以下配置：
+        ```
+          android {
+              ...
+              defaultConfig { ... }
+              signingConfigs {
+                  release {
+                      storeFile file(MYAPP_RELEASE_STORE_FILE)
+                      storePassword MYAPP_RELEASE_STORE_PASSWORD
+                      keyAlias MYAPP_RELEASE_KEY_ALIAS
+                      keyPassword MYAPP_RELEASE_KEY_PASSWORD
+                  }
+              }
+              buildTypes {
+                  release {
+                      ...
+                      signingConfig signingConfigs.release
+                  }
+              }
+          }
+        ```
+
+  5. 执行命令：
+        ```
+          cd android && ./gradlew assembleRelease
+
+          或者在package.json配置下
+           "scripts": {
+              ...
+              "release": "cd android && ./gradlew assembleRelease"
+            },
+
+          执行npm run release
+        ```
+
+# 修改app的名称（安卓）
+  * 修改android\app\src\main\res\values\strings.xml文件即可
+
+# 修改应用图标(安卓)
+  * 修改android\app\src\main\AndroidManifest.xml里面的
+      ```
+        ic_launcher是图片的名称，可改，不改的话，替换android\app\src\main\res里面的图片即可
+
+        <application
+          ...
+          android:icon="@mipmap/ic_launcher"
+        >
+      ```
+
+  * ![图标](img/app图标更换.png)
+
 # 项目开发经验
 ## UI框架react-native-mobile
 使用步骤：
