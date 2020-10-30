@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, KeyboardAvoidingView, TextInput, ScrollView, Platform } from 'react-native';
+import { Text, View, StyleSheet, KeyboardAvoidingView, TextInput, ScrollView, Platform, TouchableOpacity } from 'react-native';
 import CommonStyle from '@/utils/constant/Style';
 import { UnitConvert } from '@/utils/unitConvert';
 import MyDropdownList from '@/components/MyDropdownList';
@@ -10,6 +10,7 @@ import MyTextInput from '@/components/MyTextInput';
 import { Constant } from '@/utils/constant/Constant';
 import RecommandBtn from '@/pages/Recommend/RecommandBtn';
 import MyErrorNotice from '@/components/MyErrorNotice';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -97,6 +98,25 @@ const House = (props: HouseProps) => {
       }
       console.log('params', params)
     }
+  }
+
+  const showBtn = () => {
+    return (
+      <TouchableOpacity
+        style={{
+          width: UnitConvert.dpi(200),
+          height: UnitConvert.dpi(100),
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'red'
+        }}
+        onPress={()=>{
+          
+        }}
+      >
+        <Text style={{color: '#000'}}>点击</Text>
+      </TouchableOpacity>
+    )
   }
 
   return (
@@ -517,6 +537,7 @@ const House = (props: HouseProps) => {
               })
             }}
           />
+          {showBtn()}
           <RecommandBtn
             tipTitle='《房源温馨提示》'
             tipCallback={() => { }}
