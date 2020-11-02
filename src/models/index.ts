@@ -1,17 +1,17 @@
-import Recommend, { RecommendState } from '@/models/Recommend'
-import { DvaLoadingState } from 'dva-loading-ts'
-import AssetAuction, { AssetAuctionState } from '@/models/AssetAuction';
+/*
+ * @Author: your name
+ * @Date: 2020-10-31 08:56:24
+ * @LastEditTime: 2020-11-02 22:21:54
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \reactNativeDemo\src\models\index.ts
+ */
 import Template, { TemplateState } from './template';
-import Home, { HomeState } from './Home';
-import Login, { LoginState } from './Login';
+import ReduxUse, { ReduxUseState } from './ReduxUse';
 
-const models = [Template, Recommend, AssetAuction, Home, Login];
+const models = [Template, ReduxUse];
 export type RootState = {
   template: TemplateState
-  recommend: RecommendState
-  loading: DvaLoadingState
-  assetAuction: AssetAuctionState
-  home: HomeState
-  login: LoginState
+  reduxUse: ReduxUseState
 }
 export default models;

@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-10-31 08:56:24
+ * @LastEditTime: 2020-11-02 23:02:57
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \reactNativeDemo\src\assets\styles\picUrl.js
+ */
 export const ENV_ICON = {
   icon_top_off: require("@/assets/images/icon/icon_top_off.png"),
   icon_footer_home: require('@/assets/images/icon/icon_footer_home.png'), // 首页
@@ -55,15 +63,4 @@ export const ENV_ICON = {
 }
 
 export const ENV_IMAGE = {
-  banner: require('@/assets/images/image/banner.jpg'),
-  banner1: require('@/assets/images/image/banner1.png'),
-  banner2: require('@/assets/images/image/banner2.jpg'),
-  p1: require('@/assets/images/image/p1.png'),
-  p2: require('@/assets/images/image/p2.png'),
-  p3: require('@/assets/images/image/p3.png'),
-  left_img: require('@/assets/images/image/left_img.jpg'),
-  timg: require('@/assets/images/image/timg.jpeg'),
-  broker_bg: require('@/assets/images/image/broker_bg.png'),
-  banner_pg: require('@/assets/images/image/banner-pg.png'),
-  welcome: require('@/assets/images/image/welcome.jpg'),
 }

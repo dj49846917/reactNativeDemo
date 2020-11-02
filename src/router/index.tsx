@@ -14,6 +14,9 @@ import DatePicker from '@/pages/Template/DatePicker'
 import Tab from '@/pages/Template/Tab'
 import Input from '@/pages/Template/Input'
 import Swiper from '@/pages/Template/Swiper'
+import WebView from '@/pages/Template/WebView'
+import ReduxUse from '@/pages/Template/ReduxUse'
+import Upload from '@/pages/Template/Upload'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
   Template: { screen?: string },
@@ -29,6 +32,9 @@ export type RootStackList = { // 定义类型别名，用于约束navigator组�
   Tab: { screen?: string },                 // Tab选项卡
   Input: { screen?: string },               // 输入框
   Swiper: { screen?: string },              // 轮播图
+  WebView: { screen?: string },             // webview的使用
+  ReduxUse: { screen?: string },            // Redux的使用
+  Upload: { screen?: string },              // 图片上传
 }
 
 // 该类型申明约束每一个页面组件的props
@@ -65,6 +71,9 @@ export default function Navigator () {
         <Stack.Screen name="Tab" component={Tab} />
         <Stack.Screen name="Input" component={Input} />
         <Stack.Screen name="Swiper" component={Swiper} />
+        <Stack.Screen name="WebView" component={WebView} />
+        <Stack.Screen name="ReduxUse" component={ReduxUse} />
+        <Stack.Screen name="Upload" component={Upload} />
       </Stack.Navigator>
     </NavigationContainer>
   )

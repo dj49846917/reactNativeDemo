@@ -108,6 +108,36 @@ const Template = (props: TemplateProps) => {
             <Text style={CommonStyle.list_item_text}>Swiper轮播图</Text>
           </TouchableOpacity>
         </View>
+        <View style={CommonStyle.list}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('WebView')
+            }}
+            style={CommonStyle.list_item}
+          >
+            <Text style={CommonStyle.list_item_text}>WebView的使用</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={CommonStyle.list}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('ReduxUse')
+            }}
+            style={CommonStyle.list_item}
+          >
+            <Text style={CommonStyle.list_item_text}>redux的使用</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={CommonStyle.list}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Upload')
+            }}
+            style={CommonStyle.list_item}
+          >
+            <Text style={CommonStyle.list_item_text}>图片上传</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
