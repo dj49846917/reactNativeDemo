@@ -1,4 +1,6 @@
 import DefaultNavigationHeader from '@/components/DefaultNavigationHeader';
+import MyErrorNotice from '@/components/MyErrorNotice';
+import MyToastShort from '@/components/MyToastShort';
 import CommonStyle from '@/utils/constant/Style';
 import { UnitConvert } from '@/utils/unitConvert';
 import { useNavigation } from '@react-navigation/native';
@@ -34,6 +36,76 @@ const Template = (props: TemplateProps) => {
             style={CommonStyle.list_item}
           >
             <Text style={CommonStyle.list_item_text}>Modal弹窗</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={CommonStyle.list}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('DatePicker')
+            }}
+            style={CommonStyle.list_item}
+          >
+            <Text style={CommonStyle.list_item_text}>时间选择器</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={CommonStyle.list}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Tab')
+            }}
+            style={CommonStyle.list_item}
+          >
+            <Text style={CommonStyle.list_item_text}>Tab选项卡</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={CommonStyle.list}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Input')
+            }}
+            style={CommonStyle.list_item}
+          >
+            <Text style={CommonStyle.list_item_text}>输入框</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={CommonStyle.list}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('ModalSelect')
+            }}
+            style={CommonStyle.list_item}
+          >
+            <Text style={CommonStyle.list_item_text}>下拉选择</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={CommonStyle.list}>
+          <TouchableOpacity
+            onPress={() => {
+              MyErrorNotice({ content: '未录入XXXX' })
+            }}
+            style={CommonStyle.list_item}
+          >
+            <Text style={CommonStyle.list_item_text}>错误提示框</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={CommonStyle.list}>
+          <TouchableOpacity
+            onPress={() => {
+              MyToastShort({ content: '点击成功' })
+            }}
+            style={CommonStyle.list_item}
+          >
+            <Text style={CommonStyle.list_item_text}>普通提示框toast</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={CommonStyle.list}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Swiper')
+            }}
+            style={CommonStyle.list_item}
+          >
+            <Text style={CommonStyle.list_item_text}>Swiper轮播图</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

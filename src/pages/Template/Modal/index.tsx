@@ -18,11 +18,31 @@ const Modal = (props: ModalProps) => {
       <View style={CommonStyle.list}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('ModalSelect')
+            navigation.navigate('ModalBox')
           }}
           style={CommonStyle.list_item}
         >
-          <Text style={CommonStyle.list_item_text}>下拉选择</Text>
+          <Text style={CommonStyle.list_item_text}>普通的弹窗</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={CommonStyle.list}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('ModalComfirm')
+          }}
+          style={CommonStyle.list_item}
+        >
+          <Text style={CommonStyle.list_item_text}>对话框</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={CommonStyle.list}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('ModalTip')
+          }}
+          style={CommonStyle.list_item}
+        >
+          <Text style={CommonStyle.list_item_text}>提示框</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

@@ -7,6 +7,13 @@ import PassParam from '@/pages/Template/TurnToPage/PassParam'
 import ResetRouter from '@/pages/Template/TurnToPage/ResetRouter'
 import Modal from '@/pages/Template/Modal'
 import ModalSelect from '@/pages/Template/Modal/ModalSelect'
+import ModalBox from '@/pages/Template/Modal/ModalBox'
+import ModalComfirm from '@/pages/Template/Modal/ModalComfirm'
+import ModalTip from '@/pages/Template/Modal/ModalTip'
+import DatePicker from '@/pages/Template/DatePicker'
+import Tab from '@/pages/Template/Tab'
+import Input from '@/pages/Template/Input'
+import Swiper from '@/pages/Template/Swiper'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
   Template: { screen?: string },
@@ -15,6 +22,13 @@ export type RootStackList = { // 定义类型别名，用于约束navigator组�
   ResetRouter: { screen?: string },         // 返回时重置路由
   Modal: { screen?: string },               // modal弹窗
   ModalSelect: { screen?: string },         // 下拉选择框
+  ModalBox: { screen?: string },            // 普通的弹窗
+  ModalComfirm: { screen?: string },        // 对话框
+  ModalTip: { screen?: string },            // 提示框
+  DatePicker: { screen?: string },          // 时间选择器
+  Tab: { screen?: string },                 // Tab选项卡
+  Input: { screen?: string },               // 输入框
+  Swiper: { screen?: string },              // 轮播图
 }
 
 // 该类型申明约束每一个页面组件的props
@@ -44,6 +58,13 @@ export default function Navigator () {
         <Stack.Screen name="ResetRouter" component={ResetRouter} />
         <Stack.Screen name="Modal" component={Modal} />
         <Stack.Screen name="ModalSelect" component={ModalSelect} />
+        <Stack.Screen name="ModalBox" component={ModalBox} />
+        <Stack.Screen name="ModalComfirm" component={ModalComfirm} />
+        <Stack.Screen name="ModalTip" component={ModalTip} />
+        <Stack.Screen name="DatePicker" component={DatePicker} />
+        <Stack.Screen name="Tab" component={Tab} />
+        <Stack.Screen name="Input" component={Input} />
+        <Stack.Screen name="Swiper" component={Swiper} />
       </Stack.Navigator>
     </NavigationContainer>
   )

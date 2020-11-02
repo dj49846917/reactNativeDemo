@@ -131,30 +131,32 @@ const ModalSelect = (props: ModalSelectProps) => {
   const [visible, setVisible] = useState(false)
 
   return (
-    <SafeAreaView style={styles.container}>
-      <DefaultNavigationHeader
-        title='下拉选择框'
-        showLeftIcon
-        navigation={navigation}
-      />
-      <View style={CommonStyle.content}>
-        <View style={CommonStyle.sizedBox}></View>
-        <MyDropdownList
-          showLabel
-          required
-          flelds='意向区域'
-          placeHolder='请选择意向区域'
-          defaultValue={findDicName(arr, RegionId)}
-          lableStyle={{
-            paddingLeft: UnitConvert.dpi(30)
-          }}
-          callBack={() => {
-            setVisible(true)
-          }}
+    <>
+      <SafeAreaView style={styles.container}>
+        <DefaultNavigationHeader
+          title='下拉选择框'
+          showLeftIcon
+          navigation={navigation}
         />
-      </View>
+        <View style={CommonStyle.content}>
+          <View style={CommonStyle.sizedBox}></View>
+          <MyDropdownList
+            showLabel
+            required
+            flelds='意向区域'
+            placeHolder='请选择意向区域'
+            defaultValue={findDicName(arr, RegionId)}
+            lableStyle={{
+              paddingLeft: UnitConvert.dpi(30)
+            }}
+            callBack={() => {
+              setVisible(true)
+            }}
+          />
+        </View>
+      </SafeAreaView>
       <MyModalSelect
-      position='bottom'
+        position='bottom'
         onCancel={() => {
           setVisible(false)
         }}
@@ -167,7 +169,7 @@ const ModalSelect = (props: ModalSelectProps) => {
         defaultValue={RegionId}
         title='意向区域'
       />
-    </SafeAreaView>
+    </>
   );
 };
 
