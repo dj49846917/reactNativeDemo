@@ -22,3 +22,12 @@ target 'MyApp' do
     flipper_post_install(installer)
   end
 end
+
+target 'MyApp-tvOS' do
+  # Pods for MyApp-tvOS
+
+  target 'MyApp-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end
