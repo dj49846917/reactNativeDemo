@@ -3,17 +3,32 @@ import { UnitConvert } from "@/utils/unitConvert";
 import { Constant } from "./Constant";
 
 const CommonStyle = StyleSheet.create({
-  sizedBox: {
-    width: UnitConvert.w,
-    height: UnitConvert.dpi(20),
-    backgroundColor: Constant.defaultBgColor
-  },
   content: {
     flex: 1
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+  },
+  sizedBox: {
+    width: UnitConvert.w,
+    height: UnitConvert.dpi(20),
+    backgroundColor: Constant.defaultBgColor
+  },
+  list: {
+    height: UnitConvert.dpi(80),
+    alignItems: 'center',
+    marginTop: UnitConvert.dpi(20)
+  },
+  list_item: {
+    width: UnitConvert.dpi(500),
+    height: UnitConvert.dpi(80),
+    backgroundColor: Constant.CommonColor.danger,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  list_item_text: {
+    fontSize: UnitConvert.dpi(40),
+    color: '#fff'
   },
   content2: {
     flex: 1,

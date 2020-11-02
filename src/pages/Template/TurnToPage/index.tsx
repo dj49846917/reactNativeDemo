@@ -1,39 +1,45 @@
 import DefaultNavigationHeader from '@/components/DefaultNavigationHeader';
 import CommonStyle from '@/utils/constant/Style';
-import { UnitConvert } from '@/utils/unitConvert';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import * as React from 'react';
-import { Text, StyleSheet, SafeAreaView, ScrollView, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, View, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 
-interface TemplateProps { }
+interface TurnToPageProps { }
 
-const Template = (props: TemplateProps) => {
+const data = {
+  name: '张三',
+  age: 18
+}
+
+const TurnToPage = (props: TurnToPageProps) => {
+  const route = useRoute<any>()
   const navigation = useNavigation()
   return (
     <SafeAreaView style={CommonStyle.container}>
       <DefaultNavigationHeader
-        title='组件总览'
+        title='跳转(react-navigation)'
+        showLeftIcon
+        navigation={navigation}
       />
       <ScrollView style={CommonStyle.content}>
         <View style={CommonStyle.list}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('TurnToPage')
+              navigation.navigate('PassParam', data)
             }}
             style={CommonStyle.list_item}
           >
-            <Text style={CommonStyle.list_item_text}>跳转(react-navigation)</Text>
+            <Text style={CommonStyle.list_item_text}>跳转并传值</Text>
           </TouchableOpacity>
         </View>
         <View style={CommonStyle.list}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('Modal')
+              navigation.navigate('ResetRouter')
             }}
             style={CommonStyle.list_item}
           >
-            <Text style={CommonStyle.list_item_text}>Modal弹窗</Text>
+            <Text style={CommonStyle.list_item_text}>重置路由</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -41,7 +47,8 @@ const Template = (props: TemplateProps) => {
   );
 };
 
-export default Template;
+export default TurnToPage;
 
 const styles = StyleSheet.create({
+  container: {}
 });
