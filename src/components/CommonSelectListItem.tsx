@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, StyleProp, TextStyle, TouchableOpacity } from 'react-native';
 import { UnitConvert } from '@/utils/unitConvert';
-import { dicType } from '@/models/Recommend';
+import { dicType } from './MyModalSelect';
 
 interface CommonSelectListItemProps {
   title: string                                     // 标题

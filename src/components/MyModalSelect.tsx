@@ -1,11 +1,18 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, StyleProp, TextStyle } from 'react-native';
+import { Text, View, StyleSheet, StyleProp, TextStyle, Platform } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { UnitConvert } from '@/utils/unitConvert';
 import { Constant } from '@/utils/constant/Constant';
-import { dicType } from '@/models/Recommend';
 import Modal, { ModalProps } from 'react-native-modalbox';
+import Pickers from 'react-native-picker';
+
+export type dicType = {
+  DicCode?: number
+  DicName?: string
+  SubTypeCode?: number
+  BaseTypeCode?: number
+}
 
 interface Iprops {
   visible: boolean                            // 打开弹窗
@@ -43,9 +50,13 @@ const MyModalSelect = (props: MyModalSelectProps) => {
   })
 
   React.useEffect(() => {
+    let codeArr = []
+    let nameArr = []
     if (props.list.length > 0) {
       if (props.defaultValue) {
         props.list.forEach((item, index) => {
+          codeArr.push(item.DicCode)
+          nameArr.push(item.DicName)
           if (item.DicCode === props.defaultValue) {
             setSelectItem({
               val: props.defaultValue,
@@ -62,7 +73,30 @@ const MyModalSelect = (props: MyModalSelectProps) => {
         })
       }
     }
-  }, [props.list])
+    Pickers.init({
+      pickerConfirmBtnText: props.okText,
+      pickerCancelBtnText: props.cancelText,
+      pickerTitleText: props.title,
+      pickerData: [1, 2, 3, 5],
+      selectedValue: [5],
+      onPickerConfirm: data => {
+        console.log(data);
+        Pickers.hide()
+      },
+      onPickerCancel: data => {
+        console.log(data);
+        Pickers.hide()
+      },
+      onPickerSelect: data => {
+        console.log(data);
+      }
+    });
+    if (Platform.OS === 'android') {
+      if (props.visible) {
+        Pickers.show()
+      }
+    }
+  }, [props.list, props.visible])
 
   return (
     <Modal
@@ -71,9 +105,9 @@ const MyModalSelect = (props: MyModalSelectProps) => {
       swipeToClose={false}
       backButtonClose={false}
       backdropPressToClose={false}
-      style={{height: props.height}}
-      isOpen={props.visible}
-      // coverScreen
+      style={{ height: props.height }}
+      isOpen={Platform.OS === 'ios' ? props.visible : false}
+    // coverScreen
     >
       <View style={styles.modal}>
         <View style={[styles.content, { height: props.height }]}>
@@ -108,7 +142,7 @@ const MyModalSelect = (props: MyModalSelectProps) => {
               }
               {
                 props.custView ? props.custView : (
-                  <Picker
+                  Platform.OS === 'ios' ? <Picker
                     selectedValue={selectItem.val}
                     style={styles.modal_content}
                     onValueChange={(itemValue, itemIndex) => {
@@ -122,7 +156,7 @@ const MyModalSelect = (props: MyModalSelectProps) => {
                     {props.list.map((item, index) => (
                       <Picker.Item key={index} label={item.DicName} value={String(item.DicCode)} />
                     ))}
-                  </Picker>
+                  </Picker> : null
                 )
               }
             </View>

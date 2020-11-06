@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { UnitConvert } from '@/utils/unitConvert';
-import { dicType } from '@/models/Recommend';
 import { ENV_ICON } from '@/assets/styles/picUrl';
+import { dicType } from './MyModalSelect';
 
 interface CommonAreaProps {
   dicArr: dicType[],                              // 数据字典

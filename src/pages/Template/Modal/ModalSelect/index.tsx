@@ -5,8 +5,9 @@ import CommonStyle from '@/utils/constant/Style';
 import { UnitConvert } from '@/utils/unitConvert';
 import { findDicName } from '@/utils/utils';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, SafeAreaView, Alert } from 'react-native';
+import Picker from 'react-native-picker';
 
 interface ModalSelectProps { }
 
@@ -129,7 +130,6 @@ const ModalSelect = (props: ModalSelectProps) => {
 
   const [RegionId, setReginId] = useState('')
   const [visible, setVisible] = useState(false)
-
   return (
     <>
       <SafeAreaView style={styles.container}>
