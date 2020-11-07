@@ -50,61 +50,64 @@ const MyModalSelect = (props: MyModalSelectProps) => {
     item: {}
   })
 
-  React.useEffect(()=>{
-    let codeArr = []
-    let nameArr: (string | undefined)[] = []
-    props.list.forEach((item, index) => {
-      codeArr.push(item.DicCode)
-      nameArr.push(item.DicName)
-    })
-    Pickers.init({
-      pickerConfirmBtnText: props.okText,
-      pickerCancelBtnText: props.cancelText,
-      pickerConfirmBtnColor: [199, 22, 34, 1],
-      pickerCancelBtnColor: [199, 22, 34, 1],
-      pickerToolBarBg: [247, 247, 247, 1],
-      pickerBg: [255, 255, 255, 1],
-      pickerTitleText: props.title,
-      pickerData: nameArr,
-      selectedValue: [filterDicName(
-        props.list,
-        // @ts-ignore 
-        selectItem.val)],
-      onPickerConfirm: data => {
-        // @ts-ignore
-        let obj:MyModalSelectState = {}
-        props.list.forEach((item, index) => {
-          if (item.DicName === data[0]) {
-            obj.val = item.DicCode
-            obj.index = index
-            obj.item = item
-            setSelectItem({
-              val: item.DicCode,
-              index: index+1,
-              item,
-            })
-          }
-        })
-        Pickers.hide()
-        props.onOk(obj)
-      },
-      onPickerCancel: data => {
-        setSelectItem({
-          val: props.defaultValue,
-          index: undefined,
-          item: {}
-        })
-        Pickers.hide()
-        props.onCancel()
-      },
-      onPickerSelect: data => {}
-    });
-    if (Platform.OS === 'android') {
-      if (props.visible) {
-        Pickers.show()
+  React.useEffect(() => {
+    if (props.list.length > 0) {
+      let codeArr = []
+      let nameArr: (string | undefined)[] = []
+      props.list.forEach((item, index) => {
+        codeArr.push(item.DicCode)
+        nameArr.push(item.DicName)
+      })
+      console.log('props.list', props.list, nameArr)
+      Pickers.init({
+        pickerConfirmBtnText: props.okText,
+        pickerCancelBtnText: props.cancelText,
+        pickerConfirmBtnColor: [199, 22, 34, 1],
+        pickerCancelBtnColor: [199, 22, 34, 1],
+        pickerToolBarBg: [247, 247, 247, 1],
+        pickerBg: [255, 255, 255, 1],
+        pickerTitleText: props.title,
+        pickerData: nameArr,
+        selectedValue: [filterDicName(
+          props.list,
+          // @ts-ignore 
+          selectItem.val)],
+        onPickerConfirm: data => {
+          // @ts-ignore
+          let obj: MyModalSelectState = {}
+          props.list.forEach((item, index) => {
+            if (item.DicName === data[0]) {
+              obj.val = item.DicCode
+              obj.index = index
+              obj.item = item
+              setSelectItem({
+                val: item.DicCode,
+                index: index + 1,
+                item,
+              })
+            }
+          })
+          Pickers.hide()
+          props.onOk(obj)
+        },
+        onPickerCancel: data => {
+          setSelectItem({
+            val: props.defaultValue,
+            index: undefined,
+            item: {}
+          })
+          Pickers.hide()
+          props.onCancel()
+        },
+        onPickerSelect: data => { }
+      });
+      if (Platform.OS === 'android') {
+        if (props.visible) {
+          Pickers.show()
+        }
       }
     }
-  }, [props.visible])
+  }, [props.list, props.visible])
 
   React.useEffect(() => {
     if (props.list.length > 0) {
@@ -136,69 +139,71 @@ const MyModalSelect = (props: MyModalSelectProps) => {
       backButtonClose={false}
       backdropPressToClose={false}
       style={{ height: props.height }}
-      isOpen={Platform.OS === 'ios' ? props.visible : false}
+      isOpen={props.visible}
     // coverScreen
     >
-      <View style={styles.modal}>
-        <View style={[styles.content, { height: props.height }]}>
-          {props.custormAllView ? props.custormAllView : (
-            <View>
-              {
-                props.headerView ? props.headerView : (
-                  <View style={[styles.modal_header, { height: props.headerHeight }]}>
-                    <TouchableOpacity style={styles.modal_header_item} onPress={() => {
-                      setSelectItem({
-                        val: props.defaultValue,
-                        index: undefined,
-                        item: {}
-                      })
-                      props.onCancel()
-                    }}>
-                      <Text style={[styles.modal_header_text, props.cancelStyle]}>{props.cancelText}</Text>
-                    </TouchableOpacity>
-                    <View style={styles.modal_header_item2}>
-                      <Text style={[styles.modal_header_title, props.titleStyle]}>{props.title}</Text>
+      {Platform.OS === 'android' ? null : (
+        <View style={styles.modal}>
+          <View style={[styles.content, { height: props.height }]}>
+            {props.custormAllView ? props.custormAllView : (
+              <View>
+                {
+                  props.headerView ? props.headerView : (
+                    <View style={[styles.modal_header, { height: props.headerHeight }]}>
+                      <TouchableOpacity style={styles.modal_header_item} onPress={() => {
+                        setSelectItem({
+                          val: props.defaultValue,
+                          index: undefined,
+                          item: {}
+                        })
+                        props.onCancel()
+                      }}>
+                        <Text style={[styles.modal_header_text, props.cancelStyle]}>{props.cancelText}</Text>
+                      </TouchableOpacity>
+                      <View style={styles.modal_header_item2}>
+                        <Text style={[styles.modal_header_title, props.titleStyle]}>{props.title}</Text>
+                      </View>
+                      <TouchableOpacity
+                        style={styles.modal_header_item}
+                        onPress={() => {
+                          props.onOk(selectItem)
+                        }}
+                      >
+                        <Text style={[styles.modal_header_text, props.okStyle]}>{props.okText}</Text>
+                      </TouchableOpacity>
                     </View>
-                    <TouchableOpacity
-                      style={styles.modal_header_item}
-                      onPress={() => {
-                        props.onOk(selectItem)
+                  )
+                }
+                {
+                  props.custView ? props.custView : (
+                    Platform.OS === 'ios' ? <Picker
+                      selectedValue={selectItem.val}
+                      style={styles.modal_content}
+                      onValueChange={(itemValue, itemIndex) => {
+                        setSelectItem({
+                          val: itemValue,
+                          index: itemIndex,
+                          item: props.list[itemIndex]
+                        })
                       }}
                     >
-                      <Text style={[styles.modal_header_text, props.okStyle]}>{props.okText}</Text>
-                    </TouchableOpacity>
-                  </View>
-                )
-              }
-              {
-                props.custView ? props.custView : (
-                  Platform.OS === 'ios' ? <Picker
-                    selectedValue={selectItem.val}
-                    style={styles.modal_content}
-                    onValueChange={(itemValue, itemIndex) => {
-                      setSelectItem({
-                        val: itemValue,
-                        index: itemIndex,
-                        item: props.list[itemIndex]
-                      })
-                    }}
-                  >
-                    {props.list.map((item, index) => (
-                      <Picker.Item key={index} label={item.DicName} value={String(item.DicCode)} />
-                    ))}
-                  </Picker> : null
-                )
-              }
-            </View>
-          )}
+                      {props.list.map((item, index) => (
+                        <Picker.Item key={index} label={item.DicName} value={String(item.DicCode)} />
+                      ))}
+                    </Picker> : null
+                  )
+                }
+              </View>
+            )}
+          </View>
         </View>
-      </View>
+      )}
     </Modal>
   );
 };
 
 MyModalSelect.defaultProps = {
-  height: UnitConvert.dpi(500),
+  height: Platform.OS === 'android' ? UnitConvert.dpi(0) : UnitConvert.dpi(500),
   headerHeight: UnitConvert.dpi(80),
   cancelText: '取消',
   okText: '确定',
@@ -216,11 +221,6 @@ const styles = StyleSheet.create({
   modal: {
     flex: 1,
   },
-  // modal_height: {
-  //   flex: 1,
-  //   backgroundColor: '#000',
-  //   opacity: 0.6,
-  // },
   content: {
     width: UnitConvert.w,
     height: UnitConvert.dpi(300),
