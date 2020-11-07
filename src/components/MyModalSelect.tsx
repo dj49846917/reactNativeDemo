@@ -6,6 +6,7 @@ import { UnitConvert } from '@/utils/unitConvert';
 import { Constant } from '@/utils/constant/Constant';
 import Modal, { ModalProps } from 'react-native-modalbox';
 import Pickers from 'react-native-picker';
+import { filterDicName } from '@/utils/utils';
 
 export type dicType = {
   DicCode?: number
@@ -49,14 +50,66 @@ const MyModalSelect = (props: MyModalSelectProps) => {
     item: {}
   })
 
-  React.useEffect(() => {
+  React.useEffect(()=>{
     let codeArr = []
-    let nameArr = []
+    let nameArr: (string | undefined)[] = []
+    props.list.forEach((item, index) => {
+      codeArr.push(item.DicCode)
+      nameArr.push(item.DicName)
+    })
+    Pickers.init({
+      pickerConfirmBtnText: props.okText,
+      pickerCancelBtnText: props.cancelText,
+      pickerConfirmBtnColor: [199, 22, 34, 1],
+      pickerCancelBtnColor: [199, 22, 34, 1],
+      pickerToolBarBg: [247, 247, 247, 1],
+      pickerBg: [255, 255, 255, 1],
+      pickerTitleText: props.title,
+      pickerData: nameArr,
+      selectedValue: [filterDicName(
+        props.list,
+        // @ts-ignore 
+        selectItem.val)],
+      onPickerConfirm: data => {
+        // @ts-ignore
+        let obj:MyModalSelectState = {}
+        props.list.forEach((item, index) => {
+          if (item.DicName === data[0]) {
+            obj.val = item.DicCode
+            obj.index = index
+            obj.item = item
+            setSelectItem({
+              val: item.DicCode,
+              index: index+1,
+              item,
+            })
+          }
+        })
+        Pickers.hide()
+        props.onOk(obj)
+      },
+      onPickerCancel: data => {
+        setSelectItem({
+          val: props.defaultValue,
+          index: undefined,
+          item: {}
+        })
+        Pickers.hide()
+        props.onCancel()
+      },
+      onPickerSelect: data => {}
+    });
+    if (Platform.OS === 'android') {
+      if (props.visible) {
+        Pickers.show()
+      }
+    }
+  }, [props.visible])
+
+  React.useEffect(() => {
     if (props.list.length > 0) {
       if (props.defaultValue) {
         props.list.forEach((item, index) => {
-          codeArr.push(item.DicCode)
-          nameArr.push(item.DicName)
           if (item.DicCode === props.defaultValue) {
             setSelectItem({
               val: props.defaultValue,
@@ -73,30 +126,7 @@ const MyModalSelect = (props: MyModalSelectProps) => {
         })
       }
     }
-    Pickers.init({
-      pickerConfirmBtnText: props.okText,
-      pickerCancelBtnText: props.cancelText,
-      pickerTitleText: props.title,
-      pickerData: [1, 2, 3, 5],
-      selectedValue: [5],
-      onPickerConfirm: data => {
-        console.log(data);
-        Pickers.hide()
-      },
-      onPickerCancel: data => {
-        console.log(data);
-        Pickers.hide()
-      },
-      onPickerSelect: data => {
-        console.log(data);
-      }
-    });
-    if (Platform.OS === 'android') {
-      if (props.visible) {
-        Pickers.show()
-      }
-    }
-  }, [props.list, props.visible])
+  }, [props.list])
 
   return (
     <Modal

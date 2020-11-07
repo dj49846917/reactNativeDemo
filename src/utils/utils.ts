@@ -76,6 +76,21 @@ export function filterDicName(arr: Array<any>, key: Number) {
   }
 }
 
+// 筛选数据字典里指定value的key
+export function filterDicCode(arr: Array<any>, key: string) {
+  let res = ''
+  if (arr.length > 0) {
+    arr.forEach(item => {
+      if (item.DicName === key) {
+        res = item.DicCode
+      }
+    })
+    return res
+  } else {
+    return null
+  }
+}
+
 // 金额转换
 export function parseMoney(data: String | Number, secondData?: String | Number | undefined | null) {
   if (Number(data) > 0) {

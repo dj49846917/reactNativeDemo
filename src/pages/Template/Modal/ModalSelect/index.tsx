@@ -1,6 +1,6 @@
 import DefaultNavigationHeader from '@/components/DefaultNavigationHeader';
 import MyDropdownList from '@/components/MyDropdownList';
-import MyModalSelect from '@/components/MyModalSelect';
+import MyModalSelect, { MyModalSelectState } from '@/components/MyModalSelect';
 import CommonStyle from '@/utils/constant/Style';
 import { UnitConvert } from '@/utils/unitConvert';
 import { findDicName } from '@/utils/utils';
@@ -128,7 +128,7 @@ const arr = [
 const ModalSelect = (props: ModalSelectProps) => {
   const navigation = useNavigation()
 
-  const [RegionId, setReginId] = useState('')
+  const [RegionId, setReginId] = useState<number | string | undefined>(0)
   const [visible, setVisible] = useState(false)
   return (
     <>
@@ -160,8 +160,8 @@ const ModalSelect = (props: ModalSelectProps) => {
         onCancel={() => {
           setVisible(false)
         }}
-        onOk={(v: React.SetStateAction<string>) => {
-          setReginId(v)
+        onOk={(v: MyModalSelectState) => {
+          setReginId(v.val)
           setVisible(false)
         }}
         visible={visible}
