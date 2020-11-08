@@ -17,24 +17,30 @@ import Swiper from '@/pages/Template/Swiper'
 import WebView from '@/pages/Template/WebView'
 import ReduxUse from '@/pages/Template/ReduxUse'
 import Upload from '@/pages/Template/Upload'
+import RequestData from '@/pages/Template/RequestData'
+import RequestDataWithoutRedux from '@/pages/Template/RequestData/RequestDataWithoutRedux'
+import RequestDataWithRedux from '@/pages/Template/RequestData/RequestDataWithRedux'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
   Template: { screen?: string },
-  TurnToPage: { screen?: string },          // 跳转页面
-  PassParam: { screen?: string },           // 跳转页面传参数
-  ResetRouter: { screen?: string },         // 返回时重置路由
-  Modal: { screen?: string },               // modal弹窗
-  ModalSelect: { screen?: string },         // 下拉选择框
-  ModalBox: { screen?: string },            // 普通的弹窗
-  ModalComfirm: { screen?: string },        // 对话框
-  ModalTip: { screen?: string },            // 提示框
-  DatePicker: { screen?: string },          // 时间选择器
-  Tab: { screen?: string },                 // Tab选项卡
-  Input: { screen?: string },               // 输入框
-  Swiper: { screen?: string },              // 轮播图
-  WebView: { screen?: string },             // webview的使用
-  ReduxUse: { screen?: string },            // Redux的使用
-  Upload: { screen?: string },              // 图片上传
+  TurnToPage: { screen?: string },                        // 跳转页面
+  PassParam: { screen?: string },                         // 跳转页面传参数
+  ResetRouter: { screen?: string },                       // 返回时重置路由
+  Modal: { screen?: string },                             // modal弹窗
+  ModalSelect: { screen?: string },                       // 下拉选择框
+  ModalBox: { screen?: string },                          // 普通的弹窗
+  ModalComfirm: { screen?: string },                      // 对话框
+  ModalTip: { screen?: string },                          // 提示框
+  DatePicker: { screen?: string },                        // 时间选择器
+  Tab: { screen?: string },                               // Tab选项卡
+  Input: { screen?: string },                             // 输入框
+  Swiper: { screen?: string },                            // 轮播图
+  WebView: { screen?: string },                           // webview的使用
+  ReduxUse: { screen?: string },                          // Redux的使用
+  Upload: { screen?: string },                            // 图片上传
+  RequestData: { screen?: string },                       // 请求数据
+  RequestDataWithoutRedux: { screen?: string },           // 请求数据不走redux
+  RequestDataWithRedux: { screen?: string },              // 请求数据走redux
 }
 
 // 该类型申明约束每一个页面组件的props
@@ -74,6 +80,9 @@ export default function Navigator () {
         <Stack.Screen name="WebView" component={WebView} />
         <Stack.Screen name="ReduxUse" component={ReduxUse} />
         <Stack.Screen name="Upload" component={Upload} />
+        <Stack.Screen name="RequestData" component={RequestData} />
+        <Stack.Screen name="RequestDataWithoutRedux" component={RequestDataWithoutRedux} />
+        <Stack.Screen name="RequestDataWithRedux" component={RequestDataWithRedux} />
       </Stack.Navigator>
     </NavigationContainer>
   )

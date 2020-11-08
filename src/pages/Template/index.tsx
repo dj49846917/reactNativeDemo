@@ -2,7 +2,6 @@ import DefaultNavigationHeader from '@/components/DefaultNavigationHeader';
 import MyErrorNotice from '@/components/MyErrorNotice';
 import MyToastShort from '@/components/MyToastShort';
 import CommonStyle from '@/utils/constant/Style';
-import { UnitConvert } from '@/utils/unitConvert';
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { Text, StyleSheet, SafeAreaView, ScrollView, View } from 'react-native';
@@ -136,6 +135,16 @@ const Template = (props: TemplateProps) => {
             style={CommonStyle.list_item}
           >
             <Text style={CommonStyle.list_item_text}>图片上传</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={CommonStyle.list}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('RequestData')
+            }}
+            style={CommonStyle.list_item}
+          >
+            <Text style={CommonStyle.list_item_text}>接口请求数据</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

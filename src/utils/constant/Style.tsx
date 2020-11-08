@@ -8,6 +8,7 @@ const CommonStyle = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: '#fff'
   },
   sizedBox: {
     width: UnitConvert.w,

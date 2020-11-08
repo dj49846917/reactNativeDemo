@@ -1542,3 +1542,56 @@
         })
       );
     ``` 
+
+## loading组件ActivityIndicator的使用
+  1. 一定要在外层用Modal组件包裹，颜色默认是白色的
+
+  2. 详细代码:
+    ```
+      import { Text, View, StyleSheet, Modal, ActivityIndicator } from 
+
+      <Modal
+        visible={props.loading}
+        transparent
+      >
+        <View style={styles.loadingbox}></View>
+        <View style={styles.loadingContentBox}>
+          <ActivityIndicator color="#409eff" size="large" />
+          <Text style={{ color: '#409eff' }}>加载中...</Text>
+        </View>
+      </Modal>
+
+      const styles = StyleSheet.create({
+        loadingbox: {
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#000',
+          opacity: 0.7
+        },
+        loadingContentBox: {
+          flex: 1,
+          position: 'absolute',
+          left: '40%',
+          top: '40%'
+        }
+      });
+    ``` 
+
+## typescript表示任意对象里的值
+  ```
+    interface httpConfig {
+      url: string,
+      data?: {
+        [propName: string]: any;
+      },
+      headers?: HeadersInit_;
+      referrer?: string;
+      integrity?: string;
+      keepalive?: boolean;
+      method?: string;
+      mode?: RequestMode_;
+      window?: any;
+      signal?: AbortSignal;
+    }
+  ```

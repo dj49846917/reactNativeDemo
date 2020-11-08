@@ -1,6 +1,7 @@
 import { ENV_ICON } from "@/assets/styles/picUrl";
 
 export const Constant = {
+  API_URL: "https://www.fastmock.site/mock/5b811bc7b25efa7b4df562b8273980f9/odata",
   STORAGE_PASSWORDKEY: 'password',   // 密码的key
   STORAGE_USERKEY: 'user',           // 用户数据
   locName: '重庆',                    // 地址
