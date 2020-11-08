@@ -1,14 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2020-11-08 13:49:35
- * @LastEditTime: 2020-11-08 14:13:41
+ * @LastEditTime: 2020-11-08 16:48:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \reactNativeDemo\src\models\RequestData\index.ts
  */
 import { Model, Effect } from 'dva-core-ts'
 import { Reducer } from 'react'
-import { getMyList } from '../../service/requestData'
+import { getMyList } from '@/service/requestData'
 
 export interface RequestDataState {
   list: any[]
