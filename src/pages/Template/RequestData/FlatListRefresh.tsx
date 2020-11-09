@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, SafeAreaView, ScrollView, FlatList, Alert } from 'react-native';
-import RefreshListView, { RefreshState } from 'react-native-refresh-list-view';
 import CommonStyle from '@/utils/constant/Style';
 import DefaultNavigationHeader from '@/components/DefaultNavigationHeader';
 import { useNavigation } from '@react-navigation/native';
@@ -9,58 +8,137 @@ import { UnitConvert } from '@/utils/unitConvert';
 import MyLoading from '@/components/MyLoading';
 interface FlatListRefreshProps { }
 
+type IPageState = {
+  pageIndex: number,
+  pageSize: number,
+  loadMore: boolean,
+  hasMore: boolean
+}
+
 const FlatListRefresh = (props: FlatListRefreshProps) => {
   const navigation = useNavigation()
   const [list, setList] = useState<any[]>([])
-  const [page, setPage] = useState({
-    pageIndex: 0, // 页数
+  const [loading, setLoading] = useState(false)
+  const [page, setPage] = useState<IPageState>({
+    pageIndex: 0,
     pageSize: 10,
-    refreshState: RefreshState.Idle, // 刷新的状态
+    loadMore: false,          // 加载更多
+    hasMore: true,            // 是否数据已经全部加载完
   })
-  const [ loading, setLoading ] = useState(false)
+  const [ refresh, setRefresh ] = useState(false)
 
   useEffect(() => {
-    const params = {
-      CollectionCreateUserID: 123
+    const params: IPageState = {
+      ...page,
+      pageIndex: 0,
+      pageSize: 10,
+      loadMore: true
     }
     initData(params, 0)
   }, [])
 
-  const initData = (params:object, index:number) => {
+  const initData = (params: IPageState, index: number) => {
     setLoading(true)
     ClientHttp.Get({
       url: '/RtHouseSource/GetHouseSourceList',
     }).then((res: any) => {
       setLoading(false)
-      if (res.code === 200) {
-        let state = RefreshState.Idle
-        if (res.value.length < 10) {
-          state = RefreshState.NoMoreData;
-        }
-        if(index === 0) {
-          setList(res.value)
-          setPage({
-            ...page,
-            pageIndex: index,
-            refreshState: state,
-          })
-        } else {
-          setList(list.concat(res.value))
-          setPage({
-            ...page,
-            pageIndex: index,
-            refreshState: state,
-          })
-        }
+      setRefresh(false)
+      if (res.value.length < 10) {
+        setPage({
+          ...page,
+          pageIndex: index,
+          hasMore: false,
+          loadMore: false
+        })
+      } else {
+        setPage({
+          ...page,
+          pageIndex: index,
+          hasMore: true,
+          loadMore: true
+        })
+      }
+      if (params.loadMore) {
+        const newList = list.concat(res.value)
+        setList(newList)
+      } else {
+        setList(res.value)
       }
     }).catch(err => {
       console.log('err', err)
       setLoading(false)
-      setPage({
-        ...page,
-        refreshState: RefreshState.Failure
-      })
     })
+  }
+
+  // 下拉刷新
+  const HandleRefresh = () => {
+    // 修改刷新状态为true
+    setRefresh(true)
+    const params = {
+      ...page,
+      pageIndex: page.pageIndex + 1,
+      pageSize: 10,
+      loadMore: true
+    }
+    initData(params, 0)
+  }
+
+  // 加载更多
+  const onEndReached = () => {
+    if (loading || !page.hasMore) {
+      return
+    }
+    const params = {
+      ...page,
+      pageIndex: page.pageIndex + 1,
+      pageSize: 10,
+      loadMore: true
+    }
+    initData(params, 0)
+  }
+
+  const renderItem = ({ item }) => {
+    return (
+      <View style={styles.list} key={item.ID}>
+        <Text>{item.PropertyAddress}</Text>
+      </View>
+    )
+  }
+
+  // 设置key
+  const keyExtractor = (item: { ID: any; }) => {
+    return String(item.ID)
+  }
+
+  // 底部组件
+  const footerComponent = () => {
+    if (loading && page.hasMore && list.length > 0) {
+      return (
+        <View>
+          <Text>正在加载中...</Text>
+        </View>
+      )
+    }
+    if (!page.hasMore) {
+      return (
+        <View>
+          <Text>我是有底线的...</Text>
+        </View>
+      )
+    }
+  }
+
+  // 空数据
+  const emptyComponent = () => {
+    if(loading) {
+      return
+    }
+    return (
+      <View>
+        <Text>暂无数据</Text>
+      </View>
+    )
   }
 
   return (
@@ -71,31 +149,19 @@ const FlatListRefresh = (props: FlatListRefreshProps) => {
         navigation={navigation}
       />
       <View style={CommonStyle.sizedBox}></View>
-      <RefreshListView
-        data={list}
-        keyExtractor={(item: any, index: number) => index.toString()}
-        onHeaderRefresh={() => {
-          setPage({
-            ...page,
-            refreshState: RefreshState.HeaderRefreshing,
-          })
-          initData({}, page.pageIndex)
-        }}
-        onFooterRefresh={() => {
-          Alert.alert('222')
-          setPage({
-            ...page,
-            pageIndex: page.pageIndex + 1,
-            refreshState: RefreshState.FooterRefreshing,
-          })
-          initData({}, page.pageIndex)
-        }}
-        renderItem={({ item }) => (
-          <View style={styles.list} key={item.ID}>
-            <Text>{item.PropertyAddress}</Text>
-          </View>
-        )}
-      />
+      <View style={CommonStyle.content}>
+        <FlatList
+          data={list}
+          ListEmptyComponent={emptyComponent()}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          onEndReached={onEndReached}
+          onEndReachedThreshold={0}
+          ListFooterComponent={footerComponent()}
+          onRefresh={HandleRefresh}
+          refreshing={refresh}
+        />
+      </View>
       <MyLoading loading={loading} />
     </SafeAreaView>
   );
