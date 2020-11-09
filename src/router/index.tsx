@@ -20,6 +20,7 @@ import Upload from '@/pages/Template/Upload'
 import RequestData from '@/pages/Template/RequestData'
 import RequestDataWithoutRedux from '@/pages/Template/RequestData/RequestDataWithoutRedux'
 import RequestDataWithRedux from '@/pages/Template/RequestData/RequestDataWithRedux'
+import FlatListRefresh from '@/pages/Template/RequestData/FlatListRefresh'
 
 export type RootStackList = { // 定义类型别名，用于约束navigator组件，在添加组件时，这里必须声明类型
   Template: { screen?: string },
@@ -41,6 +42,7 @@ export type RootStackList = { // 定义类型别名，用于约束navigator组�
   RequestData: { screen?: string },                       // 请求数据
   RequestDataWithoutRedux: { screen?: string },           // 请求数据不走redux
   RequestDataWithRedux: { screen?: string },              // 请求数据走redux
+  FlatListRefresh: { screen?: string },                   // 上拉加载，下拉刷新
 }
 
 // 该类型申明约束每一个页面组件的props
@@ -83,6 +85,7 @@ export default function Navigator () {
         <Stack.Screen name="RequestData" component={RequestData} />
         <Stack.Screen name="RequestDataWithoutRedux" component={RequestDataWithoutRedux} />
         <Stack.Screen name="RequestDataWithRedux" component={RequestDataWithRedux} />
+        <Stack.Screen name="FlatListRefresh" component={FlatListRefresh} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -35,6 +35,16 @@ const RequestData = (props: RequestDataProps) => {
           <Text style={CommonStyle.list_item_text}>走redux的请求</Text>
         </TouchableOpacity>
       </View>
+      <View style={CommonStyle.list}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('FlatListRefresh')
+          }}
+          style={CommonStyle.list_item}
+        >
+          <Text style={CommonStyle.list_item_text}>上拉加载，下拉刷新</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
