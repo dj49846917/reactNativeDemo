@@ -32,7 +32,7 @@ const FlatListRefresh = (props: FlatListRefreshProps) => {
       ...page,
       pageIndex: 0,
       pageSize: 10,
-      loadMore: true
+      loadMore: false
     }
     initData(params, 0)
   }, [])
@@ -77,15 +77,16 @@ const FlatListRefresh = (props: FlatListRefreshProps) => {
     setRefresh(true)
     const params = {
       ...page,
-      pageIndex: page.pageIndex + 1,
+      pageIndex: page.pageIndex,
       pageSize: 10,
-      loadMore: true
+      loadMore: false
     }
     initData(params, 0)
   }
 
   // 加载更多
   const onEndReached = () => {
+    console.log('111')
     if (loading || !page.hasMore) {
       return
     }
@@ -156,7 +157,7 @@ const FlatListRefresh = (props: FlatListRefreshProps) => {
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           onEndReached={onEndReached}
-          onEndReachedThreshold={0}
+          onEndReachedThreshold={0.2}
           ListFooterComponent={footerComponent()}
           onRefresh={HandleRefresh}
           refreshing={refresh}
