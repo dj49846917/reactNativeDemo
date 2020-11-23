@@ -75,10 +75,20 @@
           执行npm run release
         ```
 
-# 修改app的名称（安卓）
+# 修改app的名称
+## 安卓：
   * 修改android\app\src\main\res\values\strings.xml文件即可
 
-# 修改应用图标(安卓)
+## IOS：
+  * 修改ios/MyApp/Info.plist文件里的：CFBundleDisplayName
+      ```
+        <key>CFBundleDisplayName</key>
+        <string>MyApp</string>
+      ```
+  * ![修改app名称](img/修改app名称ios.png)
+
+# 修改应用图标
+## 安卓：
   * 修改android\app\src\main\AndroidManifest.xml里面的
       ```
         ic_launcher是图片的名称，可改，不改的话，替换android\app\src\main\res里面的图片即可
@@ -90,6 +100,12 @@
       ```
 
   * ![图标](img/app图标更换.png)
+
+## ios:
+  * 在Xcode中找到AppIcon.appiconset文件夹，路径：ios/MyApp/Images.xcassets/AppIcon.appiconset
+  * ![ios替换图标](img/ios替换图标.png)
+  * 选择你的图标文件，点开[图标工厂](https://icon.wuruihong.com/)，生成所有的ios图标
+  * 
 
 # ios打包
   1. 在ios文件夹下，新建bundle文件夹，通过命令将包编译到本地
