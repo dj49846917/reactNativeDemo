@@ -1220,6 +1220,35 @@
 
   3. 详细文档请看：https://github.com/react-native-async-storage/async-storage
 
+## 图片选择组件(可多选): react-native-image-crop-picker
+  1. 下载核心包：
+    ```
+      npm install --save react-native-image-crop-picker
+
+      注意：低版本的sdk，不识别标签导致项目跑不起来，我选的是0.30.0的版本，最新的0.35.1有问题
+    ```
+
+  2. 使用：
+      ```
+        # 在android\app\src\main\AndroidManifest.xml添加相机权限
+
+          <!-- 获取拍照权限 -->
+          <uses-permission android:name="android.permission.CAMERA" />
+
+
+        使用：
+          import ImagePicker from 'react-native-image-crop-picker';
+
+          ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true
+          }).then(image => {
+            console.log(image);
+          });
+      ```
+  3. 详细文档：https://github.com/ivpusic/react-native-image-crop-picker
+
 # 项目实战开发
 ## 底部导航栏添加图标
   * 将项目中用到的图片放到assets/images文件夹下
