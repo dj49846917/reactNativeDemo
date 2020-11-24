@@ -14,8 +14,7 @@ module.exports = {
           '@/router': './src/router',
           '@/config': './src/config',
           '@/service': './src/service',
-          '@/constant': './src/constant',
-          '@/test': './src/test',
+          '@/constant': './src/constant'
         }
       }
     ]
