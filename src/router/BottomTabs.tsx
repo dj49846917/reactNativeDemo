@@ -5,7 +5,7 @@ import Account from '@/pages/Account'
 import Collection from '@/pages/Collection'
 import Recommend from '@/pages/Recommend'
 import { RootStackNavigation, RootStackList } from '@/router/index'
-import { RouteProp, TabNavigationState } from '@react-navigation/native'
+import { RouteProp, getFocusedRouteNameFromRoute, NavigationState, PartialState } from '@react-navigation/native'
 import { Image } from 'react-native'
 import { ENV_ICON } from '@/assets/styles/picUrl'
 
@@ -19,7 +19,7 @@ export type BottomTabParamList = {
 const Tab = createBottomTabNavigator<BottomTabParamList>()
 
 type Route = RouteProp<RootStackList, 'Tab'> & {
-  state?: TabNavigationState
+  state?: PartialState<NavigationState>
 }
 
 interface IProps {
@@ -29,7 +29,7 @@ interface IProps {
 
 // 动态获取底部导航栏的标题
 function getHeaderTitle(route: Route) {
-  const routeName = route.state ? route.state.routes[route.state.index].name : route.params?.screen || 'Home';
+  const routeName = getFocusedRouteNameFromRoute(route) || 'Home';
   switch (routeName) {
     case 'Home':
       return '首页';
