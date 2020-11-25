@@ -1,5 +1,5 @@
 {
-  "name": "MyApp",
+  "name": "ReactNativeTemplate",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,29 +7,35 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "dev": "SET ENVFILE=.env.development && react-native run-android",
-    "prod": "SET ENVFILE=.env.production && react-native run-android"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/picker": "^1.8.1",
     "@react-navigation/bottom-tabs": "^5.7.2",
     "@react-navigation/native": "^5.7.0",
     "@react-navigation/stack": "^5.7.1",
+    "@types/react-native-modalbox": "^1.4.8",
     "babel-plugin-module-resolver": "^4.0.0",
     "dva-core-ts": "^2.0.7",
     "dva-loading-ts": "^3.0.23",
+    "moment": "^2.29.0",
     "react": "16.13.1",
     "react-native": "0.63.0",
-    "react-native-config": "^1.3.1",
     "react-native-gesture-handler": "^1.6.1",
-    "react-native-modalbox": "^2.0.0",
+    "react-native-image-crop-picker": "^0.30.0",
+    "react-native-modalbox": "^2.0.2",
     "react-native-picker": "^4.3.7",
     "react-native-reanimated": "^1.9.0",
+    "react-native-root-siblings": "^4.0.6",
     "react-native-root-toast": "^3.2.1",
     "react-native-safe-area-context": "^3.1.1",
     "react-native-screens": "^2.9.0",
-    "react-redux": "^7.2.0"
+    "react-native-swiper": "^1.6.0",
+    "react-native-webview": "^10.9.3",
+    "react-redux": "^7.2.0",
+    "rmc-date-picker": "^6.0.10"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

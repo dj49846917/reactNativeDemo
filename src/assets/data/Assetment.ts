@@ -1,0 +1,151 @@
+export const AssetmentDic = [{
+	"DicCode": 1110001,
+	"DicName": "江北区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110002,
+	"DicName": "渝北区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110003,
+	"DicName": "渝中区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110004,
+	"DicName": "北碚区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110005,
+	"DicName": "九龙坡区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110006,
+	"DicName": "沙坪坝区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110007,
+	"DicName": "大渡口区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110008,
+	"DicName": "南岸区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110009,
+	"DicName": "巴南区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110010,
+	"DicName": "永川区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110011,
+	"DicName": "两江新区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110012,
+	"DicName": "璧山区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110013,
+	"DicName": "涪陵区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110014,
+	"DicName": "綦江区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110015,
+	"DicName": "江津区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110016,
+	"DicName": "合川区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110017,
+	"DicName": "大足区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110018,
+	"DicName": "长寿区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110019,
+	"DicName": "铜梁区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110020,
+	"DicName": "南川区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110021,
+	"DicName": "万盛区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1110022,
+	"DicName": "北部新区",
+	"SubTypeCode": 1110,
+	"BaseTypeCode": 11
+}, {
+	"DicCode": 1310001,
+	"DicName": "住宅",
+	"SubTypeCode": 1310,
+	"BaseTypeCode": 13
+}, {
+	"DicCode": 1310002,
+	"DicName": "商铺",
+	"SubTypeCode": 1310,
+	"BaseTypeCode": 13
+}, {
+	"DicCode": 1310003,
+	"DicName": "别墅",
+	"SubTypeCode": 1310,
+	"BaseTypeCode": 13
+}, {
+	"DicCode": 1310004,
+	"DicName": "车位",
+	"SubTypeCode": 1310,
+	"BaseTypeCode": 13
+}, {
+	"DicCode": 1310005,
+	"DicName": "写字楼",
+	"SubTypeCode": 1310,
+	"BaseTypeCode": 13
+}, {
+	"DicCode": 1310006,
+	"DicName": "洋房",
+	"SubTypeCode": 1310,
+	"BaseTypeCode": 13
+}, {
+	"DicCode": 1310007,
+	"DicName": "公寓",
+	"SubTypeCode": 1310,
+	"BaseTypeCode": 13
+}, {
+	"DicCode": 1310008,
+	"DicName": "其他",
+	"SubTypeCode": 1310,
+	"BaseTypeCode": 13
+}]

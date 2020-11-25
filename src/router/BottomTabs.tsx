@@ -1,25 +1,25 @@
 import React, { Component } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Image } from 'react-native'
-import { RootStackNavigation, RootStackList } from '@/router/index'
-import { RouteProp, TabNavigationState } from '@react-navigation/native'
 import Home from '@/pages/Home'
 import Account from '@/pages/Account'
 import Collection from '@/pages/Collection'
 import Recommend from '@/pages/Recommend'
-import { ENV_ICON } from '@/constant/image/icon'
+import { RootStackNavigation, RootStackList } from '@/router/index'
+import { RouteProp, getFocusedRouteNameFromRoute, NavigationState, PartialState } from '@react-navigation/native'
+import { Image } from 'react-native'
+import { ENV_ICON } from '@/assets/styles/picUrl'
 
 export type BottomTabParamList = {
   Home: undefined,
-  Collection: undefined,
   Recommend: undefined,
+  Collection: undefined,
   Account: undefined
 }
 
 const Tab = createBottomTabNavigator<BottomTabParamList>()
 
 type Route = RouteProp<RootStackList, 'Tab'> & {
-  state?: TabNavigationState
+  state?: PartialState<NavigationState>
 }
 
 interface IProps {
@@ -29,14 +29,14 @@ interface IProps {
 
 // 动态获取底部导航栏的标题
 function getHeaderTitle(route: Route) {
-  const routeName = route.state ? route.state.routes[route.state.index].name : route.params?.screen || 'Home';
+  const routeName = getFocusedRouteNameFromRoute(route) || 'Home';
   switch (routeName) {
     case 'Home':
       return '首页';
     case 'Recommend':
       return '推荐';
     case 'Collection':
-      return '收藏';
+      return '发现';
     default:
       return '我的';
   }
@@ -60,22 +60,18 @@ export default class BottomTabs extends Component<IProps> {
 
   render() {
     return (
-      <Tab.Navigator
-        lazy
-        tabBarOptions={{
-          activeTintColor: '#c71622',
-          inactiveTintColor: '#666',
-          labelStyle: { fontSize: 14, position: 'relative', top: -4 }
-        }}
+      <Tab.Navigator tabBarOptions={{ activeTintColor: '#c71622' }}
       >
         <Tab.Screen
           name='Home'
           component={Home}
           options={{
             tabBarLabel: '首页',
-            tabBarIcon: ({ focused, color, size }) => (
-              <Image source={focused ? ENV_ICON.icon_footer_home_red : ENV_ICON.icon_footer_home} />
-            ),
+            tabBarIcon: ({ focused, color, size }) => {
+              return (
+                <Image source={focused ? ENV_ICON.icon_footer_home_red : ENV_ICON.icon_footer_home} />
+              )
+            }
           }}
         />
         <Tab.Screen
@@ -83,9 +79,11 @@ export default class BottomTabs extends Component<IProps> {
           component={Recommend}
           options={{
             tabBarLabel: '推荐',
-            tabBarIcon: ({ focused, color, size }) => (
-              <Image source={focused ? ENV_ICON.icon_footer_recommend_red : ENV_ICON.icon_footer_recommend} />
-            )
+            tabBarIcon: ({ focused, color, size }) => {
+              return (
+                <Image source={focused ? ENV_ICON.icon_footer_recommend_red : ENV_ICON.icon_footer_recommend} />
+              )
+            }
           }}
         />
         <Tab.Screen
@@ -93,19 +91,23 @@ export default class BottomTabs extends Component<IProps> {
           component={Collection}
           options={{
             tabBarLabel: '收藏',
-            tabBarIcon: ({ focused, color, size }) => (
-              <Image source={focused ? ENV_ICON.icon_footer_collect_red : ENV_ICON.icon_footer_collect} />
-            )
+            tabBarIcon: ({ focused, color, size }) => {
+              return (
+                <Image source={focused ? ENV_ICON.icon_footer_collect_red : ENV_ICON.icon_footer_collect} />
+              )
+            }
           }}
         />
         <Tab.Screen
           name='Account'
           component={Account}
           options={{
-            tabBarLabel: '我的',
-            tabBarIcon: ({ focused, color, size }) => (
-              <Image source={focused ? ENV_ICON.icon_footer_user_red : ENV_ICON.icon_footer_user} />
-            )
+            tabBarLabel: '用户',
+            tabBarIcon: ({ focused, color, size }) => {
+              return (
+                <Image source={focused ? ENV_ICON.icon_footer_user_red : ENV_ICON.icon_footer_user} />
+              )
+            }
           }}
         />
       </Tab.Navigator>
