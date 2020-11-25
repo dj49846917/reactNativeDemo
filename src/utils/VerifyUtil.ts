@@ -202,7 +202,7 @@ export default class VerifyUtil {
   }
 
   //验证最小数字
-  static veriMinNumber(v: string, min: number) {
+  static veriMinNumber(v: string, min: number) { 
     if (parseFloat(v) < min) {
       return false;
     }
