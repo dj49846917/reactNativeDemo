@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Swiper, { SwiperProps } from 'react-native-swiper';
 import { UnitConvert } from '@/utils/unitConvert';
 import { ENV_IMAGE } from '@/assets/styles/picUrl';
 
 interface CommonBannerProps {
-  list: any[]
+  list: any[],
+  openLookModal: Function
 }
 
 type Iprops = CommonBannerProps & SwiperProps
@@ -21,8 +22,15 @@ const CommonBanner = (props: Iprops) => {
         pagingEnabled
       >
         {
-          props.list.map(item => (
-            <Image source={{ uri: item.BigImgUrl }} style={styles.list_item} key={item.ID} />
+          props.list.map((item, index) => (
+            <TouchableOpacity
+              key={item.ID}
+              onPress={() => {
+                props.openLookModal(index)
+              }}
+            >
+              <Image source={{ uri: item.BigImgUrl }} style={styles.list_item} />
+            </TouchableOpacity>
           ))
         }
       </Swiper>
@@ -35,6 +43,10 @@ const CommonBanner = (props: Iprops) => {
 };
 
 export default CommonBanner;
+
+CommonBanner.defaultPorps = {
+  openLookModal: () => { }
+}
 
 const styles = StyleSheet.create({
   list_item: {

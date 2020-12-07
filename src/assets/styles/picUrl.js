@@ -60,7 +60,9 @@ export const ENV_ICON = {
   icon_btn_on: require("@/assets/images/icon/icon_btn_on.png"),
   no_msg_center: require("@/assets/images/icon/no_msg_center.png"),
   btn_start: require("@/assets/images/icon/btn_start.png"),
+  icon_top_off_white: require("@/assets/images/icon/icon_top_off_white.png"),
 }
 
 export const ENV_IMAGE = {
+  left_img: require("@/assets/images/image/banner1.png"),
 }

@@ -110,6 +110,16 @@ const Template = (props: TemplateProps) => {
         <View style={CommonStyle.list}>
           <TouchableOpacity
             onPress={() => {
+              navigation.navigate('PicLook')
+            }}
+            style={CommonStyle.list_item}
+          >
+            <Text style={CommonStyle.list_item_text}>预览图片</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={CommonStyle.list}>
+          <TouchableOpacity
+            onPress={() => {
               navigation.navigate('WebView')
             }}
             style={CommonStyle.list_item}
